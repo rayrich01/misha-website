@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
-import { COPY, PROCESS_STEPS } from '@/lib/constants'
+import { PROCESS_STEPS } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'About Misha Creations | Houston Decorative Painting Artist',
@@ -23,8 +23,6 @@ export default function AboutPage() {
       addressRegion: 'TX',
       addressCountry: 'US',
     },
-    telephone: COPY.phone,
-    email: COPY.email,
   }
 
   return (

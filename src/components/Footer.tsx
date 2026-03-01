@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { COPY, NEIGHBORHOODS } from '@/lib/constants'
+import { NEIGHBORHOODS } from '@/lib/constants'
 
 export function Footer() {
   return (
@@ -29,8 +29,6 @@ export function Footer() {
           </div>
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Get in Touch</p>
-            <p className="font-body text-sm">{COPY.phone}</p>
-            <p className="font-body text-sm">{COPY.email}</p>
             <Link
               href="/consult"
               className="inline-block mt-4 bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"

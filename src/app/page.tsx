@@ -35,8 +35,6 @@ export default async function HomePage() {
     name: 'Misha Creations',
     description: "Houston's premier decorative finishes artist specializing in custom wall murals, Venetian plaster, and luxury decorative painting",
     url: 'https://mishacreations.com',
-    telephone: COPY.phone,
-    email: COPY.email,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Houston',

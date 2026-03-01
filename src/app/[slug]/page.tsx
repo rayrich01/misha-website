@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS, COPY } from '@/lib/constants'
+import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS } from '@/lib/constants'
 import { getPiecesByCategory, getPiecesByLocation, getFinishCategory, getMishaSelectPieces } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -90,7 +90,6 @@ async function FinishPage({ slug }: { slug: string }) {
       '@type': 'LocalBusiness',
       name: 'Misha Creations',
       url: 'https://mishacreations.com',
-      telephone: COPY.phone,
     },
     areaServed: { '@type': 'City', name: 'Houston' },
     description,
@@ -193,7 +192,6 @@ async function NeighborhoodPage({ slug }: { slug: string }) {
     name: 'Misha Creations',
     description: `Luxury decorative finishes and wall murals in ${hood.name}, Houston`,
     url: `https://mishacreations.com/${slug}`,
-    telephone: COPY.phone,
     areaServed: { '@type': 'Neighborhood', name: hood.name },
   }
 
