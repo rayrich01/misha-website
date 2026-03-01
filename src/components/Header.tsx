@@ -55,6 +55,9 @@ export function Header() {
               </div>
             </div>
           </div>
+          <Link href="/inquire" className="text-charcoal hover:text-gold transition-colors">
+            Inquire
+          </Link>
           <Link
             href="/consult"
             className="bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-dark transition-colors"
@@ -107,6 +110,13 @@ export function Header() {
               {n.name}
             </Link>
           ))}
+          <Link
+            href="/inquire"
+            className="block mt-4 text-charcoal font-body"
+            onClick={() => setOpen(false)}
+          >
+            Inquire
+          </Link>
           <Link
             href="/consult"
             className="block mt-4 text-center bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-3 rounded-full"

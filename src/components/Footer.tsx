@@ -30,8 +30,14 @@ export function Footer() {
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Get in Touch</p>
             <Link
+              href="/inquire"
+              className="block font-body text-sm hover:text-gold transition-colors mb-2"
+            >
+              Send an Inquiry
+            </Link>
+            <Link
               href="/consult"
-              className="inline-block mt-4 bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"
+              className="inline-block mt-3 bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"
             >
               Schedule Consultation
             </Link>
