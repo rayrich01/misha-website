@@ -3,8 +3,8 @@ import { createImageUrlBuilder } from '@sanity/image-url'
 
 type SanityImageSource = Parameters<ReturnType<typeof createImageUrlBuilder>['image']>[0]
 
-export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? 'uz6uv7gy'
-export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production'
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'uz6uv7gy'
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
 
 export const sanityClient = createClient({
   projectId,
