@@ -1,65 +1,149 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { getMishaSelectPieces, getMainSiteSettings, getHomepageHero } from '@/lib/queries'
+import { SanityImage } from '@/components/SanityImage'
+import { NeighborhoodStrip } from '@/components/NeighborhoodStrip'
+import { CtaSection } from '@/components/CtaSection'
+import { JsonLd } from '@/components/JsonLd'
+import { COPY, FINISH_SURFACES } from '@/lib/constants'
 
-export default function Home() {
+export const revalidate = 60
+
+export default async function HomePage() {
+  const [settings, pieces, heroPiece] = await Promise.all([
+    getMainSiteSettings(),
+    getMishaSelectPieces(6),
+    getHomepageHero(),
+  ])
+
+  const headline = settings?.heroHeadline || "Houston's Premier Decorative Finishes Artist"
+  const subheadline =
+    settings?.heroSubheadline ||
+    'Museum-quality murals, Venetian plaster, and custom finishes for River Oaks, Memorial, and Tanglewood estates'
+  const heroImage = settings?.heroImage?.heroImage || heroPiece?.heroImage
+
+  const testimonial = settings?.featuredTestimonial || {
+    name: 'Anna Adkinson',
+    quote:
+      "Misha has an excellent gift on so many levels in customizing and creating beautiful scenes. I have known her 22 years now and love all her work. Absolutely incredible person with integrity and highest commitment to customers' full satisfaction.",
+    duration: '22-year client',
+    location: 'Houston, TX',
+  }
+
+  const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': ['LocalBusiness', 'VisualArtist'],
+    name: 'Misha Creations',
+    description: "Houston's premier decorative finishes artist specializing in custom wall murals, Venetian plaster, and luxury decorative painting",
+    url: 'https://mishacreations.com',
+    telephone: COPY.phone,
+    email: COPY.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Houston',
+      addressRegion: 'TX',
+      addressCountry: 'US',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: '29.7604', longitude: '-95.3698' },
+    areaServed: COPY.socialProof.map((name) => ({ '@type': 'City', name })),
+    priceRange: '$$$$',
+    image: 'https://mishacreations.com/og-image.jpg',
+  }
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <JsonLd data={localBusinessSchema} />
+
+      {/* Hero */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {heroImage && (
+          <div className="absolute inset-0">
+            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+          </div>
+        )}
+        {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
+        <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
+          <h1 className="font-display text-[42px] leading-[52px] md:text-[60px] md:leading-[72px] text-white mb-6">
+            {headline}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+            {subheadline}
+          </p>
+          <Link
+            href="/consult"
+            className="inline-block bg-white text-charcoal text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-cream transition-colors font-body font-medium shadow-xl"
+          >
+            Schedule Free Consultation
+          </Link>
+        </div>
+      </section>
+
+      <NeighborhoodStrip />
+
+      {/* Misha Select Preview */}
+      {pieces.length > 0 && (
+        <section className="py-16 md:py-24 bg-cream">
+          <div className="max-w-7xl mx-auto px-5">
+            <div className="text-center mb-14">
+              <h2 className="font-display text-3xl md:text-5xl text-dark mb-4">
+                Selected Works
+              </h2>
+              <p className="font-body text-charcoal/70 max-w-2xl mx-auto">
+                A curated selection of decorative finishes, murals, and plaster work customized to our clients&apos; tastes across Houston&apos;s finest homes.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pieces.map((piece) => {
+                const finish = FINISH_SURFACES.find((f) => f.categoryId === piece.category)
+                return (
+                  <Link
+                    key={piece._id}
+                    href={finish ? `/${finish.slug}` : '/'}
+                    className="group relative aspect-[4/5] rounded-lg overflow-hidden shadow-md"
+                  >
+                    <SanityImage
+                      image={piece.heroImage}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      alt={`${piece.title} - ${piece.category} by Misha Creations Houston`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="font-editorial text-xl text-white">{piece.title}</p>
+                      {piece.location && (
+                        <p className="font-body text-sm text-white/70 mt-1">{piece.location}</p>
+                      )}
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Testimonial */}
+      <section className="py-16 md:py-24 bg-sage">
+        <div className="max-w-3xl mx-auto px-5 text-center">
+          <div className="flex justify-center gap-1 mb-6">
+            {[...Array(5)].map((_, i) => (
+              <svg key={i} className="w-6 h-6 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            ))}
+          </div>
+          <blockquote className="font-body text-lg md:text-xl leading-relaxed text-dark italic mb-8">
+            &ldquo;{testimonial.quote}&rdquo;
+          </blockquote>
+          <p className="font-editorial text-lg text-dark">{testimonial.name}</p>
+          <p className="font-body text-sm text-bronze">
+            {testimonial.duration} &middot; {testimonial.location}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+      </section>
+
+      <CtaSection />
+    </>
+  )
 }
