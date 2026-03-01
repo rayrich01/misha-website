@@ -43,10 +43,18 @@ export function Footer() {
             </Link>
           </div>
         </div>
-        <div className="border-t border-cream/10 mt-12 pt-8 text-center">
+        <div className="border-t border-cream/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-xs text-cream/50">
             &copy; {new Date().getFullYear()} Misha Creations &middot; Houston, TX
           </p>
+          <a
+            href="https://studio.mishacreations.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-body text-xs text-cream/40 hover:text-gold transition-colors"
+          >
+            For Designers &amp; Builders &rarr;
+          </a>
         </div>
       </div>
     </footer>
