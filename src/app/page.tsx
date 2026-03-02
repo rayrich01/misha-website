@@ -69,7 +69,7 @@ export default async function HomePage() {
           </p>
           <Link
             href="/consult"
-            className="inline-block bg-white text-charcoal text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-cream transition-colors font-body font-medium shadow-xl"
+            className="inline-block bg-cream text-charcoal text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-sand transition-colors font-body font-medium shadow-xl"
           >
             Schedule Free Consultation
           </Link>

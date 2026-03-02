@@ -78,7 +78,7 @@ export default function InquirePage() {
             <input
               name="name"
               required
-              className="w-full font-body text-[15px] bg-white text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function InquirePage() {
               name="email"
               type="email"
               required
-              className="w-full font-body text-[15px] bg-white text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function InquirePage() {
             <input
               name="phone"
               type="tel"
-              className="w-full font-body text-[15px] bg-white text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
             />
           </div>
 
@@ -111,7 +111,7 @@ export default function InquirePage() {
             </label>
             <select
               name="projectType"
-              className="w-full font-body text-[15px] bg-white text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
             >
               <option value="">Select a type&hellip;</option>
               {FINISH_SURFACES.map((f) => (
@@ -131,7 +131,7 @@ export default function InquirePage() {
               name="message"
               rows={5}
               placeholder="Describe your project, timeline, or any reference images you have in mind&hellip;"
-              className="w-full font-body text-[15px] bg-white text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors resize-y"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors resize-y"
             />
           </div>
 
