@@ -1,10 +1,11 @@
 import { sanityClient } from './sanity'
 
 const PIECE_FIELDS = `
-  _id, title, slug, category, location,
+  _id, title, slug, subtitle, category, location,
   heroImage { asset, hotspot, alt, caption, "lqip": asset->metadata.lqip },
   images[] { asset, hotspot, alt, caption, "lqip": asset->metadata.lqip },
-  orientation, description, isFeatured, isMishaSelect, displayOrder
+  orientation, description, tradeTags,
+  isFeatured, isMishaSelect, displayOrder
 `
 
 export interface SanityImage {
@@ -20,12 +21,14 @@ export interface PortfolioPiece {
   _id: string
   title: string
   slug: { current: string }
+  subtitle?: string
   category: string
   location?: string
   heroImage: SanityImage
   images?: SanityImage[]
   orientation: 'portrait' | 'landscape' | 'square'
   description?: string
+  tradeTags?: string[]
   isFeatured?: boolean
   isMishaSelect?: boolean
   displayOrder?: number
@@ -77,6 +80,40 @@ export async function getPiecesByLocation(location: string, limit = 4): Promise<
     *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true && location match $location]
     | order(displayOrder asc) [0...$limit] { ${PIECE_FIELDS} }
   `, { location: `*${location}*`, limit })
+}
+
+/** Featured portfolio pieces for gallery hero */
+export async function getFeaturedPieces(limit = 6): Promise<PortfolioPiece[]> {
+  return sanityClient.fetch(`
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
+      && isMishaSelect == true && isFeatured == true]
+    | order(displayOrder asc) [0...$limit] { ${PIECE_FIELDS} }
+  `, { limit })
+}
+
+/** Single portfolio piece by slug */
+export async function getPieceBySlug(slug: string): Promise<PortfolioPiece | null> {
+  return sanityClient.fetch(`
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
+      && slug.current == $slug][0] { ${PIECE_FIELDS} }
+  `, { slug })
+}
+
+/** All published Misha Select slugs (for generateStaticParams) */
+export async function getAllPortfolioSlugs(): Promise<string[]> {
+  return sanityClient.fetch(`
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
+      && isMishaSelect == true].slug.current
+  `)
+}
+
+/** Related pieces from same category, excluding current */
+export async function getRelatedPieces(category: string, excludeId: string, limit = 3): Promise<PortfolioPiece[]> {
+  return sanityClient.fetch(`
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
+      && category == $category && _id != $excludeId && isMishaSelect == true]
+    | order(displayOrder asc) [0...$limit] { ${PIECE_FIELDS} }
+  `, { category, excludeId, limit })
 }
 
 /** Finish category metadata */

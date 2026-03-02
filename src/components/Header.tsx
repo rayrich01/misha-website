@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { COPY, FINISH_SURFACES, NEIGHBORHOODS } from '@/lib/constants'
+import { FINISH_SURFACES, NEIGHBORHOODS } from '@/lib/constants'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -18,6 +18,9 @@ export function Header() {
         <div className="hidden md:flex items-center gap-6 text-sm font-body">
           <Link href="/about" className="text-charcoal hover:text-gold transition-colors">
             About
+          </Link>
+          <Link href="/portfolio" className="text-charcoal hover:text-gold transition-colors">
+            Portfolio
           </Link>
           <div className="relative group">
             <span className="text-charcoal hover:text-gold transition-colors cursor-default">
@@ -87,6 +90,9 @@ export function Header() {
         <div className="md:hidden bg-cream border-t border-sand px-5 py-4 space-y-3">
           <Link href="/about" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
             About
+          </Link>
+          <Link href="/portfolio" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
+            Portfolio
           </Link>
           <p className="text-xs uppercase tracking-widest text-bronze font-body mt-4">Finishes</p>
           {FINISH_SURFACES.map((f) => (

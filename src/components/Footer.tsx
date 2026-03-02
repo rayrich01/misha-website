@@ -30,6 +30,12 @@ export function Footer() {
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Get in Touch</p>
             <Link
+              href="/portfolio"
+              className="block font-body text-sm hover:text-gold transition-colors mb-2"
+            >
+              View Portfolio
+            </Link>
+            <Link
               href="/inquire"
               className="block font-body text-sm hover:text-gold transition-colors mb-2"
             >

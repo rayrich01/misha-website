@@ -150,7 +150,7 @@ export default function InquirePage() {
 
         <div className="mt-12 pt-8 border-t border-sand text-center">
           <p className="font-editorial text-[15px] italic text-charcoal/70 mb-4">
-            Prefer to talk through your project?
+            Prefer to talk by phone about your project?
           </p>
           <Link
             href="/consult"
