@@ -12,22 +12,16 @@ function baseUrl(): string {
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = baseUrl()
 
-  // Minimal sitemap so /sitemap.xml no longer 404s.
-  // Expand later with dynamic routes from Sanity (services, portfolio, blog, etc.).
-  const staticPaths = [
-    '',
-    '/services',
-    '/portfolio',
-    '/about',
-    '/contact',
-  ]
-
   const now = new Date()
 
-  return staticPaths.map((p, i) => ({
-    url: `${url}${p}`,
-    lastModified: now,
-    changeFrequency: i === 0 ? 'weekly' : 'monthly',
-    priority: i === 0 ? 1 : 0.7,
-  }))
+  const routes: MetadataRoute.Sitemap = [
+    { url: `${url}`,          lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${url}/services`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${url}/portfolio`,lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${url}/inquire`,  lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${url}/about`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${url}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+  ]
+
+  return routes
 }
