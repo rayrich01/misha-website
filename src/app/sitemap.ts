@@ -1,11 +1,12 @@
 import type { MetadataRoute } from 'next'
 
 function baseUrl(): string {
+  // Prefer explicit config, then Vercel production domain, then fallback.
   const explicit = process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL
   if (explicit) return explicit.replace(/\/+$/, '')
-  const vercel = process.env.VERCEL_URL
-  if (vercel) return `https://${vercel}`.replace(/\/+$/, '')
-  return 'https://mishacreations.com'.replace(/\/+$/, '')
+  const prodUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  if (prodUrl) return `https://${prodUrl}`.replace(/\/+$/, '')
+  return 'https://mishacreations.com'
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
