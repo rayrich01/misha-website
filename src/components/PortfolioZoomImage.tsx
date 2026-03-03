@@ -16,8 +16,8 @@ interface PortfolioZoomImageProps {
 
 export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZoomImageProps) {
   const [lifted, setLifted] = useState(false)
-  const [mounted, setMounted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [mounted] = useState(() => typeof window !== 'undefined')
 
   const cursor = useCursorZoom()
   const pinch = usePinchZoom()
@@ -27,8 +27,17 @@ export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZ
   const transform = cursor.isZoomed ? cursor.transform : pinch.transform
   const transformOrigin = cursor.isZoomed ? cursor.transformOrigin : '50% 50%'
 
-  // Mount portal after hydration
-  useEffect(() => { setMounted(true) }, [])
+  const open = useCallback(() => {
+    cursor.resetZoom()
+    pinch.resetZoom()
+    setLifted(true)
+  }, [cursor, pinch])
+
+  const close = useCallback(() => {
+    cursor.resetZoom()
+    pinch.resetZoom()
+    setLifted(false)
+  }, [cursor, pinch])
 
   // Lock body scroll when lifted
   useEffect(() => {
@@ -46,19 +55,7 @@ export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZ
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  })
-
-  const open = useCallback(() => {
-    cursor.resetZoom()
-    pinch.resetZoom()
-    setLifted(true)
-  }, [cursor, pinch])
-
-  const close = useCallback(() => {
-    cursor.resetZoom()
-    pinch.resetZoom()
-    setLifted(false)
-  }, [cursor, pinch])
+  }, [lifted, close])
 
   const handleOverlayClick = useCallback(() => {
     if (isZoomed) {
