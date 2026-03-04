@@ -1,10 +1,14 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { useCursorZoom } from '@/components/hooks/useCursorZoom'
 import { usePinchZoom } from '@/components/hooks/usePinchZoom'
+
+const subscribe = () => () => {}
+const getSnapshot = () => true
+const getServerSnapshot = () => false
 
 interface PortfolioZoomImageProps {
   src: string
@@ -17,7 +21,7 @@ interface PortfolioZoomImageProps {
 export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZoomImageProps) {
   const [lifted, setLifted] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const [mounted] = useState(() => typeof window !== 'undefined')
+  const mounted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
   const cursor = useCursorZoom()
   const pinch = usePinchZoom()
