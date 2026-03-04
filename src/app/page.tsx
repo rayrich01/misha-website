@@ -52,11 +52,11 @@ export default async function HomePage() {
       <JsonLd data={localBusinessSchema} />
 
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-dark">
         {heroImage && (
           <div className="absolute inset-0">
-            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-contain" />
+            <div className="absolute inset-0 bg-black/40" />
           </div>
         )}
         {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
