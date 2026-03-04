@@ -1,14 +1,13 @@
 /* Design tokens — Misha Creations main site (warm homeowner palette) */
 export const TOKENS = {
-  CREAM:    '#F5F3EF',
-  SAND:     '#E8E6DD',
+  CREAM:    '#E8E0D0',
+  SAND:     '#DBD3BE',
   SAGE:     '#D8DDD1',
   SAGE_LT:  '#E8EBE6',
   CHARCOAL: '#3C3C3A',
   DARK:     '#2D2D2D',
   GOLD:     '#C9A96E',
   BRONZE:   '#8B7355',
-  WHITE:    '#FFFFFF',
 } as const
 
 export const FONTS = {

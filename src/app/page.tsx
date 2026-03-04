@@ -52,7 +52,7 @@ export default async function HomePage() {
       <JsonLd data={localBusinessSchema} />
 
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
         {heroImage && (
           <div className="absolute inset-0">
             <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
