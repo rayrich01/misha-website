@@ -148,16 +148,24 @@ export default function InquirePage() {
           </button>
         </form>
 
-        <div className="mt-12 pt-8 border-t border-sand text-center">
-          <p className="font-editorial text-[15px] italic text-charcoal/70 mb-4">
-            Prefer to talk by phone about your project?
+        <div className="mt-12 pt-8 border-t border-sand text-center space-y-5">
+          <p className="font-editorial text-[15px] italic text-charcoal/70">
+            Feel free to call or text Misha
           </p>
-          <Link
-            href="/consult"
-            className="inline-block font-body text-xs uppercase tracking-widest text-gold border border-gold/50 px-7 py-3 hover:bg-gold/10 transition-colors"
+          <a
+            href="tel:+12816500500"
+            className="inline-block font-body text-lg font-medium text-gold tracking-wide hover:text-gold/80 transition-colors"
           >
-            Schedule a Consultation
-          </Link>
+            (281) 650-0500
+          </a>
+          <div>
+            <Link
+              href="/consult"
+              className="inline-block font-body text-xs uppercase tracking-widest text-charcoal/60 border border-sand px-7 py-3 hover:bg-gold/10 transition-colors"
+            >
+              Or Schedule a Consultation
+            </Link>
+          </div>
         </div>
       </div>
     </main>
