@@ -31,19 +31,59 @@ export default async function HomePage() {
 
   const localBusinessSchema = {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'VisualArtist'],
+    '@type': 'LocalBusiness',
     name: 'Misha Creations',
-    description: "Houston's premier decorative finishes artist specializing in custom wall murals, Venetian plaster, and luxury decorative painting",
+    description: 'Master faux artist specializing in custom wall murals, venetian plaster, and luxury decorative painting in Houston',
     url: 'https://mishacreations.com',
+    telephone: COPY.phone,
+    email: 'info@mishacreations.com',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Houston',
       addressRegion: 'TX',
       addressCountry: 'US',
     },
-    geo: { '@type': 'GeoCoordinates', latitude: '29.7604', longitude: '-95.3698' },
-    areaServed: COPY.socialProof.map((name) => ({ '@type': 'City', name })),
-    priceRange: '$$$$',
+    geo: { '@type': 'GeoCoordinates', latitude: 29.7604, longitude: -95.3698 },
+    areaServed: [
+      { '@type': 'City', name: 'Houston' },
+      { '@type': 'Neighborhood', name: 'River Oaks' },
+      { '@type': 'Neighborhood', name: 'Memorial' },
+      { '@type': 'City', name: 'The Woodlands' },
+      { '@type': 'City', name: 'Cypress' },
+      { '@type': 'City', name: 'Spring' },
+      { '@type': 'City', name: 'Tomball' },
+      { '@type': 'City', name: 'Klein' },
+      { '@type': 'Neighborhood', name: 'West University' },
+      { '@type': 'Neighborhood', name: 'Tanglewood' },
+      { '@type': 'City', name: 'Bellaire' },
+      { '@type': 'City', name: 'Katy' },
+      { '@type': 'City', name: 'Sugar Land' },
+      { '@type': 'Neighborhood', name: 'Piney Point Village' },
+      { '@type': 'Neighborhood', name: 'Bunker Hill Village' },
+      { '@type': 'Neighborhood', name: 'Hunters Creek Village' },
+      { '@type': 'City', name: 'Magnolia' },
+      { '@type': 'City', name: 'Conroe' },
+      { '@type': 'City', name: 'Pearland' },
+      { '@type': 'City', name: 'Missouri City' },
+    ],
+    serviceType: [
+      'Custom Wall Murals',
+      'Decorative Painting',
+      'Faux Finishing',
+      'Venetian Plaster',
+      'Ceiling Murals',
+      'Cabinet Glazing',
+      'Limewash',
+      "Trompe L'oeil",
+    ],
+    priceRange: '$$$',
+    openingHours: 'Mo-Fr 09:00-18:00',
+    sameAs: [
+      COPY.social.googleMaps,
+      COPY.social.instagram,
+      COPY.social.facebook,
+      COPY.social.pinterest,
+    ],
     image: 'https://mishacreations.com/og-image.jpg',
   }
 
@@ -96,7 +136,7 @@ export default async function HomePage() {
                 return (
                   <Link
                     key={piece._id}
-                    href={finish ? `/${finish.slug}` : '/'}
+                    href={finish ? `/services/${finish.slug}` : '/gallery'}
                     className="group relative aspect-[4/5] rounded-lg overflow-hidden shadow-md"
                   >
                     <SanityImage

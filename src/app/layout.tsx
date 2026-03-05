@@ -27,16 +27,32 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Misha Creations | Luxury Decorative Finishes Houston',
+    default: 'Misha Creations | Luxury Finishes & Murals Houston',
     template: '%s | Misha Creations',
   },
   description:
-    "Houston's premier decorative finishes artist. Custom wall murals, Venetian plaster, and luxury decorative painting for River Oaks, Memorial, Tanglewood, and West University homes.",
+    "Custom luxury finishes, luxury faux finishes, wall murals, Venetian plaster & decorative painting for River Oaks, Memorial & Tanglewood homes. Expert artisan craftsmanship in Houston.",
   metadataBase: new URL('https://mishacreations.com'),
   openGraph: {
     siteName: 'Misha Creations',
     locale: 'en_US',
     type: 'website',
+    title: 'Misha Creations | Luxury Finishes, Wall Murals & Venetian Plaster in Houston',
+    description:
+      "Luxury finishes, luxury faux finishes, wall murals, Venetian plaster, and artistic environments customized to your tastes, designed for Houston's most beautiful homes. Serving River Oaks, Memorial, West University, Tanglewood, Bellaire & Piney Point Village.",
+    images: ['/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Misha Creations - Houston\'s Premier Decorative Painting',
+    description: 'Transform your Houston home with luxury wall murals and decorative finishes.',
+    images: ['/og-image.jpg'],
+  },
+  other: {
+    'geo.region': 'US-TX',
+    'geo.placename': 'Houston',
+    'geo.position': '29.7604;-95.3698',
+    'ICBM': '29.7604, -95.3698',
   },
 }
 

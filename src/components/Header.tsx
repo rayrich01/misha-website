@@ -19,19 +19,19 @@ export function Header() {
           <Link href="/about" className="text-charcoal hover:text-gold transition-colors">
             About
           </Link>
-          <Link href="/portfolio" className="text-charcoal hover:text-gold transition-colors">
-            Portfolio
+          <Link href="/gallery" className="text-charcoal hover:text-gold transition-colors">
+            Gallery
           </Link>
           <div className="relative group">
-            <span className="text-charcoal hover:text-gold transition-colors cursor-default">
-              Finishes
-            </span>
+            <Link href="/services" className="text-charcoal hover:text-gold transition-colors">
+              Services
+            </Link>
             <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
-              <div className="bg-cream border border-sand rounded-lg shadow-lg py-2 min-w-[220px]">
+              <div className="bg-cream border border-sand rounded-lg shadow-lg py-2 min-w-[260px]">
                 {FINISH_SURFACES.map((f) => (
                   <Link
                     key={f.slug}
-                    href={`/${f.slug}`}
+                    href={`/services/${f.slug}`}
                     className="block px-4 py-2 text-sm text-charcoal hover:bg-sand hover:text-gold transition-colors"
                   >
                     {f.title}
@@ -49,7 +49,7 @@ export function Header() {
                 {NEIGHBORHOODS.map((n) => (
                   <Link
                     key={n.slug}
-                    href={`/${n.slug}`}
+                    href={`/areas/${n.slug}`}
                     className="block px-4 py-2 text-sm text-charcoal hover:bg-sand hover:text-gold transition-colors"
                   >
                     {n.name}
@@ -58,8 +58,8 @@ export function Header() {
               </div>
             </div>
           </div>
-          <Link href="/inquire" className="text-charcoal hover:text-gold transition-colors">
-            Inquire
+          <Link href="/faq" className="text-charcoal hover:text-gold transition-colors">
+            FAQ
           </Link>
           <Link
             href="/consult"
@@ -91,14 +91,17 @@ export function Header() {
           <Link href="/about" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
             About
           </Link>
-          <Link href="/portfolio" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
-            Portfolio
+          <Link href="/gallery" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
+            Gallery
           </Link>
-          <p className="text-xs uppercase tracking-widest text-bronze font-body mt-4">Finishes</p>
+          <Link href="/services" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
+            Services
+          </Link>
+          <p className="text-xs uppercase tracking-widest text-bronze font-body mt-4">Services</p>
           {FINISH_SURFACES.map((f) => (
             <Link
               key={f.slug}
-              href={`/${f.slug}`}
+              href={`/services/${f.slug}`}
               className="block text-charcoal pl-3 font-body text-sm"
               onClick={() => setOpen(false)}
             >
@@ -109,18 +112,17 @@ export function Header() {
           {NEIGHBORHOODS.map((n) => (
             <Link
               key={n.slug}
-              href={`/${n.slug}`}
+              href={`/areas/${n.slug}`}
               className="block text-charcoal pl-3 font-body text-sm"
               onClick={() => setOpen(false)}
             >
               {n.name}
             </Link>
           ))}
-          <Link
-            href="/inquire"
-            className="block mt-4 text-charcoal font-body"
-            onClick={() => setOpen(false)}
-          >
+          <Link href="/faq" className="block mt-4 text-charcoal font-body" onClick={() => setOpen(false)}>
+            FAQ
+          </Link>
+          <Link href="/inquire" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
             Inquire
           </Link>
           <Link

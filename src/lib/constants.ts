@@ -17,83 +17,81 @@ export const FONTS = {
 } as const
 
 export interface FinishSurface {
+  /** URL slug — used in /services/{slug} route */
   slug: string
+  /** Sanity portfolioPiece.category value */
   categoryId: string
   title: string
   metaTitle: string
+  metaDescription: string
   h1: string
 }
 
+/* ─── Service pages — slugs match Readdy URLs exactly for SEO parity ─── */
 export const FINISH_SURFACES: FinishSurface[] = [
   {
-    slug: 'venetian-plaster-houston',
-    categoryId: 'venetian-plaster',
-    title: 'Venetian Plaster',
-    metaTitle: 'Venetian Plaster Houston | Misha Creations',
-    h1: 'Venetian Plaster in Houston',
-  },
-  {
-    slug: 'wall-murals-houston',
+    slug: 'luxury-wall-murals',
     categoryId: 'wall-murals',
-    title: 'Wall Murals',
-    metaTitle: 'Custom Wall Murals Houston | Misha Creations',
-    h1: 'Custom Wall Murals in Houston',
+    title: 'Luxury Wall Murals',
+    metaTitle: 'Luxury Wall Murals Houston | Custom Hand-Painted Murals | Misha Creations',
+    metaDescription: 'Transform your Houston home with custom luxury wall murals by Misha Creations. Expert hand-painted murals for River Oaks, Memorial, and The Woodlands. Museum-quality artistry for discerning homeowners.',
+    h1: 'Luxury Wall Murals in Houston',
   },
   {
-    slug: 'faux-finishes-houston',
-    categoryId: 'faux-finishes',
-    title: 'Faux Finishes',
-    metaTitle: 'Faux Finishes Houston | Misha Creations',
-    h1: 'Faux & Specialty Finishes in Houston',
+    slug: 'venetian-lime-plaster',
+    categoryId: 'venetian-plaster',
+    title: 'Venetian Lime Plaster',
+    metaTitle: 'Venetian Lime Plaster Houston | Luxury Plaster Finishes | Misha Creations',
+    metaDescription: 'Authentic Venetian lime plaster finishes for Houston luxury homes. Hand-applied by Misha Creations for River Oaks, Memorial, and Tanglewood estates. 25+ years of artisan expertise.',
+    h1: 'Venetian Lime Plaster in Houston',
   },
   {
-    slug: 'decorative-ceilings-houston',
-    categoryId: 'decorative-ceilings',
-    title: 'Decorative Ceilings',
-    metaTitle: 'Decorative Ceilings Houston | Misha Creations',
-    h1: 'Decorative Ceiling Painting in Houston',
+    slug: 'trompe-loeil-architectural-illusions',
+    categoryId: 'trompe-loeil',
+    title: "Trompe L'Oeil & Architectural Illusions",
+    metaTitle: "Luxury Trompe L'Oeil Artist Houston TX | Trompe L'Oeil Finishes Houston TX | Misha Creations",
+    metaDescription: "Premier luxury trompe l'oeil artist Houston TX specializing in trompe l'oeil finishes Houston TX. Classical architectural illusions, faux niches, stone blocks & molding for River Oaks, Memorial & Tanglewood luxury homes.",
+    h1: "Trompe L'Oeil & Architectural Illusions in Houston",
   },
   {
-    slug: 'childrens-rooms-houston',
+    slug: 'childrens-themed-rooms',
     categoryId: 'childrens-rooms',
-    title: "Children's Rooms",
-    metaTitle: "Children's Room Murals Houston | Misha Creations",
+    title: "Children's Themed Rooms",
+    metaTitle: "Children's Themed Room Murals Houston | Kids Room Painting Katy TX",
+    metaDescription: "Create magical spaces for your children with custom themed room murals. Expert children's room painting for Houston, Katy, Memorial, and River Oaks luxury homes.",
     h1: "Children's Themed Room Murals in Houston",
   },
   {
-    slug: 'themed-rooms-houston',
+    slug: 'themed-rooms-skyscapes',
     categoryId: 'themed-rooms',
-    title: 'Themed Rooms',
-    metaTitle: 'Themed Room Design Houston | Misha Creations',
+    title: 'Themed Rooms & Skyscapes',
+    metaTitle: 'Themed Rooms & Skyscapes Houston | Sky Ceiling Murals Katy TX',
+    metaDescription: 'Transform your Houston home with stunning themed rooms and sky ceiling murals. Expert skyscape painting for River Oaks, Memorial, and Katy luxury residences.',
     h1: 'Themed Rooms & Skyscapes in Houston',
   },
   {
-    slug: 'trompe-loeil-houston',
-    categoryId: 'trompe-loeil',
-    title: "Trompe l'Oeil",
-    metaTitle: "Trompe l'Oeil Houston | Misha Creations",
-    h1: "Trompe l'Oeil & Architectural Illusions in Houston",
+    slug: 'decorative-ceilings',
+    categoryId: 'decorative-ceilings',
+    title: 'Decorative Ceilings',
+    metaTitle: 'Decorative Ceiling Painting Houston | Misha Creations',
+    metaDescription: "Transform your Houston luxury home with custom decorative ceiling painting. Sky murals, trompe-l'oeil domes, gilded finishes & frescoed medallions for River Oaks, Memorial & Tanglewood estates.",
+    h1: 'Decorative Ceiling Painting in Houston',
   },
   {
-    slug: 'modello-stencils-houston',
+    slug: 'faux-specialty-finishes',
+    categoryId: 'faux-finishes',
+    title: 'Faux & Specialty Finishes',
+    metaTitle: 'Luxury Faux Finishes Houston | Faux Marble & Stone | Misha Creations',
+    metaDescription: 'Master faux artist specializing in luxury faux finishes including faux marble, faux wood grain finishing, and decorative painting for Houston luxury homes.',
+    h1: 'Luxury Faux & Specialty Finishes in Houston',
+  },
+  {
+    slug: 'modello-stencils',
     categoryId: 'modello-stencils',
     title: 'Modello Stencils',
-    metaTitle: 'Modello Stencils Houston | Misha Creations',
+    metaTitle: 'Modello Stencils Houston | Decorative Stenciling Katy TX',
+    metaDescription: 'Transform your Houston home with elegant Modello stencil designs. Expert decorative stenciling for River Oaks, Memorial, and Katy luxury residences.',
     h1: 'Modello & Decorative Stencils in Houston',
-  },
-  {
-    slug: 'skyscapes-houston',
-    categoryId: 'skyscapes',
-    title: 'Skyscapes & Celestial',
-    metaTitle: 'Skyscapes & Celestial Painting Houston | Misha Creations',
-    h1: 'Skyscapes & Celestial Painting in Houston',
-  },
-  {
-    slug: 'commercial-houston',
-    categoryId: 'commercial',
-    title: 'Commercial & Public Art',
-    metaTitle: 'Commercial & Public Art Houston | Misha Creations',
-    h1: 'Commercial & Public Art in Houston',
   },
 ]
 
@@ -105,44 +103,51 @@ export interface NeighborhoodSurface {
   slug: string
   name: string
   metaTitle: string
+  metaDescription: string
   h1: string
 }
 
 export const NEIGHBORHOODS: NeighborhoodSurface[] = [
   {
-    slug: 'river-oaks',
+    slug: 'river-oaks-luxury-murals',
     name: 'River Oaks',
-    metaTitle: 'Decorative Finishes River Oaks | Misha Creations Houston',
+    metaTitle: 'Luxury Wall and Ceiling Murals, Decorative Plaster in River Oaks | Misha Creations',
+    metaDescription: 'Transform your River Oaks home with luxury wall murals, decorative ceilings, and Venetian plaster. Serving Memorial Close In and West University. 25+ years expertise.',
     h1: 'Luxury Decorative Finishes in River Oaks',
   },
   {
     slug: 'memorial',
     name: 'Memorial',
     metaTitle: 'Decorative Painting Memorial Houston | Misha Creations',
+    metaDescription: 'Luxury decorative painting and finishes in Memorial, Houston. Wall murals, decorative ceilings, and custom finishes by Misha Creations. 25+ years serving Memorial.',
     h1: 'Luxury Decorative Painting in Memorial',
   },
   {
     slug: 'tanglewood',
     name: 'Tanglewood',
     metaTitle: 'Decorative Finishes Tanglewood | Misha Creations Houston',
+    metaDescription: 'Luxury decorative finishes and specialty painting in Tanglewood, Houston. Venetian plaster, faux stone, and metallic glazes by Misha Creations. 25+ years of artisan expertise.',
     h1: 'Luxury Decorative Finishes in Tanglewood',
   },
   {
     slug: 'west-university',
     name: 'West University',
     metaTitle: 'Decorative Painting West University | Misha Creations Houston',
+    metaDescription: "Luxury decorative painting in West University, Houston. Children's murals, botanical wall murals, and custom finishes by Misha Creations. 25+ years serving West U.",
     h1: 'Luxury Decorative Painting in West University',
   },
   {
     slug: 'the-woodlands',
     name: 'The Woodlands',
     metaTitle: 'Decorative Finishes The Woodlands | Misha Creations',
+    metaDescription: 'Luxury decorative finishes in The Woodlands, TX. Themed rooms, sky ceilings, and decorative ceiling treatments by Misha Creations. 25+ years of artistic excellence.',
     h1: 'Luxury Decorative Finishes in The Woodlands',
   },
   {
     slug: 'bellaire',
     name: 'Bellaire',
     metaTitle: 'Decorative Painting Bellaire Houston | Misha Creations',
+    metaDescription: 'Luxury decorative painting in Bellaire, Houston. Specialty faux finishes, nature murals, and textured accent walls by Misha Creations. 25+ years of artisan expertise.',
     h1: 'Luxury Decorative Painting in Bellaire',
   },
 ]
@@ -169,7 +174,7 @@ export interface NeighborhoodContent {
 }
 
 export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
-  'river-oaks': {
+  'river-oaks-luxury-murals': {
     description: 'River Oaks estates demand the finest artistry. Misha has spent over two decades transforming grand foyers, formal dining rooms, and master suites in this iconic neighborhood with hand-applied Venetian plaster, architectural trompe l\'oeil, and custom gilded accents that honor the timeless elegance of each home.',
     featuredCategories: ['venetian-plaster', 'trompe-loeil'],
     categoryOffset: 0,
@@ -245,6 +250,12 @@ export const COPY = {
   calendlyUrl: 'https://calendly.com/mishacreations/30min',
   address: { city: 'Houston', state: 'TX', country: 'US' },
   socialProof: ['River Oaks', 'Tanglewood', 'Memorial', 'West University', 'Bellaire', 'The Woodlands'],
+  social: {
+    instagram: 'https://www.instagram.com/mishacreations',
+    facebook: 'https://www.facebook.com/mishacreations',
+    pinterest: 'https://www.pinterest.com/mishacreations',
+    googleMaps: 'https://www.google.com/maps/place/Misha+Creations',
+  },
 } as const
 
 export const PROCESS_STEPS = [
