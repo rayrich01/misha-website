@@ -53,7 +53,15 @@ const nextConfig: NextConfig = {
       { source: '/feed', destination: '/blog', permanent: true },
       { source: '/lander', destination: '/', permanent: true },
       { source: '/contact', destination: '/consult', permanent: true },
+      { source: '/contact-us', destination: '/consult', permanent: true },
       { source: '/book-consultation', destination: '/consult', permanent: true },
+
+      // ── Legacy area pages with no matching current page ──
+      { source: '/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
+      { source: '/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/sweetwater-luxury-murals', destination: '/', permanent: true },
 
       // ── Previous misha-website portfolio → gallery ──
       { source: '/portfolio', destination: '/gallery', permanent: true },
