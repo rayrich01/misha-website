@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { sanityImageUrl } from '@/lib/sanity'
+import { sanityImageBaseUrl } from '@/lib/sanity'
 import type { SanityImage as SanityImageType } from '@/lib/queries'
 
 interface Props {
@@ -23,11 +23,11 @@ export function SanityImage({
   fill = false,
   sizes,
   className,
-  quality = 80,
+  quality,
 }: Props) {
   if (!image?.asset) return null
 
-  const src = sanityImageUrl(image, { width: fill ? 1600 : width, height: fill ? undefined : height, quality })
+  const src = sanityImageBaseUrl(image)
   const altText = alt || image.alt || 'Misha Creations decorative finish'
   const blurDataURL = image.lqip || undefined
 
@@ -39,6 +39,7 @@ export function SanityImage({
         fill
         priority={priority}
         sizes={sizes || '100vw'}
+        quality={quality}
         className={className}
         placeholder={blurDataURL ? 'blur' : 'empty'}
         blurDataURL={blurDataURL}
@@ -55,6 +56,7 @@ export function SanityImage({
       height={height}
       priority={priority}
       sizes={sizes}
+      quality={quality}
       className={className}
       placeholder={blurDataURL ? 'blur' : 'empty'}
       blurDataURL={blurDataURL}

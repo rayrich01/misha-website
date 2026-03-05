@@ -26,3 +26,7 @@ export function sanityImageUrl(
   else b = b.quality(80)
   return b.url()
 }
+
+export function sanityImageBaseUrl(source: SanityImageSource): string {
+  return builder.image(source).auto('format').url()
+}
