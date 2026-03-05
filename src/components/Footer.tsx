@@ -13,12 +13,12 @@ export function Footer() {
               25+ years of artistic excellence.
             </p>
             <p className="font-body text-sm text-cream/60">
-              <a href={`tel:${COPY.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-gold transition-colors">
+              <a href={`tel:${COPY.phone.replace(/[^0-9+]/g, '')}`} className="inline-block py-2 hover:text-gold transition-colors">
                 {COPY.phone}
               </a>
             </p>
             <p className="font-body text-sm text-cream/60">
-              <a href={`mailto:${COPY.email}`} className="hover:text-gold transition-colors">
+              <a href={`mailto:${COPY.email}`} className="inline-block py-2 hover:text-gold transition-colors">
                 {COPY.email}
               </a>
             </p>
@@ -86,14 +86,14 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-cream/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="font-body text-xs text-cream/50">
+          <p className="font-body text-xs text-cream/60">
             &copy; {new Date().getFullYear()} Misha Creations &middot; Houston, TX
           </p>
           <div className="flex items-center gap-4">
-            <a href={COPY.social.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/40 hover:text-gold transition-colors">Instagram</a>
-            <a href={COPY.social.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/40 hover:text-gold transition-colors">Facebook</a>
-            <a href={COPY.social.pinterest} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/40 hover:text-gold transition-colors">Pinterest</a>
-            <a href="https://studio.mishacreations.com" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/40 hover:text-gold transition-colors">For Designers &amp; Builders &rarr;</a>
+            <a href={COPY.social.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Instagram</a>
+            <a href={COPY.social.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Facebook</a>
+            <a href={COPY.social.pinterest} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Pinterest</a>
+            <a href="https://studio.mishacreations.com" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">For Designers &amp; Builders &rarr;</a>
           </div>
         </div>
       </div>

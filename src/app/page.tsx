@@ -126,7 +126,7 @@ export default async function HomePage() {
               <h2 className="font-display text-3xl md:text-5xl text-dark mb-4">
                 Selected Works
               </h2>
-              <p className="font-body text-charcoal/70 max-w-2xl mx-auto">
+              <p className="font-body text-charcoal/85 max-w-2xl mx-auto">
                 A curated selection of decorative finishes, murals, and plaster work customized to our clients&apos; tastes across Houston&apos;s finest homes.
               </p>
             </div>
