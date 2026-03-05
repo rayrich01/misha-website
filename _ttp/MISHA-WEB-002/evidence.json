@@ -61,8 +61,20 @@
       "DO NOT cancel Readdy"
     ]
   },
-  "step6_blocker": {
-    "status": "BLOCKED",
-    "description": "MAIN-001 editor tabs (MainSiteTab.tsx, PagesTab.tsx) not found in workspace. Files were never created or lost in power outage. Requires Ray input."
+  "step6_editor_tabs": {
+    "status": "COMPLETE",
+    "description": "Created MainSiteTab.tsx, PagesTab.tsx, and rewired editor/page.tsx as PIN-gated tabbed interface with 3 tabs: Featured Images, Main Site, Pages.",
+    "files_created": [
+      "misha-studio-site/src/components/editor/MainSiteTab.tsx",
+      "misha-studio-site/src/components/editor/PagesTab.tsx"
+    ],
+    "files_modified": [
+      "misha-studio-site/src/app/(studio)/editor/page.tsx"
+    ],
+    "tabs": [
+      { "id": "featured", "label": "Featured Images", "component": "FeaturedImagesPage" },
+      { "id": "main-site", "label": "Main Site", "component": "MainSiteTab" },
+      { "id": "pages", "label": "Pages", "component": "PagesTab" }
+    ]
   }
 }
