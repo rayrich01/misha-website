@@ -1,0 +1,87 @@
+name: CR from PR Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  handle-pr-comment:
+    if: >-
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '**Page:**')
+    runs-on: ubuntu-latest
+    steps:
+      - name: React with eyes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'eyes',
+            });
+
+      - name: Parse and queue
+        id: queue
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.comment.body;
+
+            // Parse page
+            const pageMatch = body.match(/\*\*Page:\*\*\s*(.+)/);
+            const page = pageMatch ? pageMatch[1].trim() : 'unknown';
+
+            // Parse description — everything after the page line
+            const descMatch = body.split(/\*\*Page:\*\*.*\n/);
+            const description = descMatch.length > 1
+              ? descMatch[1].trim()
+              : body;
+
+            // Queue to Supabase
+            const resp = await fetch(`${process.env.SUPABASE_URL}/rest/v1/cr_tasks`, {
+              method: 'POST',
+              headers: {
+                'apikey': process.env.SUPABASE_SERVICE_ROLE_KEY,
+                'Authorization': `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=minimal',
+              },
+              body: JSON.stringify({
+                tenant: 'misha-main',
+                cr_number: context.payload.issue.number,
+                category: 'pr-comment',
+                priority: 'before-launch',
+                auto_execute: true,
+                status: 'queued',
+                issue_url: context.payload.issue.html_url,
+                page,
+                body: description,
+              }),
+            });
+
+            if (!resp.ok) {
+              throw new Error(`Supabase queue failed: ${resp.status} ${await resp.text()}`);
+            }
+
+            core.setOutput('success', 'true');
+
+      - name: React with rocket on success
+        if: steps.queue.outputs.success == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'rocket',
+            });

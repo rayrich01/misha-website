@@ -1,0 +1,37 @@
+name: New Feature / Page Request
+description: Request a new page, form, or feature for the Misha Creations site.
+labels: ["feature"]
+body:
+  - type: textarea
+    id: what-do-you-need
+    attributes:
+      label: What do you need
+      description: Describe the new page, form, or feature.
+    validations:
+      required: true
+
+  - type: input
+    id: who-is-it-for
+    attributes:
+      label: Who is it for
+      placeholder: "e.g. homeowners, trade partners, Misha"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "Urgent — blocks operations"
+        - "Before launch"
+        - "Nice to have"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference-examples
+    attributes:
+      label: Reference / examples
+    validations:
+      required: false

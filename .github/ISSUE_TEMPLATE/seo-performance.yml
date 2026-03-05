@@ -1,0 +1,56 @@
+name: SEO or Performance Issue
+description: Report an SEO, performance, accessibility, or structured data issue.
+labels: ["seo"]
+body:
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue type
+      options:
+        - "SEO — indexing or ranking"
+        - "Performance — page speed"
+        - "Accessibility — WCAG compliance"
+        - "Structured data — JSON-LD"
+    validations:
+      required: true
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      placeholder: "e.g. https://mishacreations.com/services/luxury-wall-murals"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the issue
+    validations:
+      required: true
+
+  - type: input
+    id: tool-or-report
+    attributes:
+      label: Tool or report
+      placeholder: "e.g. PageSpeed Insights, GSC, Lighthouse"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "Urgent — blocks operations"
+        - "Before launch"
+        - "Nice to have"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+    validations:
+      required: false

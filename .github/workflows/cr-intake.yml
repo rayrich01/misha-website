@@ -1,0 +1,164 @@
+name: CR Intake
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Parse category and priority
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+
+            // --- Detect category ---
+            let category = 'unknown';
+            if (body.includes('Page URL or name')) {
+              category = 'content-update';
+            } else if (body.includes('Who is it for')) {
+              category = 'feature-request';
+            } else if (
+              body.includes('Issue type') &&
+              (body.includes('SEO') || body.includes('Performance') || body.includes('Accessibility'))
+            ) {
+              category = 'seo-performance';
+            } else if (body.includes('What happened')) {
+              category = 'bug';
+            }
+
+            // --- Detect priority ---
+            let priority = 'nice-to-have';
+            if (body.includes('Urgent')) {
+              priority = 'urgent';
+            } else if (body.includes('Before launch')) {
+              priority = 'before-launch';
+            }
+
+            // --- Auto-execute decision ---
+            const autoExecute = category !== 'feature-request' && category !== 'unknown';
+
+            core.setOutput('category', category);
+            core.setOutput('priority', priority);
+            core.setOutput('auto_execute', String(autoExecute));
+
+      - name: Add labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const category = '${{ steps.parse.outputs.category }}';
+            const priority = '${{ steps.parse.outputs.priority }}';
+            const labels = [category, priority, 'cr-pending'];
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels,
+            });
+
+      - name: Post acknowledgment comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const num = context.issue.number;
+            const category = '${{ steps.parse.outputs.category }}';
+            const priority = '${{ steps.parse.outputs.priority }}';
+            const autoExecute = ${{ steps.parse.outputs.auto_execute }};
+            const status = autoExecute ? 'Queued for auto-execution' : 'Awaiting manual review';
+
+            const comment = [
+              `**CR-${num}** received`,
+              '',
+              `| Field | Value |`,
+              `|-------|-------|`,
+              `| Category | \`${category}\` |`,
+              `| Priority | \`${priority}\` |`,
+              `| Auto-execute | \`${autoExecute}\` |`,
+              `| Status | ${status} |`,
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: num,
+              body: comment,
+            });
+
+      - name: Queue to Supabase
+        uses: actions/github-script@v7
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        with:
+          script: |
+            const sbUrl = process.env.SUPABASE_URL;
+            const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+            if (!sbUrl || !sbKey) {
+              core.warning('Supabase secrets not configured — skipping queue');
+              return;
+            }
+
+            const num = context.issue.number;
+            const category = '${{ steps.parse.outputs.category }}';
+            const priority = '${{ steps.parse.outputs.priority }}';
+            const autoExecute = ${{ steps.parse.outputs.auto_execute }};
+
+            const task = {
+              cr_number: num,
+              tenant: 'misha-main',
+              source: 'github-issue',
+              source_url: '${{ github.event.issue.html_url }}',
+              category: category,
+              priority: priority,
+              status: 'pending',
+              title: context.payload.issue.title,
+              description: context.payload.issue.body,
+              payload: {
+                issue_number: num,
+                requester: context.payload.issue.user.login,
+              },
+              requester: context.payload.issue.user.login,
+              auto_execute: autoExecute,
+              queued_at: new Date().toISOString()
+            };
+
+            const res = await fetch(`${sbUrl}/rest/v1/cr_tasks`, {
+              method: 'POST',
+              headers: {
+                'apikey': sbKey,
+                'Authorization': `Bearer ${sbKey}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'return=representation'
+              },
+              body: JSON.stringify(task)
+            });
+
+            if (res.ok) {
+              const [row] = await res.json();
+              core.info(`CR-${num} queued to Supabase: ${row.id}`);
+
+              try {
+                await github.rest.issues.removeLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: num,
+                  name: 'cr-pending'
+                });
+              } catch (e) { /* label may not exist yet */ }
+
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: num,
+                labels: ['cr-queued']
+              });
+            } else {
+              const err = await res.text();
+              core.warning(`Failed to queue CR-${num} to Supabase: ${err}`);
+            }

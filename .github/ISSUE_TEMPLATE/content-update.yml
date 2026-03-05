@@ -1,0 +1,43 @@
+name: Content Update
+description: Request a content change on the Misha Creations site.
+labels: ["content"]
+body:
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL or name
+      placeholder: "e.g. https://mishacreations.com/services or 'Gallery page'"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-needs-to-change
+    attributes:
+      label: What needs to change
+    validations:
+      required: true
+
+  - type: textarea
+    id: new-content
+    attributes:
+      label: New content / correct information
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "Urgent — blocks operations"
+        - "Before launch"
+        - "Nice to have"
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+    validations:
+      required: false

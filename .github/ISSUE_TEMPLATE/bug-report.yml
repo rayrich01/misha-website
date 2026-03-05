@@ -1,0 +1,50 @@
+name: Bug Report
+description: Report a bug on the Misha Creations site.
+labels: ["bug"]
+body:
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      placeholder: "e.g. https://mishacreations.com/inquire"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-you-expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options:
+        - "Phone"
+        - "Tablet"
+        - "Computer"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser if known
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+    validations:
+      required: false
