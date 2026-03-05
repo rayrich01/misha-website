@@ -81,6 +81,20 @@ export const FINISH_SURFACES: FinishSurface[] = [
     metaTitle: 'Modello Stencils Houston | Misha Creations',
     h1: 'Modello & Decorative Stencils in Houston',
   },
+  {
+    slug: 'skyscapes-houston',
+    categoryId: 'skyscapes',
+    title: 'Skyscapes & Celestial',
+    metaTitle: 'Skyscapes & Celestial Painting Houston | Misha Creations',
+    h1: 'Skyscapes & Celestial Painting in Houston',
+  },
+  {
+    slug: 'commercial-houston',
+    categoryId: 'commercial',
+    title: 'Commercial & Public Art',
+    metaTitle: 'Commercial & Public Art Houston | Misha Creations',
+    h1: 'Commercial & Public Art in Houston',
+  },
 ]
 
 export const FINISH_MAP = Object.fromEntries(
@@ -136,6 +150,11 @@ export const NEIGHBORHOODS: NeighborhoodSurface[] = [
 export const NEIGHBORHOOD_MAP = Object.fromEntries(
   NEIGHBORHOODS.map(n => [n.slug, n])
 ) as Record<string, NeighborhoodSurface>
+
+export const FINISH_DESCRIPTIONS: Record<string, string> = {
+  'skyscapes': 'Airbrushed skies, galaxies, clouds, and atmospheric treatments for ceilings and walls. Day-to-night transitions, star maps, and cosmic environments rendered with luminous depth.',
+  'commercial': 'Themed installations for commercial, hospitality, restaurant, and public spaces. Large-scale murals and environmental art designed for high-traffic durability and visual impact.',
+}
 
 export const COPY = {
   siteTitle: 'Misha Creations',

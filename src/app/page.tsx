@@ -60,11 +60,11 @@ export default async function HomePage() {
           </div>
         )}
         {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
-        <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
+        <div className="relative z-10 text-left px-5 md:px-12 max-w-4xl mr-auto pt-20">
           <h1 className="font-display text-[42px] leading-[52px] md:text-[60px] md:leading-[72px] text-white mb-6">
             {headline}
           </h1>
-          <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+          <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-2xl leading-relaxed">
             {subheadline}
           </p>
           <Link

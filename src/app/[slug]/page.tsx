@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS } from '@/lib/constants'
+import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS, FINISH_DESCRIPTIONS } from '@/lib/constants'
 import { getPiecesByCategory, getPiecesByLocation, getFinishCategory, getMishaSelectPieces } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -65,6 +65,7 @@ async function FinishPage({ slug }: { slug: string }) {
   const description =
     category?.tradeDescription ||
     category?.shortDescription ||
+    FINISH_DESCRIPTIONS[finish.categoryId] ||
     `Misha Creations brings 25+ years of expertise in ${finish.title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
   const finishFaqs = [
