@@ -66,8 +66,10 @@ export default function InquirePage() {
           Start a Conversation
         </h1>
         <p className="font-body text-charcoal leading-relaxed mb-10">
-          Tell us about your project. Misha will respond with a scope,
-          sample board recommendation, and realistic timeline within 48 hours.
+          Tell Misha about your project, vision, location you live, a realistic timeline
+          as well as any questions you may have and she will respond within 48 hours.
+          You can also schedule a free consultative call directly with Misha or reach
+          out to her via phone or text.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
