@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS, FINISH_DESCRIPTIONS } from '@/lib/constants'
-import { getPiecesByCategory, getPiecesByLocation, getFinishCategory, getMishaSelectPieces } from '@/lib/queries'
+import { FINISH_MAP, NEIGHBORHOOD_MAP, FINISH_SURFACES, NEIGHBORHOODS, FINISH_DESCRIPTIONS, NEIGHBORHOOD_CONTENT } from '@/lib/constants'
+import { getPiecesByCategory, getPiecesByCategories, getFinishCategory, getMishaSelectPieces } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
@@ -166,26 +166,23 @@ async function FinishPage({ slug }: { slug: string }) {
 /* ─── Neighborhood Surface ─── */
 async function NeighborhoodPage({ slug }: { slug: string }) {
   const hood = NEIGHBORHOOD_MAP[slug]
-  const [locationPieces, fallbackPieces] = await Promise.all([
-    getPiecesByLocation(hood.name, 4),
-    getMishaSelectPieces(4),
-  ])
-  const pieces = locationPieces.length >= 3 ? locationPieces : fallbackPieces.slice(0, 4)
+  const content = NEIGHBORHOOD_CONTENT[slug]
 
-  const neighborhoodFaqs = [
-    {
-      question: `Does Misha Creations serve ${hood.name}?`,
-      answer: `Yes! Misha has been serving ${hood.name} homeowners for over 25 years with luxury decorative finishes, wall murals, and Venetian plaster. She personally visits your home for every consultation.`,
-    },
-    {
-      question: `How much does decorative painting cost in ${hood.name}?`,
-      answer: `Every project is customized to your tastes and priced based on scope, surface area, and finish complexity. Misha provides a detailed, no-obligation estimate after an in-home consultation.`,
-    },
-    {
-      question: `What decorative finishes are popular in ${hood.name}?`,
-      answer: `${hood.name} homeowners often choose Venetian plaster for entry halls, custom wall murals for dining rooms, and decorative ceiling treatments for living areas. Misha tailors every finish to complement your home's architecture.`,
-    },
-  ]
+  const pieces = content
+    ? await getPiecesByCategories(content.featuredCategories, 2, content.categoryOffset)
+    : (await getMishaSelectPieces(4)).slice(0, 4)
+
+  const neighborhoodFaqs = content
+    ? [
+        { question: `Does Misha Creations serve ${hood.name}?`, answer: content.faqAnswers.serve },
+        { question: `How much does decorative painting cost in ${hood.name}?`, answer: content.faqAnswers.cost },
+        { question: `What decorative finishes are popular in ${hood.name}?`, answer: content.faqAnswers.popular },
+      ]
+    : [
+        { question: `Does Misha Creations serve ${hood.name}?`, answer: `Yes! Misha has been serving ${hood.name} homeowners for over 25 years with luxury decorative finishes, wall murals, and Venetian plaster. She personally visits your home for every consultation.` },
+        { question: `How much does decorative painting cost in ${hood.name}?`, answer: `Every project is customized to your tastes and priced based on scope, surface area, and finish complexity. Misha provides a detailed, no-obligation estimate after an in-home consultation.` },
+        { question: `What decorative finishes are popular in ${hood.name}?`, answer: `${hood.name} homeowners often choose Venetian plaster for entry halls, custom wall murals for dining rooms, and decorative ceiling treatments for living areas. Misha tailors every finish to complement your home's architecture.` },
+      ]
 
   const localBusinessSchema = {
     '@context': 'https://schema.org',
@@ -217,9 +214,18 @@ async function NeighborhoodPage({ slug }: { slug: string }) {
         </div>
       </section>
 
+      {/* Description */}
+      {content && (
+        <section className="py-16 md:py-20 bg-cream">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <p className="font-body text-lg leading-relaxed text-charcoal">{content.description}</p>
+          </div>
+        </section>
+      )}
+
       {/* Portfolio Grid */}
       {pieces.length > 0 && (
-        <section className="py-16 md:py-20 bg-cream">
+        <section className={`py-16 md:py-20 ${content ? 'bg-sand' : 'bg-cream'}`}>
           <div className="max-w-6xl mx-auto px-5">
             <h2 className="font-display text-3xl md:text-4xl text-center text-dark mb-12">
               Work in {hood.name}

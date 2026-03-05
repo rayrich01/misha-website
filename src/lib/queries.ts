@@ -74,6 +74,19 @@ export async function getPiecesByCategory(category: string, limit = 6): Promise<
   `, { category, limit })
 }
 
+/** Pieces by multiple categories with offset (for unique neighborhood pages) */
+export async function getPiecesByCategories(categories: string[], perCategory = 2, offset = 0): Promise<PortfolioPiece[]> {
+  const results = await Promise.all(
+    categories.map((cat) =>
+      sanityClient.fetch<PortfolioPiece[]>(`
+        *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true && category == $cat]
+        | order(displayOrder asc) [$offset...$end] { ${PIECE_FIELDS} }
+      `, { cat, offset, end: offset + perCategory })
+    )
+  )
+  return results.flat()
+}
+
 /** Pieces by location/neighborhood */
 export async function getPiecesByLocation(location: string, limit = 4): Promise<PortfolioPiece[]> {
   return sanityClient.fetch(`
