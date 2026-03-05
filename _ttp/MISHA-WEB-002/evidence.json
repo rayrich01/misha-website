@@ -1,0 +1,68 @@
+{
+  "ttp": "MISHA-WEB-002",
+  "created": "2026-03-05",
+  "recovery": "post-power-outage",
+  "repo": "rayrich01/misha-website",
+  "branch": "main",
+  "framework": "Next.js 16.1.6 (Turbopack)",
+  "sanity": {
+    "projectId": "uz6uv7gy",
+    "dataset": "production"
+  },
+  "build": {
+    "status": "PASS",
+    "pages": 44,
+    "errors": 0,
+    "warnings": 1,
+    "warningNote": "pre-existing <img> in inquire/page.tsx (user upload preview)"
+  },
+  "seo_parity": {
+    "status": "VERIFIED",
+    "source": "readdy_react_site/project-5316871 (1)/",
+    "audit_file": "_ttp/MISHA-WEB-002/seo-audit.md",
+    "checks": {
+      "title_tags": "MATCH — all page titles match Readdy",
+      "meta_descriptions": "MATCH — all descriptions match Readdy",
+      "phone_number": "MATCH — (281) 650-0500",
+      "address": "MATCH — Houston, TX, US (no postalCode in either)",
+      "geo_coordinates": "MATCH — 29.7604, -95.3698",
+      "json_ld_LocalBusiness": "MATCH — all fields present",
+      "sameAs_social": "MATCH — Google Maps, Instagram, Facebook, Pinterest",
+      "areaServed": "MATCH — 20 areas (13 cities + 7 neighborhoods)",
+      "serviceType": "MATCH — 8 service types",
+      "og_image": "MATCH — /og-image.jpg",
+      "canonical_urls": "MATCH — via metadataBase"
+    }
+  },
+  "redirects": {
+    "status": "VERIFIED",
+    "count": 39,
+    "note": "All Readdy client-side Navigate redirects replicated as 301 in next.config.ts"
+  },
+  "portfolio_images": {
+    "status": "VERIFIED",
+    "lightbox": "object-contain (fit=max equivalent)",
+    "inline_detail": "natural aspect ratio (w-full h-auto)",
+    "grid_cards": "object-cover (intentional for fixed-aspect grid)",
+    "thumbnails": "object-cover (intentional for 14x14 strips)"
+  },
+  "routes": {
+    "static_pages": ["/", "/about", "/services", "/gallery", "/blog", "/faq", "/inquire", "/consult", "/recent-projects"],
+    "dynamic_service_pages": 8,
+    "dynamic_area_pages": 6,
+    "dynamic_portfolio_pages": 15,
+    "total": 44
+  },
+  "phase9_promotion": {
+    "status": "LOCKED",
+    "reason": "Preview deployment only. Ray must explicitly approve promotion to production domain.",
+    "constraints": [
+      "DO NOT add mishacreations.com as custom domain in Vercel",
+      "DO NOT cancel Readdy"
+    ]
+  },
+  "step6_blocker": {
+    "status": "BLOCKED",
+    "description": "MAIN-001 editor tabs (MainSiteTab.tsx, PagesTab.tsx) not found in workspace. Files were never created or lost in power outage. Requires Ray input."
+  }
+}
