@@ -1,13 +1,42 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, useRef, type FormEvent, type ChangeEvent } from 'react'
 import Link from 'next/link'
 import { FINISH_SURFACES } from '@/lib/constants'
+
+const ROOM_TYPES = [
+  'Living Room', 'Dining Room', 'Master Bedroom', 'Master Bathroom',
+  'Powder Room', 'Foyer / Entry', 'Hallway / Stairwell', 'Kitchen',
+  'Home Office / Library', 'Wine Cellar', 'Media / Game Room',
+  "Children's Room / Nursery", 'Ceiling', 'Exterior', 'Commercial Space', 'Other',
+]
+
+const TIMEFRAMES = [
+  { value: '2-weeks', label: 'Within 2 weeks' },
+  { value: '30-days', label: 'Within 30 days' },
+  { value: '60-days', label: 'Within 60 days' },
+  { value: '90-days', label: 'Within 90 days' },
+  { value: 'flexible', label: 'Flexible / No rush' },
+]
+
+const MAX_IMAGES = 5
 
 export default function InquirePage() {
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
+  const [images, setImages] = useState<File[]>([])
+  const fileRef = useRef<HTMLInputElement>(null)
+
+  function handleFiles(e: ChangeEvent<HTMLInputElement>) {
+    const files = Array.from(e.target.files || [])
+    setImages((prev) => [...prev, ...files].slice(0, MAX_IMAGES))
+    if (fileRef.current) fileRef.current.value = ''
+  }
+
+  function removeImage(idx: number) {
+    setImages((prev) => prev.filter((_, i) => i !== idx))
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -15,7 +44,13 @@ export default function InquirePage() {
     setError('')
 
     const form = e.currentTarget
-    const data = Object.fromEntries(new FormData(form))
+    const fd = new FormData(form)
+
+    // Append images to FormData
+    images.forEach((file) => fd.append('referenceImages', file))
+
+    // Add subject
+    fd.append('_subject', 'New Inquiry from mishacreations.com')
 
     const formId = process.env.NEXT_PUBLIC_FORMSPREE_INQUIRE
     const endpoint = formId
@@ -25,8 +60,8 @@ export default function InquirePage() {
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...data, _subject: 'New Inquiry from mishacreations.com' }),
+        headers: { Accept: 'application/json' },
+        body: fd,
       })
       if (!res.ok) throw new Error('Submission failed')
       setSubmitted(true)
@@ -127,14 +162,92 @@ export default function InquirePage() {
 
           <div>
             <label className="block font-body text-xs uppercase tracking-wider text-charcoal/70 mb-1.5">
+              Room Type
+            </label>
+            <select
+              name="roomType"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+            >
+              <option value="">Select a room&hellip;</option>
+              {ROOM_TYPES.map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-body text-xs uppercase tracking-wider text-charcoal/70 mb-1.5">
+              Timeframe
+            </label>
+            <select
+              name="timeframe"
+              className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors"
+            >
+              <option value="">When would you like to start?</option>
+              {TIMEFRAMES.map((t) => (
+                <option key={t.value} value={t.value}>{t.label}</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-body text-xs uppercase tracking-wider text-charcoal/70 mb-1.5">
               Message
             </label>
             <textarea
               name="message"
               rows={5}
-              placeholder="Describe your project, timeline, or any reference images you have in mind&hellip;"
+              placeholder="Describe your project, vision, or any questions you have&hellip;"
               className="w-full font-body text-[15px] bg-sand/40 text-dark border border-sand rounded px-3.5 py-3 outline-none focus:border-gold transition-colors resize-y"
             />
+          </div>
+
+          <div>
+            <label className="block font-body text-xs uppercase tracking-wider text-charcoal/70 mb-1.5">
+              Reference Images <span className="normal-case tracking-normal text-charcoal/50">(up to 5)</span>
+            </label>
+            <p className="font-body text-sm text-charcoal/60 mb-3">
+              Include reference images for our discussion — photos of your space, vision ideas, color tones, or examples you love.
+            </p>
+            <div className="flex flex-wrap gap-3 mb-3">
+              {images.map((file, i) => (
+                <div key={i} className="relative group">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={`Reference ${i + 1}`}
+                    className="w-20 h-20 object-cover rounded border border-sand"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removeImage(i)}
+                    className="absolute -top-2 -right-2 w-5 h-5 bg-charcoal text-cream rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))}
+            </div>
+            {images.length < MAX_IMAGES && (
+              <label className="inline-flex items-center gap-2 font-body text-sm text-gold border border-gold/40 rounded px-4 py-2.5 cursor-pointer hover:bg-gold/5 transition-colors">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+                Add {images.length === 0 ? 'Images' : 'More'}
+                <input
+                  ref={fileRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleFiles}
+                  className="hidden"
+                />
+              </label>
+            )}
+            {images.length > 0 && (
+              <span className="font-body text-xs text-charcoal/50 ml-3">
+                {images.length} of {MAX_IMAGES}
+              </span>
+            )}
           </div>
 
           {error && (
