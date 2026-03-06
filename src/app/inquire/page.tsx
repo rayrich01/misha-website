@@ -46,27 +46,40 @@ export default function InquirePage() {
     const form = e.currentTarget
     const fd = new FormData(form)
 
-    // Append images to FormData
-    images.forEach((file) => fd.append('referenceImages', file))
-
-    // Add subject
-    fd.append('_subject', 'New Inquiry from mishacreations.com')
-
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_INQUIRE
-    const endpoint = formId
-      ? `https://formspree.io/f/${formId}`
-      : 'https://formspree.io/misha@mishacreations.com'
+    // Build JSON payload for the API route
+    const payload: Record<string, string> = {}
+    fd.forEach((value, key) => {
+      if (typeof value === 'string') payload[key] = value
+    })
 
     try {
-      const res = await fetch(endpoint, {
+      // Primary: send to API route (GHL + Resend emails)
+      const res = await fetch('/api/inquiry', {
         method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: fd,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
-      if (!res.ok) throw new Error('Submission failed')
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Submission failed')
+      }
+
+      // Secondary: also send to Formspree for image attachments and backup
+      const formId = process.env.NEXT_PUBLIC_FORMSPREE_INQUIRE
+      if (formId) {
+        const fsFd = new FormData(form)
+        images.forEach((file) => fsFd.append('referenceImages', file))
+        fsFd.append('_subject', 'New Inquiry from mishacreations.com')
+        fetch(`https://formspree.io/f/${formId}`, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: fsFd,
+        }).catch(() => {}) // fire-and-forget backup
+      }
+
       setSubmitted(true)
-    } catch {
-      setError('Something went wrong. Please try again or call to reach us directly.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again or call to reach us directly.')
     } finally {
       setSending(false)
     }
