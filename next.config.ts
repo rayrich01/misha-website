@@ -63,9 +63,8 @@ const nextConfig: NextConfig = {
       { source: '/areas/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
       { source: '/areas/sweetwater-luxury-murals', destination: '/', permanent: true },
 
-      // ── Previous misha-website portfolio → gallery ──
+      // ── Previous misha-website portfolio listing → gallery ──
       { source: '/portfolio', destination: '/gallery', permanent: true },
-      { source: '/portfolio/:slug', destination: '/gallery/:slug', permanent: true },
     ]
   },
 }

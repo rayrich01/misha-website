@@ -115,8 +115,7 @@ export async function getPieceBySlug(slug: string): Promise<PortfolioPiece | nul
 /** All published Misha Select slugs (for generateStaticParams) */
 export async function getAllPortfolioSlugs(): Promise<string[]> {
   return sanityClient.fetch(`
-    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
-      && isMishaSelect == true].slug.current
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true].slug.current
   `)
 }
 
