@@ -80,9 +80,6 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Misha Creations &middot; Houston, TX
           </p>
           <div className="flex items-center gap-4">
-            <a href={COPY.social.instagram} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Instagram</a>
-            <a href={COPY.social.facebook} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Facebook</a>
-            <a href={COPY.social.pinterest} target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">Pinterest</a>
             <a href="https://studio.mishacreations.com" target="_blank" rel="noopener noreferrer" className="font-body text-xs text-cream/60 hover:text-gold transition-colors">For Designers &amp; Builders &rarr;</a>
           </div>
         </div>
