@@ -63,9 +63,9 @@ export function Footer() {
             </Link>
             <Link
               href="/inquire"
-              className="block font-body text-sm hover:text-gold transition-colors mb-2"
+              className="inline-block mt-3 bg-cream text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-cream/90 transition-colors font-body"
             >
-              Send an Inquiry
+              Contact
             </Link>
             <Link
               href="/consult"

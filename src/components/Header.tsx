@@ -65,7 +65,7 @@ export function Header() {
             href="/inquire"
             className="bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors"
           >
-            Inquiry Form
+            Contact
           </Link>
           <Link
             href="/consult"
@@ -128,8 +128,12 @@ export function Header() {
           <Link href="/faq" className="block mt-4 text-charcoal font-body" onClick={() => setOpen(false)}>
             FAQ
           </Link>
-          <Link href="/inquire" className="block text-charcoal font-body" onClick={() => setOpen(false)}>
-            Inquire
+          <Link
+            href="/inquire"
+            className="block mt-4 text-center bg-gold text-dark text-xs uppercase tracking-widest px-6 py-3 rounded-full"
+            onClick={() => setOpen(false)}
+          >
+            Contact
           </Link>
           <Link
             href="/consult"
