@@ -65,7 +65,7 @@ export function Header() {
             href="/consult"
             className="bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-dark transition-colors"
           >
-            Book a Consultation
+            Schedule a Call With Misha
           </Link>
         </div>
 
@@ -130,7 +130,7 @@ export function Header() {
             className="block mt-4 text-center bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-3 rounded-full"
             onClick={() => setOpen(false)}
           >
-            Book a Consultation
+            Schedule a Call With Misha
           </Link>
         </div>
       )}
