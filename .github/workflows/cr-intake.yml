@@ -42,7 +42,8 @@ jobs:
             }
 
             // --- Auto-execute decision ---
-            const autoExecute = category !== 'feature-request' && category !== 'unknown';
+            // All categorized CRs auto-execute; review happens after completion
+            const autoExecute = category !== 'unknown';
 
             core.setOutput('category', category);
             core.setOutput('priority', priority);
