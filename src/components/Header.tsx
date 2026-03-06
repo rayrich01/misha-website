@@ -62,6 +62,12 @@ export function Header() {
             FAQ
           </Link>
           <Link
+            href="/inquire"
+            className="bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors"
+          >
+            Inquiry Form
+          </Link>
+          <Link
             href="/consult"
             className="bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-dark transition-colors"
           >
