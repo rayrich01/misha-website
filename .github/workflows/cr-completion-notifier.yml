@@ -28,9 +28,16 @@ jobs:
               'Content-Type': 'application/json'
             };
 
+            // ── Helper to build Supabase query URLs safely (hyphens in tenant names) ──
+            function sbQuery(params) {
+              const url = new URL(`${sbUrl}/rest/v1/cr_tasks`);
+              for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
+              return url.toString();
+            }
+
             // ── Fetch tasks in 'review' status (completed but not yet notified) ──
             const res = await fetch(
-              `${sbUrl}/rest/v1/cr_tasks?tenant=eq.misha-main&status=eq.review&select=*`,
+              sbQuery({ tenant: 'eq.misha-main', status: 'eq.review', select: '*' }),
               { headers }
             );
             if (!res.ok) return;
@@ -108,7 +115,7 @@ jobs:
 
             // ── Handle failed/blocked tasks ──
             const failRes = await fetch(
-              `${sbUrl}/rest/v1/cr_tasks?tenant=eq.misha-main&status=in.(failed,blocked,escalated)&error=not.is.null&select=*`,
+              sbQuery({ tenant: 'eq.misha-main', status: 'in.(failed,blocked,escalated)', 'error': 'not.is.null', select: '*' }),
               { headers }
             );
             if (!failRes.ok) return;
