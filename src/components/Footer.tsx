@@ -12,16 +12,6 @@ export function Footer() {
               Luxury decorative finishes, wall murals, and Venetian plaster for Houston&apos;s finest homes.
               25+ years of artistic excellence.
             </p>
-            <p className="font-body text-sm text-cream/60">
-              <a href={`tel:${COPY.phone.replace(/[^0-9+]/g, '')}`} className="inline-block py-2 hover:text-gold transition-colors">
-                {COPY.phone}
-              </a>
-            </p>
-            <p className="font-body text-sm text-cream/60">
-              <a href={`mailto:${COPY.email}`} className="inline-block py-2 hover:text-gold transition-colors">
-                {COPY.email}
-              </a>
-            </p>
           </div>
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Services</p>
