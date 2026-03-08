@@ -56,12 +56,14 @@ const nextConfig: NextConfig = {
       { source: '/contact-us', destination: '/consult', permanent: true },
       { source: '/book-consultation', destination: '/consult', permanent: true },
 
-      // ── Legacy area pages with no matching current page ──
-      { source: '/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
-      { source: '/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
-      { source: '/areas/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
-      { source: '/areas/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
-      { source: '/areas/sweetwater-luxury-murals', destination: '/', permanent: true },
+      // ── Legacy area pages → nearest canonical neighborhood ──
+      { source: '/river-oaks-luxury-murals', destination: '/areas/river-oaks-luxury-murals', permanent: true },
+      { source: '/sweetwater-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
+      { source: '/avalon-at-seven-meadows-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
+      { source: '/lakes-of-parkway-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
+      { source: '/areas/avalon-at-seven-meadows-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
+      { source: '/areas/lakes-of-parkway-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
+      { source: '/areas/sweetwater-luxury-murals', destination: '/areas/the-woodlands', permanent: true },
 
       // ── Previous misha-website portfolio listing → gallery ──
       { source: '/portfolio', destination: '/gallery', permanent: true },
