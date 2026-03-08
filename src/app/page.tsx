@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getMishaSelectPieces, getMainSiteSettings, getHomepageHero } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
@@ -5,6 +6,12 @@ import { NeighborhoodStrip } from '@/components/NeighborhoodStrip'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
 import { COPY, FINISH_SURFACES } from '@/lib/constants'
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://mishacreations.com',
+  },
+}
 
 export const revalidate = 60
 
