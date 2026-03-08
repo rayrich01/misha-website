@@ -57,7 +57,6 @@ export default async function HomePage() {
       { '@type': 'Neighborhood', name: 'Tanglewood' },
       { '@type': 'City', name: 'Bellaire' },
       { '@type': 'City', name: 'Katy' },
-      { '@type': 'City', name: 'Sugar Land' },
       { '@type': 'Neighborhood', name: 'Piney Point Village' },
       { '@type': 'Neighborhood', name: 'Bunker Hill Village' },
       { '@type': 'Neighborhood', name: 'Hunters Creek Village' },

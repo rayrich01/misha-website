@@ -16,7 +16,7 @@ const generalFaqs = [
   {
     question: 'What areas do you serve?',
     answer:
-      'Misha Creations serves all of the greater Houston area including River Oaks, Memorial, Tanglewood, West University, Bellaire, The Woodlands, Katy, Sugar Land, and surrounding communities. Misha personally visits every home for consultation.',
+      'Misha Creations serves all of the greater Houston area including River Oaks, Memorial, Tanglewood, West University, Bellaire, The Woodlands, Katy, and surrounding communities. Misha personally visits every home for consultation.',
   },
   {
     question: 'How much does decorative painting cost?',
