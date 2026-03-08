@@ -37,6 +37,6 @@
     "/contact": "308 → /consult"
   },
   "build": "PASS — 565 pages, zero errors",
-  "commit": "pending",
+  "commit": "ed17a9b",
   "next_review": "Check GSC coverage report 7 days after deploy — confirm all 42 redirects indexed as 301"
 }
