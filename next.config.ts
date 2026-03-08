@@ -59,6 +59,14 @@ const nextConfig: NextConfig = {
       // ── Legacy area pages → nearest canonical neighborhood ──
       { source: '/river-oaks-luxury-murals', destination: '/areas/river-oaks-luxury-murals', permanent: true },
 
+      // ── Retired Sugar Land area pages → homepage (no longer served) ──
+      { source: '/sweetwater-luxury-murals', destination: '/', permanent: true },
+      { source: '/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
+      { source: '/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/sweetwater-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/avalon-at-seven-meadows-luxury-murals', destination: '/', permanent: true },
+      { source: '/areas/lakes-of-parkway-luxury-murals', destination: '/', permanent: true },
+
       // ── Previous misha-website portfolio listing → gallery ──
       { source: '/portfolio', destination: '/gallery', permanent: true },
     ]
