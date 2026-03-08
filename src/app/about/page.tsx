@@ -4,17 +4,16 @@ import { JsonLd } from '@/components/JsonLd'
 import { PROCESS_STEPS } from '@/lib/constants'
 
 export const metadata: Metadata = {
-  title: 'About Misha Creations | Houston Artist',
-  description:
-    "Meet Misha, Houston's premier decorative artist with 25+ years creating luxury murals & finishes for River Oaks, Memorial & Tanglewood homes.",
+  title: "About Misha | Houston's Premier Decorative Finishes Artist",
+  description: "25+ years transforming Houston's finest homes — Venetian plaster, hand-painted murals, luxury decorative finishes. River Oaks, Memorial, Tanglewood.",
   alternates: {
     canonical: 'https://mishacreations.com/about',
   },
   openGraph: {
-    title: "About Misha Creations | Houston's Premier Decorative Artist",
-    description:
-      "Meet Houston's premier decorative artist with 25+ years creating luxury finishes for River Oaks, Memorial, and Tanglewood homes.",
+    title: "About Misha | Houston's Premier Decorative Finishes Artist",
+    description: "25+ years transforming Houston's finest homes — Venetian plaster, hand-painted murals, luxury decorative finishes. River Oaks, Memorial, Tanglewood.",
     url: 'https://mishacreations.com/about',
+    type: 'profile',
   },
 }
 

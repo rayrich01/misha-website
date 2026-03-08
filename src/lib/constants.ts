@@ -81,8 +81,8 @@ export const FINISH_SURFACES: FinishSurface[] = [
     slug: 'faux-specialty-finishes',
     categoryId: 'faux-finishes',
     title: 'Faux & Specialty Finishes',
-    metaTitle: 'Luxury Faux Finishes Houston | Faux Marble & Stone | Misha Creations',
-    metaDescription: 'Master faux artist specializing in luxury faux finishes including faux marble, faux wood grain finishing, and decorative painting for Houston luxury homes.',
+    metaTitle: 'Faux Specialty Finishes Houston | Misha Creations',
+    metaDescription: "Custom faux finishes for Houston's luxury homes — Venetian plaster, metallic treatments, trompe l'oeil, and more. 25 years of artisan expertise.",
     h1: 'Luxury Faux & Specialty Finishes in Houston',
   },
   {
