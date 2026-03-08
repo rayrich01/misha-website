@@ -1,0 +1,39 @@
+{
+  "package": "TTP-SEO-002",
+  "date": "2026-03-08T21:15:00Z",
+  "status": "COMPLETE",
+  "target_keyword": "decorative painting houston",
+  "gsc_baseline": {
+    "impressions_90d": 223,
+    "clicks_90d": 0,
+    "ctr": "0%",
+    "avg_position": 9.09
+  },
+  "new_route": "/decorative-painting-houston",
+  "title": "Decorative Painting Houston | Misha Creations",
+  "title_chars": 45,
+  "description": "Houston's premier decorative painting artist. Venetian plaster, hand-painted murals, faux finishes & luxury wall treatments. River Oaks, Memorial, Tanglewood.",
+  "description_chars": 158,
+  "canonical": "https://mishacreations.com/decorative-painting-houston",
+  "h1": "Decorative Painting in Houston",
+  "sections": ["hero", "services-grid-6", "portfolio-grid", "areas-served", "closing-cta"],
+  "schema_type": "LocalBusiness",
+  "sitemap_added": true,
+  "sitemap_priority": 0.9,
+  "nav_updated": false,
+  "char_check": "PASS — title 45/60, description 158/160",
+  "build": "PASS",
+  "curl_verify": "PASS — title, description, canonical, H1 all confirmed",
+  "commit": "32a0ca1",
+  "adaptations": [
+    "Replaced inline styles with Tailwind classes matching site conventions",
+    "Used getFeaturedPieces instead of non-existent getMainSitePieces",
+    "Used existing CtaSection component instead of inline CTA",
+    "Used Link from next/link instead of raw <a> tags",
+    "Fixed service hrefs to match actual route slugs in FINISH_MAP",
+    "Fixed area hrefs to match actual /areas/{slug} routes",
+    "Added LocalBusiness JSON-LD schema",
+    "Fixed title template duplication (layout appends '| Misha Creations')"
+  ],
+  "next_review": "Check GSC 28 days from index date — target position 3-6"
+}
