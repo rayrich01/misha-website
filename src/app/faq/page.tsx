@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
-import { JsonLd } from '@/components/JsonLd'
 
 export const metadata: Metadata = {
   title: 'FAQ | Misha Creations Houston',
@@ -51,23 +50,8 @@ const generalFaqs = [
 ]
 
 export default function FaqPage() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: generalFaqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  }
-
   return (
     <>
-      <JsonLd data={faqSchema} />
-
       <section className="bg-cream pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-4xl mx-auto px-5 text-center">
           <h1 className="font-display text-[48px] md:text-[64px] text-dark mb-4">
