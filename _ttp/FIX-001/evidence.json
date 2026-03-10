@@ -1,0 +1,17 @@
+{
+  "package": "FIX-001",
+  "date": "2026-03-10T14:00:00Z",
+  "type": "redirect-cleanup",
+  "action": "Removed dead duplicate redirect on line 30 of next.config.ts",
+  "detail": "/trompe-loeil-architectural-illusions had two redirect entries — line 21 (→ /services/trompe-loeil-architectural-illusions) and line 30 (→ /trompe-loeil-houston). Next.js uses first match, so line 30 was dead code. Line 30 also would have created a two-hop chain. Removed line 30; line 21 remains active and resolves correctly.",
+  "redirects_after_cleanup": {
+    "/trompe-loeil-architectural-illusions": "/services/trompe-loeil-architectural-illusions (line 21, permanent)",
+    "/trompe-loeil-houston": "/services/trompe-loeil-architectural-illusions (line 38, permanent)"
+  },
+  "gsc_issue": "Not found (404) reported in GSC Coverage report 2026-03-10 — likely stale cache from before redirect was added",
+  "duplicate_check": "PASS — 0 duplicate sources after cleanup",
+  "loop_check": "PASS",
+  "build": "PASS",
+  "commit": "e07e6c3",
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/8"
+}
