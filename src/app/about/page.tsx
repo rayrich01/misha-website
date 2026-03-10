@@ -5,13 +5,13 @@ import { PROCESS_STEPS } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: "About Misha | Houston's Premier Decorative Finishes Artist",
-  description: "25+ years transforming Houston's finest homes — Venetian plaster, hand-painted murals, luxury decorative finishes. River Oaks, Memorial, Tanglewood.",
+  description: "25+ years transforming Houston's most distinguished homes with Venetian plaster, hand-painted murals, and luxury finishes. River Oaks, Memorial, Tanglewood.",
   alternates: {
     canonical: 'https://mishacreations.com/about',
   },
   openGraph: {
     title: "About Misha | Houston's Premier Decorative Finishes Artist",
-    description: "25+ years transforming Houston's finest homes — Venetian plaster, hand-painted murals, luxury decorative finishes. River Oaks, Memorial, Tanglewood.",
+    description: "25+ years transforming Houston's most distinguished homes with Venetian plaster, hand-painted murals, and luxury finishes. River Oaks, Memorial, Tanglewood.",
     url: 'https://mishacreations.com/about',
     type: 'profile',
   },
