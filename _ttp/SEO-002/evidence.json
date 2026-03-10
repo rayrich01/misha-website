@@ -20,5 +20,5 @@
   "build": "PASS",
   "note": "Page existed prior to verification — created during MISHA-WEB-002 ungated deploy. All checks passed as-is, no file changes required.",
   "commit": "10e3a59",
-  "pr_url": "PENDING"
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/7"
 }
