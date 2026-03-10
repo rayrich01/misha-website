@@ -12,6 +12,6 @@
   "duplicate_check": "PASS — 0 duplicate sources after cleanup",
   "loop_check": "PASS",
   "build": "PASS",
-  "commit": "PENDING",
-  "pr_url": "PENDING"
+  "commit": "e07e6c3",
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/8"
 }
