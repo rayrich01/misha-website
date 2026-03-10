@@ -19,6 +19,6 @@
   "char_check": "PASS",
   "build": "PASS",
   "note": "Page existed prior to verification — created during MISHA-WEB-002 ungated deploy. All checks passed as-is, no file changes required.",
-  "commit": "PENDING",
+  "commit": "10e3a59",
   "pr_url": "PENDING"
 }
