@@ -27,7 +27,7 @@
   },
   "char_check": "PASS",
   "build": "PASS",
-  "commit": "",
-  "pr_url": "",
+  "commit": "ead2635",
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/6",
   "next_review": "Check GSC 28 days from deploy date"
 }
