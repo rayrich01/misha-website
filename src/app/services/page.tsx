@@ -50,19 +50,19 @@ export default async function ServicesPage() {
       <JsonLd data={serviceSchema} />
 
       {/* Hero */}
-      <section className="relative min-h-[50vh] flex items-center justify-center bg-charcoal">
+      <section className="relative min-h-[50vh] flex items-center justify-center bg-ink">
         <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
-          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-white mb-4">
+          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-cream mb-4">
             Decorative Painting Services
           </h1>
-          <p className="font-body text-lg text-white/85 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto">
             Museum-quality artistry for Houston&apos;s most distinguished homes. 25+ years of artistic excellence.
           </p>
         </div>
       </section>
 
       {/* Service Cards */}
-      <section className="py-16 md:py-24 bg-cream">
+      <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-7xl mx-auto px-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {categoryPieces.map(({ finish, heroImage }) => (
@@ -79,7 +79,7 @@ export default async function ServicesPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 )}
-                {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
+                {!heroImage && <div className="absolute inset-0 bg-ink" />}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <p className="font-editorial text-lg text-white">{finish.title}</p>

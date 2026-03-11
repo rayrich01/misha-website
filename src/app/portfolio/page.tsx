@@ -38,16 +38,16 @@ export default async function PortfolioPage() {
       <JsonLd data={gallerySchema} />
 
       {/* Hero */}
-      <section className="bg-cream pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="bg-ink pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-4xl mx-auto px-5 text-center">
-          <h1 className="font-display text-[48px] md:text-[64px] text-dark mb-4">
+          <h1 className="font-display text-[48px] md:text-[64px] text-cream mb-4">
             Portfolio
           </h1>
-          <p className="font-editorial text-xl md:text-2xl text-charcoal/70 max-w-2xl mx-auto mb-6">
+          <p className="font-editorial text-xl md:text-2xl text-mist max-w-2xl mx-auto mb-6">
             A curated collection of decorative finishes across Houston&apos;s finest homes
           </p>
           <div className="w-8 h-px bg-gold mx-auto mb-6" />
-          <p className="font-body text-sm text-bronze">
+          <p className="font-body text-sm text-muted">
             Trusted by homeowners in {COPY.socialProof.join(', ')}
           </p>
         </div>
@@ -55,9 +55,9 @@ export default async function PortfolioPage() {
 
       {/* Featured Works */}
       {featured.length > 0 && (
-        <section className="pb-20 bg-cream">
+        <section className="pb-20 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
-            <h2 className="font-display text-3xl md:text-4xl text-dark text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl text-cream text-center mb-12">
               Featured Works
             </h2>
 
@@ -88,7 +88,7 @@ export default async function PortfolioPage() {
       {FINISH_SURFACES.map((finish, sectionIndex) => {
         const pieces = categoryResults[sectionIndex] || []
         if (pieces.length === 0) return null
-        const bgClass = sectionIndex % 2 === 0 ? 'bg-sand' : 'bg-cream'
+        const bgClass = sectionIndex % 2 === 0 ? 'bg-warm' : 'bg-ink'
 
         return (
           <section key={finish.slug} id={finish.categoryId} className={`py-16 md:py-20 ${bgClass}`}>
@@ -98,13 +98,13 @@ export default async function PortfolioPage() {
                 <p className="font-body text-xs uppercase tracking-[0.18em] text-gold mb-2">
                   {finish.title} &middot; {pieces.length} project{pieces.length !== 1 ? 's' : ''}
                 </p>
-                <h2 className="font-display text-3xl md:text-4xl text-dark mb-3">
+                <h2 className="font-display text-3xl md:text-4xl text-cream mb-3">
                   {finish.title}
                 </h2>
                 <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
                   <Link
                     href={`/${finish.slug}`}
-                    className="font-body text-sm text-gold hover:text-bronze transition-colors"
+                    className="font-body text-sm text-gold hover:text-goldf transition-colors"
                   >
                     Explore {finish.title} &rarr;
                   </Link>

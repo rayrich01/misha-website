@@ -33,19 +33,19 @@ export function FaqAccordion({ faqs, heading = 'Frequently Asked Questions' }: P
     <section className="py-16 md:py-24">
       <JsonLd data={faqSchema} />
       <div className="max-w-3xl mx-auto px-5">
-        <h2 className="font-display text-3xl md:text-4xl text-center text-dark mb-12">
+        <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
           {heading}
         </h2>
         <div className="space-y-3">
           {faqs.map((faq, i) => (
-            <div key={i} className="border border-sand rounded-lg overflow-hidden">
+            <div key={i} className="border border-muted/30 rounded-lg overflow-hidden">
               <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between px-6 py-4 text-left font-editorial text-lg text-dark hover:bg-sand/50 transition-colors"
+                className="w-full flex items-center justify-between px-6 py-4 text-left font-editorial text-lg text-cream hover:bg-warm/50 transition-colors"
               >
                 <span>{faq.question}</span>
                 <svg
-                  className={`w-5 h-5 text-bronze transition-transform flex-shrink-0 ml-4 ${openIndex === i ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-muted transition-transform flex-shrink-0 ml-4 ${openIndex === i ? 'rotate-180' : ''}`}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -55,7 +55,7 @@ export function FaqAccordion({ faqs, heading = 'Frequently Asked Questions' }: P
               </button>
               {openIndex === i && (
                 <div className="px-6 pb-5">
-                  <p className="font-body text-charcoal leading-relaxed">{faq.answer}</p>
+                  <p className="font-body text-mist leading-relaxed">{faq.answer}</p>
                 </div>
               )}
             </div>

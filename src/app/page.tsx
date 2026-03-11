@@ -105,7 +105,7 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
           </div>
         )}
-        {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
+        {!heroImage && <div className="absolute inset-0 bg-ink" />}
         <div className="relative z-10 text-left px-5 md:px-12 max-w-4xl mr-auto pt-20">
           <h1 className="font-display text-[42px] leading-[52px] md:text-[60px] md:leading-[72px] text-white mb-6">
             {headline}
@@ -115,9 +115,9 @@ export default async function HomePage() {
           </p>
           <a
             href="tel:+12816500500"
-            className="inline-block bg-cream text-charcoal text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-sand transition-colors font-body font-medium shadow-xl"
+            className="inline-block bg-gold text-ink text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium shadow-xl"
           >
-            Call (281) 650-0500
+            Schedule Free Consultation
           </a>
         </div>
       </section>
@@ -126,13 +126,13 @@ export default async function HomePage() {
 
       {/* Misha Select Preview */}
       {pieces.length > 0 && (
-        <section className="py-16 md:py-24 bg-cream">
+        <section className="py-16 md:py-24 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
             <div className="text-center mb-14">
-              <h2 className="font-display text-3xl md:text-5xl text-dark mb-4">
+              <h2 className="font-display text-3xl md:text-5xl text-cream mb-4">
                 Selected Works
               </h2>
-              <p className="font-body text-charcoal/85 max-w-2xl mx-auto">
+              <p className="font-body text-mist max-w-2xl mx-auto">
                 A curated selection of decorative finishes, murals, and plaster work customized to our clients&apos; tastes across Houston&apos;s finest homes.
               </p>
             </div>
@@ -168,7 +168,7 @@ export default async function HomePage() {
       )}
 
       {/* Testimonial */}
-      <section className="py-16 md:py-24 bg-sage">
+      <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-3xl mx-auto px-5 text-center">
           <div className="flex justify-center gap-1 mb-6">
             {[...Array(5)].map((_, i) => (
@@ -177,11 +177,11 @@ export default async function HomePage() {
               </svg>
             ))}
           </div>
-          <blockquote className="font-body text-lg md:text-xl leading-relaxed text-dark italic mb-8">
+          <blockquote className="font-body text-lg md:text-xl leading-relaxed text-cream italic mb-8">
             &ldquo;{testimonial.quote}&rdquo;
           </blockquote>
-          <p className="font-editorial text-lg text-dark">{testimonial.name}</p>
-          <p className="font-body text-sm text-bronze">
+          <p className="font-editorial text-lg text-cream">{testimonial.name}</p>
+          <p className="font-body text-sm text-muted">
             {testimonial.duration} &middot; {testimonial.location}
           </p>
         </div>

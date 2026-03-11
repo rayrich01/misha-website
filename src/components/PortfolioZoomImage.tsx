@@ -96,7 +96,7 @@ export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZ
       </div>
 
       {/* Hint */}
-      <p className="text-center font-body text-xs text-charcoal/40 mt-3">
+      <p className="text-center font-body text-xs text-mist/40 mt-3">
         Click to zoom &middot; scroll to explore detail
       </p>
 
@@ -104,7 +104,7 @@ export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZ
       {mounted && lifted && createPortal(
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center"
-          style={{ background: 'rgba(45,45,45,0.88)' }}
+          style={{ background: 'rgba(23,18,16,0.92)' }}
         >
           {/* Backdrop click */}
           <div className="absolute inset-0" onClick={handleOverlayClick} />
@@ -112,14 +112,14 @@ export function PortfolioZoomImage({ src, alt, lqip, width, height }: PortfolioZ
           {/* Close button */}
           <button
             onClick={close}
-            className="absolute top-5 right-5 z-10 bg-cream/90 backdrop-blur-sm text-charcoal px-4 py-2 rounded-full font-body text-xs uppercase tracking-wider hover:bg-cream transition-colors"
+            className="absolute top-5 right-5 z-10 bg-cream/90 backdrop-blur-sm text-ink px-4 py-2 rounded-full font-body text-xs uppercase tracking-wider hover:bg-cream transition-colors"
           >
             Close
           </button>
 
           {/* Scale indicator */}
           {isZoomed && (
-            <div className="absolute bottom-5 right-5 z-10 bg-dark/80 backdrop-blur-sm text-gold font-body text-xs px-3 py-1.5 rounded-full">
+            <div className="absolute bottom-5 right-5 z-10 bg-ink/80 backdrop-blur-sm text-gold font-body text-xs px-3 py-1.5 rounded-full">
               {(cursor.isZoomed ? cursor.zoom.scale : pinch.scale).toFixed(1)}&times;
             </div>
           )}

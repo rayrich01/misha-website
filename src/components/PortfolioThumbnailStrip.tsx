@@ -30,7 +30,7 @@ export function PortfolioThumbnailStrip({ images, activeIndex, onSelect }: Props
 
   return (
     <div className="mt-6">
-      <p className="font-body text-xs text-charcoal/50 mb-3 text-center">
+      <p className="font-body text-xs text-mist/50 mb-3 text-center">
         {images.length} images from this project
       </p>
       <div

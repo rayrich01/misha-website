@@ -93,7 +93,7 @@ export default async function ServicePage({ params }: PageProps) {
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
           </div>
         )}
-        {!heroImage && <div className="absolute inset-0 bg-charcoal" />}
+        {!heroImage && <div className="absolute inset-0 bg-ink" />}
         <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
           <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-white mb-4">
             {finish.h1}
@@ -105,17 +105,17 @@ export default async function ServicePage({ params }: PageProps) {
       </section>
 
       {/* Description */}
-      <section className="py-16 md:py-20 bg-cream">
+      <section className="py-16 md:py-20 bg-warm">
         <div className="max-w-3xl mx-auto px-5 text-center">
-          <p className="font-body text-lg leading-relaxed text-charcoal">{description}</p>
+          <p className="font-body text-lg leading-relaxed text-mist">{description}</p>
         </div>
       </section>
 
       {/* Portfolio Grid */}
       {pieces.length > 0 && (
-        <section className="py-16 md:py-20 bg-sand">
+        <section className="py-16 md:py-20 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
-            <h2 className="font-display text-3xl md:text-4xl text-center text-dark mb-12">
+            <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
               Featured {finish.title} Work
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

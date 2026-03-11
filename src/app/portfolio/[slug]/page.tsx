@@ -76,10 +76,10 @@ export default async function PieceDetailPage({ params }: PageProps) {
     <>
       <JsonLd data={imageSchema} />
 
-      <main className="bg-cream pt-24 pb-0">
+      <main className="bg-ink pt-24 pb-0">
         {/* Breadcrumb */}
         <div className="max-w-4xl mx-auto px-5 mb-8">
-          <nav className="font-body text-xs text-charcoal/50">
+          <nav className="font-body text-xs text-mist/50">
             <Link href="/portfolio" className="hover:text-gold transition-colors">Portfolio</Link>
             {finish && (
               <>
@@ -90,7 +90,7 @@ export default async function PieceDetailPage({ params }: PageProps) {
               </>
             )}
             <span className="mx-2">/</span>
-            <span className="text-charcoal/70">{piece.title}</span>
+            <span className="text-mist/70">{piece.title}</span>
           </nav>
         </div>
 
@@ -109,24 +109,24 @@ export default async function PieceDetailPage({ params }: PageProps) {
                   {finish.title}
                 </p>
               )}
-              <h1 className="font-display text-[36px] md:text-[48px] text-dark leading-tight mb-3">
+              <h1 className="font-display text-[36px] md:text-[48px] text-cream leading-tight mb-3">
                 {piece.title}
               </h1>
               {piece.subtitle && (
-                <p className="font-editorial text-lg text-charcoal/60 mb-4">{piece.subtitle}</p>
+                <p className="font-editorial text-lg text-mist/60 mb-4">{piece.subtitle}</p>
               )}
               {piece.location && (
-                <p className="font-editorial text-base italic text-bronze mb-6">{piece.location}</p>
+                <p className="font-editorial text-base italic text-muted mb-6">{piece.location}</p>
               )}
               {piece.description && (
-                <p className="font-body text-charcoal leading-relaxed mb-6">{piece.description}</p>
+                <p className="font-body text-mist leading-relaxed mb-6">{piece.description}</p>
               )}
               {piece.tradeTags && piece.tradeTags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {piece.tradeTags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-body text-[10px] uppercase tracking-wider text-bronze/70 border border-sand px-3 py-1 rounded-full"
+                      className="font-body text-[10px] uppercase tracking-wider text-muted/70 border border-muted/30 px-3 py-1 rounded-full"
                     >
                       {tag}
                     </span>
@@ -137,20 +137,20 @@ export default async function PieceDetailPage({ params }: PageProps) {
 
             {/* Right: CTA sidebar */}
             <div className="lg:col-span-1">
-              <div className="bg-sand rounded-xl p-6">
-                <p className="font-editorial text-xl text-dark mb-2">Love this finish?</p>
-                <p className="font-body text-sm text-charcoal/70 leading-relaxed mb-5">
+              <div className="bg-warm rounded-xl p-6">
+                <p className="font-editorial text-xl text-cream mb-2">Love this finish?</p>
+                <p className="font-body text-sm text-mist/70 leading-relaxed mb-5">
                   Every project is one-of-a-kind, customized to your home&apos;s architecture and light. Misha can create something similar tailored to your space.
                 </p>
                 <a
                   href="tel:+12816500500"
-                  className="block text-center bg-gold text-dark text-xs uppercase tracking-widest font-body font-medium px-6 py-3 rounded-full hover:bg-gold/90 transition-colors"
+                  className="block text-center bg-gold text-ink text-xs uppercase tracking-widest font-body font-medium px-6 py-3 rounded-full hover:bg-gold/90 transition-colors"
                 >
-                  Call (281) 650-0500
+                  Request a Consultation
                 </a>
                 <Link
                   href={`/inquire${finish ? `?finish=${finish.categoryId}` : ''}`}
-                  className="block text-center mt-3 font-body text-xs text-gold hover:text-bronze transition-colors"
+                  className="block text-center mt-3 font-body text-xs text-gold hover:text-goldf transition-colors"
                 >
                   Or send an inquiry &rarr;
                 </Link>
@@ -161,9 +161,9 @@ export default async function PieceDetailPage({ params }: PageProps) {
 
         {/* Related Pieces */}
         {relatedPieces.length > 0 && (
-          <section className="py-16 md:py-20 bg-sand">
+          <section className="py-16 md:py-20 bg-warm">
             <div className="max-w-7xl mx-auto px-5">
-              <h2 className="font-display text-3xl text-dark text-center mb-10">
+              <h2 className="font-display text-3xl text-cream text-center mb-10">
                 More {finish?.title || 'Related'} Work
               </h2>
               <PortfolioGrid pieces={relatedPieces} columns={3} />

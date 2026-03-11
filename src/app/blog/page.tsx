@@ -19,20 +19,20 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <>
-      <section className="bg-cream pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="bg-ink pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-4xl mx-auto px-5 text-center">
-          <h1 className="font-display text-[48px] md:text-[64px] text-dark mb-4">
+          <h1 className="font-display text-[48px] md:text-[64px] text-cream mb-4">
             Blog
           </h1>
-          <p className="font-body text-lg text-charcoal/70 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto">
             Expert decorative painting tips, luxury finishing techniques, and design inspiration
           </p>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-sand">
+      <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-3xl mx-auto px-5 text-center">
-          <p className="font-editorial text-xl text-charcoal/70 italic">
+          <p className="font-editorial text-xl text-mist italic">
             New articles coming soon. In the meantime, explore our gallery to see our latest work.
           </p>
         </div>

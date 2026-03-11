@@ -38,24 +38,24 @@ export default function AboutPage() {
       <JsonLd data={orgSchema} />
 
       {/* Hero */}
-      <section className="bg-charcoal pt-32 pb-20 md:pt-40 md:pb-28">
+      <section className="bg-ink pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="max-w-3xl mx-auto px-5 text-center">
-          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-white mb-6">
+          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-cream mb-6">
             The Story Behind the Finish
           </h1>
-          <p className="font-body text-lg text-white/80 leading-relaxed">
+          <p className="font-body text-lg text-mist leading-relaxed">
             Every surface tells a story. Ours began over 25 years ago with a simple belief: your home should move you.
           </p>
         </div>
       </section>
 
       {/* Story */}
-      <section className="py-16 md:py-24 bg-cream">
+      <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-3xl mx-auto px-5">
-          <h2 className="font-display text-3xl md:text-4xl text-dark mb-8 text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-cream mb-8 text-center">
             Art That Lives With You
           </h2>
-          <div className="font-body text-charcoal leading-relaxed space-y-6">
+          <div className="font-body text-mist leading-relaxed space-y-6">
             <p>
               Misha is a muralist, luminist, and decorative artist — painting surfaces that change with the
               hour, breathe with the room, and hold up under the scrutiny of Houston&apos;s most discerning
@@ -79,17 +79,17 @@ export default function AboutPage() {
       </section>
 
       {/* Process */}
-      <section className="py-16 md:py-24 bg-sage">
+      <section className="py-16 md:py-24 bg-ink">
         <div className="max-w-4xl mx-auto px-5">
-          <h2 className="font-display text-3xl md:text-4xl text-dark mb-14 text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-cream mb-14 text-center">
             How We Work Together
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {PROCESS_STEPS.map((step) => (
-              <div key={step.step} className="bg-cream rounded-lg p-8">
+              <div key={step.step} className="bg-warm rounded-lg p-8">
                 <span className="font-editorial text-4xl text-gold/60">{step.step}</span>
-                <h3 className="font-editorial text-xl text-dark mt-2 mb-3">{step.name}</h3>
-                <p className="font-body text-charcoal leading-relaxed">{step.desc}</p>
+                <h3 className="font-editorial text-xl text-cream mt-2 mb-3">{step.name}</h3>
+                <p className="font-body text-mist leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
