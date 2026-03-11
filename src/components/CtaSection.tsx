@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 interface Props {
   headline?: string
   body?: string
@@ -16,12 +14,12 @@ export function CtaSection({
         <p className="font-body text-lg leading-relaxed text-cream/85 mb-10">
           {body}
         </p>
-        <Link
-          href="/consult"
+        <a
+          href="tel:+12816500500"
           className="inline-block bg-gold text-dark text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium"
         >
-          Schedule Your Consultation
-        </Link>
+          Call (281) 650-0500
+        </a>
       </div>
     </section>
   )

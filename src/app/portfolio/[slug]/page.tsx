@@ -142,12 +142,12 @@ export default async function PieceDetailPage({ params }: PageProps) {
                 <p className="font-body text-sm text-charcoal/70 leading-relaxed mb-5">
                   Every project is one-of-a-kind, customized to your home&apos;s architecture and light. Misha can create something similar tailored to your space.
                 </p>
-                <Link
-                  href={`/consult`}
+                <a
+                  href="tel:+12816500500"
                   className="block text-center bg-gold text-dark text-xs uppercase tracking-widest font-body font-medium px-6 py-3 rounded-full hover:bg-gold/90 transition-colors"
                 >
-                  Request a Consultation
-                </Link>
+                  Call (281) 650-0500
+                </a>
                 <Link
                   href={`/inquire${finish ? `?finish=${finish.categoryId}` : ''}`}
                   className="block text-center mt-3 font-body text-xs text-gold hover:text-bronze transition-colors"

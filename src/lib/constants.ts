@@ -247,7 +247,7 @@ export const COPY = {
   tagline: "Houston's premier decorative finishes artist",
   phone: '(281) 650-0500',
   email: 'misha@mishacreations.com',
-  calendlyUrl: 'https://calendly.com/mishacreations/30min',
+  phoneHref: 'tel:+12816500500',
   address: { city: 'Houston', state: 'TX', country: 'US' },
   socialProof: ['River Oaks', 'Tanglewood', 'Memorial', 'West University', 'Bellaire', 'The Woodlands'],
   social: {

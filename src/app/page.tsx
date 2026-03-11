@@ -113,12 +113,12 @@ export default async function HomePage() {
           <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-2xl leading-relaxed">
             {subheadline}
           </p>
-          <Link
-            href="/consult"
+          <a
+            href="tel:+12816500500"
             className="inline-block bg-cream text-charcoal text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-sand transition-colors font-body font-medium shadow-xl"
           >
-            Schedule Free Consultation
-          </Link>
+            Call (281) 650-0500
+          </a>
         </div>
       </section>
 

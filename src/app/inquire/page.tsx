@@ -116,8 +116,9 @@ export default function InquirePage() {
         <p className="font-body text-charcoal leading-relaxed mb-10">
           Tell Misha about your project, vision, location you live, a realistic timeline
           as well as any questions you may have and she will respond within 48 hours.
-          You can also schedule a free consultative call directly with Misha or reach
-          out to her via phone or text.
+          You can also call Misha directly at{' '}
+          <a href="tel:+12816500500" className="text-gold hover:text-bronze transition-colors">(281) 650-0500</a>{' '}
+          or reach out via text.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -287,12 +288,12 @@ export default function InquirePage() {
             (281) 650-0500
           </a>
           <div>
-            <Link
-              href="/consult"
+            <a
+              href="tel:+12816500500"
               className="inline-block font-body text-xs uppercase tracking-widest text-charcoal/60 border border-sand px-7 py-3 hover:bg-gold/10 transition-colors"
             >
-              Or Schedule a Consultation
-            </Link>
+              Or Call (281) 650-0500
+            </a>
           </div>
         </div>
       </div>
