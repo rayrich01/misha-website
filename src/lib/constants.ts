@@ -1,19 +1,18 @@
-/* Design tokens — Misha Creations main site (warm homeowner palette) */
+/* Design tokens — Misha Creations main site (dark premium palette, matching studio) */
 export const TOKENS = {
-  CREAM:    '#E8E0D0',
-  SAND:     '#DBD3BE',
-  SAGE:     '#D8DDD1',
-  SAGE_LT:  '#E8EBE6',
-  CHARCOAL: '#3C3C3A',
-  DARK:     '#2D2D2D',
-  GOLD:     '#C9A96E',
-  BRONZE:   '#8B7355',
+  INK:   '#171210',
+  WARM:  '#1E1710',
+  GOLD:  '#C4A064',
+  GOLDF: '#D4B478',
+  CREAM: '#F0EAE0',
+  MIST:  '#C8BEB4',
+  MUTED: '#786A5C',
 } as const
 
 export const FONTS = {
   display:   "'Great Vibes', cursive",
   editorial: "'Cormorant Garamond', serif",
-  body:      "'Lora', serif",
+  body:      "'Jost', sans-serif",
 } as const
 
 export interface FinishSurface {

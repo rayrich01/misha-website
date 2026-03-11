@@ -26,22 +26,22 @@ export default async function RecentProjectsPage() {
 
   return (
     <>
-      <section className="bg-cream pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="bg-ink pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-4xl mx-auto px-5 text-center">
-          <h1 className="font-display text-[48px] md:text-[64px] text-dark mb-4">
+          <h1 className="font-display text-[48px] md:text-[64px] text-cream mb-4">
             Recent Projects
           </h1>
-          <p className="font-body text-lg text-charcoal/70 max-w-2xl mx-auto mb-6">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto mb-6">
             Latest luxury murals and decorative finishes for Houston&apos;s most prestigious homes
           </p>
-          <p className="font-body text-sm text-bronze">
+          <p className="font-body text-sm text-muted">
             Trusted by homeowners in {COPY.socialProof.join(', ')}
           </p>
         </div>
       </section>
 
       {pieces.length > 0 && (
-        <section className="py-16 md:py-24 bg-sand">
+        <section className="py-16 md:py-24 bg-warm">
           <div className="max-w-7xl mx-auto px-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {pieces.map((piece, i) => (

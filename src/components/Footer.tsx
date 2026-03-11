@@ -3,7 +3,7 @@ import { NEIGHBORHOODS, FINISH_SURFACES, COPY } from '@/lib/constants'
 
 export function Footer() {
   return (
-    <footer className="bg-dark text-cream/80 py-16">
+    <footer className="bg-ink text-mist py-16 border-t border-warm">
       <div className="max-w-7xl mx-auto px-5">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
@@ -63,15 +63,15 @@ export function Footer() {
             </Link>
             <Link
               href="/inquire"
-              className="inline-block mt-3 bg-cream text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-cream/90 transition-colors font-body"
+              className="inline-block mt-3 bg-cream text-ink text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-cream/90 transition-colors font-body"
             >
               Contact
             </Link>
             <a
               href="tel:+12816500500"
-              className="inline-block mt-3 bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"
+              className="inline-block mt-3 bg-gold text-ink text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"
             >
-              Call (281) 650-0500
+              Schedule Consultation
             </a>
           </div>
         </div>

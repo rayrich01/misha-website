@@ -5,7 +5,7 @@ import { PortfolioGrid } from '@/components/PortfolioGrid'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
 
-// ── SEO Metadata ─────────────────────────────────────────────────────────────
+// -- SEO Metadata --
 export const metadata: Metadata = {
   title: 'Decorative Painting Houston',
   description:
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
 }
 
-// ── Service cards ────────────────────────────────────────────────────────────
+// -- Service cards --
 const SERVICES = [
   {
     title: 'Venetian Plaster',
@@ -65,7 +65,7 @@ const NEIGHBORHOODS = [
   { name: 'Bellaire', href: '/areas/bellaire' },
 ]
 
-// ── Page ─────────────────────────────────────────────────────────────────────
+// -- Page --
 export default async function DecorativePaintingHoustonPage() {
   let pieces: Awaited<ReturnType<typeof getFeaturedPieces>> = []
   try {
@@ -97,16 +97,16 @@ export default async function DecorativePaintingHoustonPage() {
     <>
       <JsonLd data={localBusinessSchema} />
 
-      {/* ── Hero Section ── */}
-      <section className="bg-charcoal pt-32 pb-20 md:pt-40 md:pb-28">
+      {/* Hero Section */}
+      <section className="bg-ink pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="max-w-3xl mx-auto px-5 text-center">
           <p className="font-body text-xs uppercase tracking-[0.22em] text-gold mb-5">
             Houston Decorative Painting
           </p>
-          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-white mb-6">
+          <h1 className="font-display text-[42px] leading-[52px] md:text-[58px] md:leading-[68px] text-cream mb-6">
             Decorative Painting in Houston
           </h1>
-          <p className="font-body text-lg text-white/80 leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="font-body text-lg text-mist leading-relaxed max-w-2xl mx-auto mb-10">
             Misha has spent 25 years bringing extraordinary surfaces to Houston&apos;s
             most distinguished homes — Venetian plaster walls, hand-painted ceiling
             murals, custom faux finishes, and decorative treatments that transform
@@ -114,28 +114,28 @@ export default async function DecorativePaintingHoustonPage() {
           </p>
           <a
             href="tel:+12816500500"
-            className="inline-block bg-gold text-dark text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium"
+            className="inline-block bg-gold text-ink text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium"
           >
-            Call (281) 650-0500
+            Schedule a Consultation
           </a>
         </div>
       </section>
 
-      {/* ── Services Section ── */}
-      <section className="py-16 md:py-24 bg-cream">
+      {/* Services Section */}
+      <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-4xl mx-auto px-5">
-          <h2 className="font-display text-3xl md:text-4xl text-dark mb-14 text-center">
+          <h2 className="font-display text-3xl md:text-4xl text-cream mb-14 text-center">
             Decorative Painting Services
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((svc) => (
-              <div key={svc.title} className="border-t border-bronze/20 pt-6">
-                <h3 className="font-editorial text-xl text-dark mb-3">
+              <div key={svc.title} className="border-t border-muted/30 pt-6">
+                <h3 className="font-editorial text-xl text-cream mb-3">
                   <Link href={svc.href} className="hover:text-gold transition-colors">
                     {svc.title}
                   </Link>
                 </h3>
-                <p className="font-body text-charcoal/80 leading-relaxed text-sm">
+                <p className="font-body text-mist/80 leading-relaxed text-sm">
                   {svc.body}
                 </p>
               </div>
@@ -144,11 +144,11 @@ export default async function DecorativePaintingHoustonPage() {
         </div>
       </section>
 
-      {/* ── Portfolio Grid ── */}
+      {/* Portfolio Grid */}
       {pieces.length > 0 && (
-        <section className="py-16 md:py-24 bg-sand">
+        <section className="py-16 md:py-24 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
-            <h2 className="font-display text-3xl md:text-4xl text-dark mb-12 text-center">
+            <h2 className="font-display text-3xl md:text-4xl text-cream mb-12 text-center">
               Recent Decorative Painting Projects
             </h2>
             <PortfolioGrid pieces={pieces} />
@@ -156,28 +156,28 @@ export default async function DecorativePaintingHoustonPage() {
         </section>
       )}
 
-      {/* ── Areas Served ── */}
-      <section className="py-16 md:py-20 bg-cream">
+      {/* Areas Served */}
+      <section className="py-16 md:py-20 bg-warm">
         <div className="max-w-3xl mx-auto px-5 text-center">
-          <h2 className="font-display text-3xl md:text-4xl text-dark mb-6">
+          <h2 className="font-display text-3xl md:text-4xl text-cream mb-6">
             Serving Houston&apos;s Premier Neighborhoods
           </h2>
-          <p className="font-body text-charcoal/70 leading-loose">
+          <p className="font-body text-mist leading-loose">
             {NEIGHBORHOODS.map((n, i) => (
               <span key={n.name}>
-                <Link href={n.href} className="text-charcoal hover:text-gold transition-colors font-medium">
+                <Link href={n.href} className="text-cream hover:text-gold transition-colors font-medium">
                   {n.name}
                 </Link>
-                {i < NEIGHBORHOODS.length - 1 && <span className="text-bronze"> &middot; </span>}
+                {i < NEIGHBORHOODS.length - 1 && <span className="text-muted"> &middot; </span>}
               </span>
             ))}
-            <span className="text-bronze"> &middot; </span>
+            <span className="text-muted"> &middot; </span>
             <span>Briargrove &middot; Royden Oaks &middot; Energy Corridor &middot; Piney Point Village</span>
           </p>
         </div>
       </section>
 
-      {/* ── Closing CTA ── */}
+      {/* Closing CTA */}
       <CtaSection
         headline="Begin Your Commission"
         body="Every project begins with a consultation — Misha studies your architecture, light, and vision before recommending a single finish. Contact us to schedule yours."

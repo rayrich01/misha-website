@@ -31,7 +31,7 @@ export function PortfolioCard({ piece, showCategory, sizes, priority }: Portfoli
 
       {/* Image count badge */}
       {imageCount > 1 && (
-        <span className="absolute top-3 right-3 font-body text-[10px] tracking-wider text-cream bg-charcoal/60 backdrop-blur-sm px-2.5 py-1 rounded-full">
+        <span className="absolute top-3 right-3 font-body text-[10px] tracking-wider text-cream bg-ink/60 backdrop-blur-sm px-2.5 py-1 rounded-full">
           {imageCount} images
         </span>
       )}

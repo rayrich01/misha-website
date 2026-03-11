@@ -52,12 +52,12 @@ const generalFaqs = [
 export default function FaqPage() {
   return (
     <>
-      <section className="bg-cream pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="bg-ink pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-4xl mx-auto px-5 text-center">
-          <h1 className="font-display text-[48px] md:text-[64px] text-dark mb-4">
+          <h1 className="font-display text-[48px] md:text-[64px] text-cream mb-4">
             Frequently Asked Questions
           </h1>
-          <p className="font-body text-lg text-charcoal/70 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto">
             Common questions about our decorative painting services in Houston
           </p>
         </div>

@@ -73,7 +73,7 @@ export default async function AreaPage({ params }: PageProps) {
       <JsonLd data={localBusinessSchema} />
 
       {/* Hero */}
-      <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-charcoal">
+      <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-ink">
         {pieces[0]?.heroImage && (
           <div className="absolute inset-0">
             <SanityImage image={pieces[0].heroImage} fill priority sizes="100vw" className="object-cover opacity-40" />
@@ -91,18 +91,18 @@ export default async function AreaPage({ params }: PageProps) {
 
       {/* Description */}
       {content && (
-        <section className="py-16 md:py-20 bg-cream">
+        <section className="py-16 md:py-20 bg-warm">
           <div className="max-w-3xl mx-auto px-5 text-center">
-            <p className="font-body text-lg leading-relaxed text-charcoal">{content.description}</p>
+            <p className="font-body text-lg leading-relaxed text-mist">{content.description}</p>
           </div>
         </section>
       )}
 
       {/* Portfolio Grid */}
       {pieces.length > 0 && (
-        <section className={`py-16 md:py-20 ${content ? 'bg-sand' : 'bg-cream'}`}>
+        <section className={`py-16 md:py-20 ${content ? 'bg-ink' : 'bg-warm'}`}>
           <div className="max-w-6xl mx-auto px-5">
-            <h2 className="font-display text-3xl md:text-4xl text-center text-dark mb-12">
+            <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
               Work in {hood.name}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -127,9 +127,9 @@ export default async function AreaPage({ params }: PageProps) {
       )}
 
       {/* Services available */}
-      <section className="py-16 bg-sand">
+      <section className="py-16 bg-warm">
         <div className="max-w-4xl mx-auto px-5 text-center">
-          <h2 className="font-display text-3xl text-dark mb-8">
+          <h2 className="font-display text-3xl text-cream mb-8">
             Services Available in {hood.name}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -137,9 +137,9 @@ export default async function AreaPage({ params }: PageProps) {
               <Link
                 key={f.slug}
                 href={`/services/${f.slug}`}
-                className="bg-cream rounded-lg p-4 text-center hover:shadow-md transition-shadow"
+                className="bg-ink rounded-lg p-4 text-center hover:shadow-md transition-shadow"
               >
-                <p className="font-editorial text-sm text-dark">{f.title}</p>
+                <p className="font-editorial text-sm text-cream">{f.title}</p>
               </Link>
             ))}
           </div>

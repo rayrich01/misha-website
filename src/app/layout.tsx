@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Great_Vibes, Cormorant_Garamond, Lora } from 'next/font/google'
+import { Great_Vibes, Cormorant_Garamond, Jost } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -18,10 +18,10 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 })
 
-const lora = Lora({
-  weight: ['400', '500', '600'],
+const jost = Jost({
+  weight: ['300', '400', '500', '600'],
   subsets: ['latin'],
-  variable: '--font-lora',
+  variable: '--font-jost',
   display: 'swap',
 })
 
@@ -64,7 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${greatVibes.variable} ${cormorant.variable} ${lora.variable} font-body antialiased`}
+        className={`${greatVibes.variable} ${cormorant.variable} ${jost.variable} font-body antialiased`}
       >
 {/* Google Tag Manager (noscript) */}
 <noscript dangerouslySetInnerHTML={{ __html: `
