@@ -67,12 +67,12 @@ export function Header() {
           >
             Contact
           </Link>
-          <Link
-            href="/consult"
+          <a
+            href="tel:+12816500500"
             className="bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-dark transition-colors"
           >
-            Schedule a Call With Misha
-          </Link>
+            Call (281) 650-0500
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -135,13 +135,13 @@ export function Header() {
           >
             Contact
           </Link>
-          <Link
-            href="/consult"
+          <a
+            href="tel:+12816500500"
             className="block mt-4 text-center bg-charcoal text-cream text-xs uppercase tracking-widest px-6 py-3 rounded-full"
             onClick={() => setOpen(false)}
           >
-            Schedule a Call With Misha
-          </Link>
+            Call (281) 650-0500
+          </a>
         </div>
       )}
     </header>

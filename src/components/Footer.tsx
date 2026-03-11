@@ -67,12 +67,12 @@ export function Footer() {
             >
               Contact
             </Link>
-            <Link
-              href="/consult"
+            <a
+              href="tel:+12816500500"
               className="inline-block mt-3 bg-gold text-dark text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-gold/90 transition-colors font-body"
             >
-              Schedule Consultation
-            </Link>
+              Call (281) 650-0500
+            </a>
           </div>
         </div>
         <div className="border-t border-cream/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">

@@ -112,12 +112,12 @@ export default async function DecorativePaintingHoustonPage() {
             murals, custom faux finishes, and decorative treatments that transform
             architecture into art.
           </p>
-          <Link
-            href="/consult"
+          <a
+            href="tel:+12816500500"
             className="inline-block bg-gold text-dark text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium"
           >
-            Schedule a Consultation
-          </Link>
+            Call (281) 650-0500
+          </a>
         </div>
       </section>
 
