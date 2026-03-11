@@ -1,0 +1,14 @@
+{
+  "package": "DISP-001",
+  "site": "misha-website",
+  "date": "2026-03-11T00:00:00Z",
+  "type": "display-fix",
+  "change": "Added max-w-screen-2xl mx-auto w-full wrapper in root layout.tsx",
+  "max_width_px": 1536,
+  "tailwind_class": "max-w-screen-2xl",
+  "existing_constraint_found": false,
+  "hero_fixed_heights_found": "none",
+  "build": "PASS",
+  "commit": "",
+  "pr_url": ""
+}

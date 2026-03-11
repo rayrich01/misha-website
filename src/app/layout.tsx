@@ -72,7 +72,6 @@ export default function RootLayout({
   height="0" width="0" style="display:none;visibility:hidden"></iframe>
 ` }} />
 {/* End Google Tag Manager (noscript) */}
-        <Header />
 {/* Google Tag Manager */}
 <script dangerouslySetInnerHTML={{ __html: `
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -82,8 +81,11 @@ export default function RootLayout({
   })(window,document,'script','dataLayer','GTM-T8WG6SX9');
 ` }} />
 {/* End Google Tag Manager */}
-        <main>{children}</main>
-        <Footer />
+        <div className="max-w-screen-2xl mx-auto w-full">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   )
