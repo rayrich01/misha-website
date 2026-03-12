@@ -71,7 +71,7 @@ export function Header() {
             href="tel:+12816500500"
             className="bg-cream text-ink text-xs uppercase tracking-widest px-6 py-2.5 rounded-full hover:bg-cream/90 transition-colors"
           >
-            Schedule a Call With Misha
+            Call (281) 650-0500
           </a>
         </div>
 
@@ -140,7 +140,7 @@ export function Header() {
             className="block mt-4 text-center bg-cream text-ink text-xs uppercase tracking-widest px-6 py-3 rounded-full"
             onClick={() => setOpen(false)}
           >
-            Schedule a Call With Misha
+            Call (281) 650-0500
           </a>
         </div>
       )}
