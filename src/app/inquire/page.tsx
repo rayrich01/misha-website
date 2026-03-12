@@ -292,7 +292,7 @@ export default function InquirePage() {
               href="tel:+12816500500"
               className="inline-block font-body text-xs uppercase tracking-widest text-mist/60 border border-muted/30 px-7 py-3 hover:bg-gold/10 transition-colors"
             >
-              Or Schedule a Consultation
+              Or Call (281) 650-0500
             </a>
           </div>
         </div>
