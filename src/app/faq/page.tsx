@@ -64,7 +64,7 @@ export default function FaqPage() {
       </section>
 
       <FaqAccordion faqs={generalFaqs} heading="" />
-      <CtaSection headline="Have More Questions?" body="Schedule a complimentary consultation to discuss your project with Misha in person." />
+      <CtaSection headline="Have More Questions?" body="Call today for a complimentary consultation to discuss your project with Misha in person." />
     </>
   )
 }

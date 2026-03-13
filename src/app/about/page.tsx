@@ -98,7 +98,7 @@ export default function AboutPage() {
 
       <CtaSection
         headline="Ready to Begin?"
-        body="Schedule a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
+        body="Call today for a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
       />
     </>
   )

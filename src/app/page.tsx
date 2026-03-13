@@ -117,7 +117,7 @@ export default async function HomePage() {
             href="tel:+12816500500"
             className="inline-block bg-gold text-ink text-sm uppercase tracking-widest px-10 py-4 rounded-full hover:bg-gold/90 transition-colors font-body font-medium shadow-xl"
           >
-            Schedule Free Consultation
+            Call (281) 650-0500
           </a>
         </div>
       </section>

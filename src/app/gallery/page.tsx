@@ -130,7 +130,7 @@ export default async function GalleryPage() {
 
       <CtaSection
         headline="Envision Something Similar?"
-        body="Every finish is one-of-a-kind, customized to your home's architecture and light. Schedule a complimentary consultation to begin your commission."
+        body="Every finish is one-of-a-kind, customized to your home's architecture and light. Call today for a complimentary consultation to begin your commission."
       />
     </>
   )

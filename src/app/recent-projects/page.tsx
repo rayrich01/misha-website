@@ -60,7 +60,7 @@ export default async function RecentProjectsPage() {
 
       <CtaSection
         headline="Inspired by What You See?"
-        body="Every finish is one-of-a-kind. Schedule a complimentary consultation to begin your commission."
+        body="Every finish is one-of-a-kind. Call today for a complimentary consultation to begin your commission."
       />
     </>
   )
