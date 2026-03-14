@@ -1,0 +1,29 @@
+{
+  "$schema": "atlas-domain-v1",
+  "project": {
+    "name": "Misha Creations",
+    "description": "Decorative finishes artistry — SEO-focused site for direct-to-consumer engagement, consultations, and project inquiries",
+    "tenant": "misha-main",
+    "domain": "decorative-arts",
+    "production_url": "https://mishacreations.com",
+    "repo_url": "https://github.com/rayrich01/misha-website"
+  },
+  "stakeholders": {
+    "owner": "Ray Richardson",
+    "operator": "Ray Richardson"
+  },
+  "stack": {
+    "framework": "Next.js 16",
+    "language": "TypeScript",
+    "cms": "Sanity v3 (read-only client)",
+    "hosting": "Vercel",
+    "key_dependencies": ["Tailwind CSS", "@sanity/client", "Resend"]
+  },
+  "goals": {
+    "current_phase": "production",
+    "primary_goal": "Public portfolio site — artist representation and gallery presentation",
+    "constraints": []
+  },
+  "updated_at": "2026-03-14T00:00:00Z",
+  "updated_by": "atlas-agent"
+}
