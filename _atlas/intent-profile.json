@@ -1,0 +1,48 @@
+{
+  "$schema": "atlas-intent-profile-v1",
+  "domain": "misha-main",
+  "domain_name": "Misha Creations — Business Site",
+  "domain_authority": "Misha (via Ray Richardson)",
+  "technical_authority": "Ray Richardson",
+  "mission": "Present Misha's luxury decorative finishes portfolio to the Houston market with SEO-optimized, museum-grade presentation",
+  "optimization_priorities": [
+    "SEO performance for Houston luxury market keywords",
+    "Visual presentation quality — white wall gallery principle",
+    "Mobile responsiveness across all devices",
+    "Lead generation through portfolio engagement"
+  ],
+  "tradeoff_rules": [
+    "Prefer image quality over page load speed",
+    "Prefer SEO-correct structure over design experimentation",
+    "Prefer proven Houston neighborhood targeting over broad reach",
+    "Content changes require Ray's review — no auto-publish"
+  ],
+  "escalation_triggers": [
+    "Any change to SEO metadata or structured data",
+    "Any change to the portfolio image pipeline",
+    "Any redirect changes in next.config.ts",
+    "GSC coverage regressions",
+    "Build failure on any CR"
+  ],
+  "protected_values": [
+    "Portfolio images must be artist-quality presentation",
+    "Neighborhood pages must match footer navigation",
+    "No AI-generated marketing copy without Ray's review",
+    "Contact information must be current and accurate"
+  ],
+  "unacceptable_optimizations": [
+    "Compressing portfolio images below museum-grade quality",
+    "Removing neighborhood landing pages for simpler structure",
+    "Auto-generating service descriptions",
+    "Creating areas pages that don't match the footer listing"
+  ],
+  "cr_routing_preferences": {
+    "content-update": "auto-execute with Ray review",
+    "seo-fix": "auto-execute with Ray review",
+    "feature-request": "escalate to Ray",
+    "bug": "auto-execute, notify Ray"
+  },
+  "active_seo_remediation": true,
+  "updated_at": "2026-03-15T00:00:00Z",
+  "updated_by": "atlas-agent"
+}
