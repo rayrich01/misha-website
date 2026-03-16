@@ -45,6 +45,6 @@
   "pages_generated": 566,
   "loop_check": "N/A — no redirect loops introduced",
   "build": "PASS",
-  "commit": "<pending>",
-  "pr_url": "<pending>"
+  "commit": "5c136c4",
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/18"
 }
