@@ -1,0 +1,50 @@
+{
+  "package": "SEO-CATEGORY-001",
+  "date": "2026-03-16T00:00:00Z",
+  "type": "seo-keyword-depth",
+  "reason": "Per-category keyword optimization based on March 2025 Houston competitive research",
+  "sanity_api_token_available": false,
+  "architecture_note": "Service pages are NOT Sanity documents. They are driven by FINISH_MAP in src/lib/constants.ts with portfolio images pulled from Sanity finishCategory + portfolioPiece. No 'service' document type exists in Sanity.",
+  "constants_updated": {
+    "file": "src/lib/constants.ts",
+    "changes": [
+      "Updated metaTitle for all 8 existing service categories",
+      "Updated metaDescription for all 8 existing service categories",
+      "Added per-category descriptions to FINISH_DESCRIPTIONS (8 categories)",
+      "Added per-category FAQ data to new FINISH_FAQS constant (8 categories, 28 total FAQ items)",
+      "Added faux-painting-houston as 9th service entry in FINISH_SURFACES"
+    ]
+  },
+  "service_page_template_updated": {
+    "file": "src/app/services/[slug]/page.tsx",
+    "changes": [
+      "Import FINISH_FAQS from constants",
+      "Use category-specific FAQs when available, fallback to generic FAQs"
+    ]
+  },
+  "redirect_added": {
+    "file": "next.config.ts",
+    "entry": "/faux-painting-houston -> /services/faux-painting-houston"
+  },
+  "faq_schema_component": "Already existed — FaqAccordion.tsx includes FAQPage JSON-LD schema",
+  "faqs_field_added_to_sanity_schema": false,
+  "faqs_field_note": "finishCategory schema has no faqs field. FAQs live in constants.ts. Schema enhancement documented in sanity-manual-entry.md.",
+  "faux_painting_houston_created": true,
+  "faux_painting_houston_note": "Created as FINISH_SURFACES entry (code-driven, not Sanity doc). No 'service' doc type exists.",
+  "sanity_manual_entry_file": "_ttp/SEO-CATEGORY-001/sanity-manual-entry.md",
+  "categories_updated": [
+    "venetian-lime-plaster",
+    "luxury-wall-murals",
+    "faux-specialty-finishes",
+    "trompe-loeil-architectural-illusions",
+    "modello-stencils",
+    "decorative-ceilings",
+    "childrens-themed-rooms",
+    "themed-rooms-skyscapes"
+  ],
+  "pages_generated": 566,
+  "loop_check": "N/A — no redirect loops introduced",
+  "build": "PASS",
+  "commit": "<pending>",
+  "pr_url": "<pending>"
+}
