@@ -1,0 +1,17 @@
+{
+  "package": "CLEAN-001",
+  "date": "2026-03-16T00:00:00Z",
+  "type": "neighborhood-removal",
+  "reason": "Sweetwater is Sugar Land area — outside Misha's target service area",
+  "redirects_updated": [
+    "/sweetwater-luxury-murals → /decorative-painting-houston (was → /)",
+    "/areas/sweetwater-luxury-murals → /decorative-painting-houston (was → /)"
+  ],
+  "sanity_document_deleted": "unable to verify — Sanity CLI auth not configured for this project",
+  "sanity_document_id": "not verified",
+  "static_page_deleted": false,
+  "loop_check": "PASS",
+  "build": "PASS",
+  "commit": "<pending>",
+  "pr_url": "<pending>"
+}
