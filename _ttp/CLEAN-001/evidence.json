@@ -12,6 +12,6 @@
   "static_page_deleted": false,
   "loop_check": "PASS",
   "build": "PASS",
-  "commit": "<pending>",
-  "pr_url": "<pending>"
+  "commit": "4b67717",
+  "pr_url": "https://github.com/rayrich01/misha-website/pull/17"
 }
