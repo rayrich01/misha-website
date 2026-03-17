@@ -32,6 +32,7 @@ const nextConfig: NextConfig = {
       { source: '/venetian-plaster-houston', destination: '/services/venetian-lime-plaster', permanent: true },
       { source: '/wall-murals-houston', destination: '/services/luxury-wall-murals', permanent: true },
       { source: '/faux-finishes-houston', destination: '/services/faux-specialty-finishes', permanent: true },
+      { source: '/faux-painting-houston', destination: '/services/faux-painting-houston', permanent: true },
       { source: '/decorative-ceilings-houston', destination: '/services/decorative-ceilings', permanent: true },
       { source: '/childrens-rooms-houston', destination: '/services/childrens-themed-rooms', permanent: true },
       { source: '/themed-rooms-houston', destination: '/services/themed-rooms-skyscapes', permanent: true },

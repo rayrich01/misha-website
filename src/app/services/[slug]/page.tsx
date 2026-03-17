@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS } from '@/lib/constants'
+import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS, FINISH_FAQS } from '@/lib/constants'
 import { getPiecesByCategory, getFinishCategory } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -53,20 +53,23 @@ export default async function ServicePage({ params }: PageProps) {
     FINISH_DESCRIPTIONS[finish.categoryId] ||
     `Misha Creations brings 25+ years of expertise in ${finish.title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
-  const finishFaqs = [
-    {
-      question: `How much does ${finish.title.toLowerCase()} cost in Houston?`,
-      answer: `Every ${finish.title.toLowerCase()} project is customized to your tastes and priced based on scope, surface area, and complexity. Misha provides a detailed estimate after an in-home consultation where she studies your space, lighting, and vision.`,
-    },
-    {
-      question: `How long does a ${finish.title.toLowerCase()} project take?`,
-      answer: `Timeline depends on the scope and complexity of the work. Most projects take 1-3 weeks from design approval to completion. Misha coordinates around your schedule and provides a realistic timeline during the consultation.`,
-    },
-    {
-      question: `Do you provide samples before starting ${finish.title.toLowerCase()} work?`,
-      answer: `Absolutely. Misha creates physical finish samples for your approval before any brushwork begins. You see and touch the exact finish that will be applied in your home. No surprises on install day.`,
-    },
-  ]
+  const categoryFaqs = FINISH_FAQS[finish.categoryId]
+  const finishFaqs = categoryFaqs && categoryFaqs.length > 0
+    ? categoryFaqs
+    : [
+        {
+          question: `How much does ${finish.title.toLowerCase()} cost in Houston?`,
+          answer: `Every ${finish.title.toLowerCase()} project is customized to your tastes and priced based on scope, surface area, and complexity. Misha provides a detailed estimate after an in-home consultation where she studies your space, lighting, and vision.`,
+        },
+        {
+          question: `How long does a ${finish.title.toLowerCase()} project take?`,
+          answer: `Timeline depends on the scope and complexity of the work. Most projects take 1-3 weeks from design approval to completion. Misha coordinates around your schedule and provides a realistic timeline during the consultation.`,
+        },
+        {
+          question: `Do you provide samples before starting ${finish.title.toLowerCase()} work?`,
+          answer: `Absolutely. Misha creates physical finish samples for your approval before any brushwork begins. You see and touch the exact finish that will be applied in your home. No surprises on install day.`,
+        },
+      ]
 
   const serviceSchema = {
     '@context': 'https://schema.org',
