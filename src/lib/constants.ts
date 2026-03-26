@@ -383,6 +383,46 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has painted trompe l\'oeil and architectural illusions in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'childrens-rooms': {
+    intro: {
+      heading: 'Custom Children\'s Themed Room Murals',
+      paragraphs: [
+        'A child\'s room is where imagination lives. Custom themed room murals transform nurseries, playrooms, and bedrooms into immersive environments designed around your child\'s interests — from storybook landscapes and nature scenes to fantasy worlds, sports themes, and whimsical characters. Every mural is one-of-a-kind and painted by hand.',
+        'Misha has over 25 years of experience painting children\'s rooms in Houston luxury homes. She works directly with parents to understand the vision, creates detailed design renderings for approval, and uses professional-grade, low-VOC paints appropriate for children\'s environments. The result is a space that sparks imagination and grows with your child.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Children\'s Room Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to see the room, discuss your child\'s interests, and understand the vision. She evaluates lighting, wall space, and room layout.' },
+        { name: 'Custom Design Renderings', desc: 'Misha creates detailed design renderings showing how the themed room will look. Colors, characters, and scenes are refined to your family\'s approval before any painting begins.' },
+        { name: 'Hand-Painted Execution', desc: 'The mural is painted on-site by Misha personally using professional-grade, low-VOC materials. Work is coordinated around your family\'s schedule.' },
+        { name: 'The Reveal', desc: 'Once complete, Misha walks you through the finished room. The result is a magical space created just for your child — painted by the artist who designed it.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Children\'s Rooms',
+      points: [
+        '25+ years of experience painting children\'s room murals in Houston',
+        'Every mural hand-painted by the artist personally',
+        'Professional-grade, low-VOC paints safe for children\'s environments',
+        'Custom design renderings for your family\'s approval before painting begins',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What themes can Misha paint for a child\'s room?', answer: 'Misha creates custom themed rooms based on your child\'s interests and imagination — from nature scenes and storybook worlds to sports themes, fantasy landscapes, and whimsical characters. Every design is one-of-a-kind and tailored to your child.' },
+      { question: 'Is the paint safe for children\'s rooms?', answer: 'Yes. Misha uses professional-grade, low-VOC paints and finishes appropriate for children\'s environments. Safety and air quality are considered in every nursery and children\'s room project.' },
+      { question: 'Can Misha paint a nursery before the baby arrives?', answer: 'Yes. Misha coordinates project timing around your schedule and can complete nursery murals well before your due date. Most projects take 1-3 weeks from design approval to completion.' },
+      { question: 'Will the mural grow with my child?', answer: 'Misha designs murals with longevity in mind. She discusses age-appropriate themes and can create designs that transition from toddler to school-age. Murals can also be refreshed or updated as your child\'s interests evolve.' },
+      { question: 'Does Misha serve my area for children\'s room murals?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'themed-rooms-skyscapes', label: 'Themed Rooms & Skyscapes' },
+      { slug: 'luxury-wall-murals', label: 'Luxury Wall Murals' },
+    ],
+    areaContext: 'Misha has painted children\'s themed room murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
