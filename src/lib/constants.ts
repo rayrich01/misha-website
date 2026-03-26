@@ -263,6 +263,46 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has painted custom wall murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'decorative-ceilings': {
+    intro: {
+      heading: 'What Is Decorative Ceiling Painting?',
+      paragraphs: [
+        'Decorative ceiling painting transforms the overhead surface of a room into a work of art. From hand-painted sky murals and cloud scenes to frescoed medallions, gilded domes, and ornamental coffered details, decorative ceilings add dimension and drama that walls alone cannot achieve.',
+        'Misha has over 25 years of experience painting decorative ceilings in Houston luxury homes. She specializes in sky ceiling murals, trompe l\'oeil dome illusions, and ornamental ceiling treatments designed to complement your home\'s architecture and capture the unique light of each space.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Ceiling Painting Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the ceiling height, lighting, and architectural details. She discusses your vision and recommends the ideal ceiling treatment for your space.' },
+        { name: 'Custom Design and Samples', desc: 'Misha creates detailed design renderings and physical finish samples showing how the ceiling will look. You approve every element before painting begins.' },
+        { name: 'Hand-Painted Execution', desc: 'The ceiling is painted on-site by Misha personally, layer by layer. Specialized techniques and equipment ensure precision on overhead surfaces. Work is coordinated around your schedule.' },
+        { name: 'Final Reveal', desc: 'Once complete, Misha walks you through the finished ceiling. The result is a one-of-a-kind overhead surface that transforms the entire character of the room.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Decorative Ceilings',
+      points: [
+        '25+ years of decorative ceiling painting experience in Houston',
+        'Every ceiling hand-painted by the artist personally',
+        'Specialized techniques for sky murals, domes, medallions, and ornamental finishes',
+        'Custom design renderings and finish samples before any work begins',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What types of decorative ceiling painting does Misha offer?', answer: 'Misha offers hand-painted sky murals, cloud ceiling scenes, trompe l\'oeil dome illusions, frescoed medallions, gilded finishes, coffered ceiling treatments, and ornamental overhead designs. Each ceiling is custom-designed to complement your home\'s architecture.' },
+      { question: 'Can decorative ceilings be painted in any room?', answer: 'Yes. Decorative ceiling painting works in foyers, dining rooms, bedrooms, bathrooms, living rooms, and hallways. Misha assesses ceiling height, condition, and lighting during the consultation to recommend the best treatment for each space.' },
+      { question: 'What is a sky ceiling mural?', answer: 'A sky ceiling mural is a hand-painted ceiling treatment that creates the illusion of an open sky — often with realistic cloud formations, atmospheric depth, and natural light transitions. Misha paints each sky ceiling to match the room\'s lighting and architecture.' },
+      { question: 'How long does decorative ceiling painting take?', answer: 'Timeline depends on ceiling size, height, and treatment complexity. Most decorative ceiling projects take 1-3 weeks from design approval to completion. Misha coordinates around your schedule and provides a realistic timeline during the consultation.' },
+      { question: 'Does Misha serve my area for ceiling painting?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'luxury-wall-murals', label: 'Luxury Wall Murals' },
+      { slug: 'trompe-loeil-architectural-illusions', label: 'Trompe L\'Oeil & Architectural Illusions' },
+    ],
+    areaContext: 'Misha has painted decorative ceilings in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
