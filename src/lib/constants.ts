@@ -223,6 +223,46 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has applied Venetian lime plaster finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'wall-murals': {
+    intro: {
+      heading: 'What Are Custom Wall Murals?',
+      paragraphs: [
+        'Custom wall murals are one-of-a-kind, hand-painted artworks created directly on your walls, ceilings, or architectural surfaces. Unlike printed reproductions or decals, every mural Misha paints is site-specific — scaled to your elevations, designed for your light, and approved before brushwork begins.',
+        'With over 25 years of experience painting murals in Houston luxury homes, Misha creates everything from classical landscapes and Mediterranean scenes to botanical compositions, architectural trompe l\'oeil, and contemporary abstracts. Each mural is hand-painted by the artist personally — no subcontractors, no shortcuts.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Mural Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the wall, ceiling, or surface. She evaluates the light, scale, and surrounding architecture to recommend the ideal approach for your mural.' },
+        { name: 'Custom Design and Approval', desc: 'Misha creates detailed design renderings showing how the mural will look in your space. You review and approve before any painting begins.' },
+        { name: 'Hand-Painted Execution', desc: 'The mural is painted on-site by Misha personally, layer by layer. She coordinates around your schedule and manages the project from first sketch to final detail.' },
+        { name: 'Final Walkthrough', desc: 'Once complete, Misha walks you through the finished work. The result is a one-of-a-kind mural designed for your home and painted by the artist who conceived it.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Wall Murals',
+      points: [
+        '25+ years of mural painting experience in Houston',
+        'Every mural hand-painted by the artist personally',
+        'Custom design renderings for approval before painting begins',
+        'Museum-quality artistry for residential and commercial spaces',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What types of wall murals does Misha paint?', answer: 'Misha paints custom murals for walls, ceilings, and architectural features — including landscape scenes, Mediterranean vistas, botanical compositions, trompe l\'oeil illusions, and contemporary designs. Every mural is one-of-a-kind and painted by Misha personally.' },
+      { question: 'What rooms are best for wall murals?', answer: 'Wall murals work beautifully in foyers, dining rooms, living rooms, bedrooms, nurseries, bathrooms, hallways, and even home offices. Misha evaluates your space during a complimentary in-home consultation to recommend the best approach for your room.' },
+      { question: 'Can Misha paint a mural from my own design or photo?', answer: 'Yes. Misha works from your vision — whether it is a reference photo, a designer\'s concept, or a completely original idea. The process starts with a consultation where she discusses your vision and creates custom design renderings for your approval.' },
+      { question: 'How does the wall mural process work?', answer: 'The process begins with a complimentary in-home consultation where Misha studies the space and light. She then creates design renderings for your approval. Once approved, the mural is hand-painted in your home over 1-3 weeks, coordinated around your schedule.' },
+      { question: 'Does Misha serve my area for wall murals?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'trompe-loeil-architectural-illusions', label: 'Trompe L\'Oeil & Architectural Illusions' },
+      { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
+    ],
+    areaContext: 'Misha has painted custom wall murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
