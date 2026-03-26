@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { CtaSection } from '@/components/CtaSection'
 
 export const metadata: Metadata = {
@@ -16,6 +17,21 @@ export const metadata: Metadata = {
   },
 }
 
+const articles = [
+  {
+    slug: 'guide-to-venetian-lime-plaster-houston',
+    title: 'A Guide to Venetian Lime Plaster for Houston Luxury Homes',
+    excerpt: 'Learn about authentic Venetian lime plaster — how it is applied, where it works best, and why training matters. By an artist with 25+ years of experience.',
+    category: 'Guide',
+  },
+  {
+    slug: 'guide-to-decorative-painting-houston',
+    title: 'The Complete Guide to Decorative Painting for Houston Homes',
+    excerpt: "Explore 8 types of decorative painting services — from Venetian plaster and wall murals to faux finishes and trompe l'oeil. Everything you need to know.",
+    category: 'Complete Guide',
+  },
+]
+
 export default function BlogPage() {
   return (
     <>
@@ -31,10 +47,18 @@ export default function BlogPage() {
       </section>
 
       <section className="py-16 md:py-24 bg-warm">
-        <div className="max-w-3xl mx-auto px-5 text-center">
-          <p className="font-editorial text-xl text-mist italic">
-            New articles coming soon. In the meantime, explore our gallery to see our latest work.
-          </p>
+        <div className="max-w-3xl mx-auto px-5 space-y-8">
+          {articles.map((a) => (
+            <Link
+              key={a.slug}
+              href={`/blog/${a.slug}`}
+              className="block border border-muted/30 rounded-lg p-8 hover:border-gold/40 transition-colors"
+            >
+              <p className="font-body text-xs uppercase tracking-widest text-gold mb-3">{a.category}</p>
+              <h2 className="font-editorial text-xl md:text-2xl text-cream mb-3">{a.title}</h2>
+              <p className="font-body text-mist leading-relaxed">{a.excerpt}</p>
+            </Link>
+          ))}
         </div>
       </section>
 
