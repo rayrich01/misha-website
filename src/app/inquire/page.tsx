@@ -77,6 +77,16 @@ export default function InquirePage() {
         }).catch(() => {}) // fire-and-forget backup
       }
 
+      // Push lead event to GTM dataLayer for GA4 measurement
+      if (typeof window !== 'undefined' && (window as Record<string, unknown>).dataLayer) {
+        ;(window as { dataLayer: Record<string, unknown>[] }).dataLayer.push({
+          event: 'generate_lead',
+          form_id: 'inquire',
+          project_type: payload.projectType || '',
+          room_type: payload.roomType || '',
+        })
+      }
+
       setSubmitted(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again or call to reach us directly.')
