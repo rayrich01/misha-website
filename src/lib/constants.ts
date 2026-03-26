@@ -303,6 +303,46 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has painted decorative ceilings in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'faux-finishes': {
+    intro: {
+      heading: 'What Are Faux & Specialty Finishes?',
+      paragraphs: [
+        'Faux and specialty finishes are hand-applied decorative treatments that replicate the appearance of natural materials — stone, aged leather, brushed metals, metallic glazes, and textured surfaces — using layered paint and plaster techniques. The result is a rich, dimensional surface that adds depth and character to any room.',
+        'With over 25 years of experience, Misha hand-applies every faux and specialty finish personally. From warm metallic glazes in powder rooms to faux stone accent walls in living spaces, each treatment is customized to your home\'s architecture, palette, and lighting. Faux finishes are one of the most versatile decorative painting services, suitable for walls, ceilings, trim, and architectural details.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Faux Finish Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the surfaces, lighting, and existing palette. She discusses your vision and recommends the ideal faux or specialty treatment for your space.' },
+        { name: 'Custom Sample Creation', desc: 'Physical finish samples are created on sample boards so you can see and touch the exact surface before any work begins. Colors, textures, and sheen levels are refined to your approval.' },
+        { name: 'Hand-Applied Execution', desc: 'The finish is applied by Misha personally using layered techniques that build depth and dimension. Work is coordinated around your schedule.' },
+        { name: 'Final Review and Reveal', desc: 'Once complete, Misha reviews the finished surfaces with you. The result is a one-of-a-kind decorative treatment designed for your home.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Faux Finishes',
+      points: [
+        '25+ years of faux and specialty finish experience in Houston',
+        'Every surface hand-applied by the artist personally',
+        'Physical finish samples provided before any work begins',
+        'Versatile treatments for walls, ceilings, trim, and architectural details',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What types of faux finishes does Misha offer?', answer: 'Misha offers a wide range of faux and specialty treatments including faux stone, aged leather, brushed metals, metallic glazes, hand-rubbed surfaces, and textured accent walls. Each finish is customized and hand-applied to your specifications.' },
+      { question: 'What is the difference between faux finishes and Venetian plaster?', answer: 'Faux finishes replicate the appearance of materials like stone, metal, or wood through layered paint techniques. Venetian plaster is a specific lime-based plaster applied in thin layers and polished for depth and luminosity. Misha offers both as separate services.' },
+      { question: 'How durable are faux specialty finishes?', answer: 'Professional faux finishes are highly durable when properly applied and sealed. They are suitable for high-traffic areas and maintain their appearance for years. Misha uses professional-grade materials for lasting results.' },
+      { question: 'Where do faux finishes work best?', answer: 'Faux and specialty finishes work beautifully on accent walls, powder rooms, dining rooms, living rooms, entryways, and architectural features like columns and niches. They add depth and character that standard paint cannot achieve.' },
+      { question: 'Does Misha serve my area for faux finishes?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'venetian-lime-plaster', label: 'Venetian Lime Plaster' },
+      { slug: 'modello-stencils', label: 'Modello Stencils' },
+    ],
+    areaContext: 'Misha has applied faux and specialty finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
