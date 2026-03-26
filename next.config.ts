@@ -4,6 +4,10 @@ const nextConfig: NextConfig = {
   images: {
     loader: 'custom',
     loaderFile: './src/lib/sanity-image-loader.ts',
+    /* Cap largest device breakpoint at 1920 — removes 2048/3840 defaults
+       that cause oversized image requests on Sanity CDN (MC-LIVE-SEO-012B) */
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',
