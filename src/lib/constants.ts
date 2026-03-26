@@ -343,6 +343,46 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has applied faux and specialty finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'trompe-loeil': {
+    intro: {
+      heading: 'What Is Trompe L\'Oeil?',
+      paragraphs: [
+        'Trompe l\'oeil — French for "deceive the eye" — is a classical painting technique that creates realistic three-dimensional illusions on flat surfaces. Faux architectural elements like niches, columns, stone detailing, arched windows, and decorative molding appear to project from or recede into the wall, adding visual depth and architectural interest where none physically exists.',
+        'Misha has over 25 years of experience painting trompe l\'oeil and architectural illusions in Houston luxury homes. From faux library shelves and stone-framed windows to full-room panoramic scenes, each illusion is hand-painted by the artist personally and designed to integrate seamlessly with your home\'s existing architecture.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Trompe L\'Oeil Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the wall, room proportions, and sight lines. She discusses your vision and recommends how trompe l\'oeil can enhance or transform the space.' },
+        { name: 'Design Renderings', desc: 'Detailed design renderings show exactly how the illusion will look on your surface. Perspective, lighting, and architectural accuracy are refined before any painting begins.' },
+        { name: 'Hand-Painted Execution', desc: 'The illusion is painted on-site by Misha personally, building from structural outlines to detailed shadows, highlights, and textures. Work is coordinated around your schedule.' },
+        { name: 'Final Reveal', desc: 'Once complete, Misha walks you through the finished work. The full dimensional effect is best appreciated from the natural viewing angle of the room.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Trompe L\'Oeil',
+      points: [
+        '25+ years of trompe l\'oeil and architectural illusion experience in Houston',
+        'Every illusion hand-painted by the artist personally',
+        'Detailed design renderings for approval before painting begins',
+        'Classical technique adapted to modern and traditional Houston homes',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What is trompe l\'oeil painting?', answer: 'Trompe l\'oeil is a classical painting technique that creates realistic three-dimensional illusions on flat surfaces. The name means "deceive the eye" in French. Misha specializes in faux architectural elements like niches, columns, stone detailing, and decorative molding that appear to project from or recede into the wall.' },
+      { question: 'Where can trompe l\'oeil be used in a home?', answer: 'Trompe l\'oeil works on walls, ceilings, hallways, foyers, dining rooms, and architectural features. It is especially effective for adding visual depth to smaller spaces or creating the appearance of windows, niches, and columns where none exist.' },
+      { question: 'Is trompe l\'oeil the same as a mural?', answer: 'They overlap but differ in intent. Murals depict scenes or imagery, while trompe l\'oeil specifically aims to create architectural illusions — making flat surfaces appear three-dimensional. Misha offers both as separate services.' },
+      { question: 'How long does a trompe l\'oeil project take?', answer: 'Timeline varies with the complexity and scale of the illusion. Most projects take 1-3 weeks from design approval to completion. Misha creates detailed design renderings for approval before painting begins.' },
+      { question: 'Does Misha serve my area for trompe l\'oeil?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'luxury-wall-murals', label: 'Luxury Wall Murals' },
+      { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
+    ],
+    areaContext: 'Misha has painted trompe l\'oeil and architectural illusions in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
