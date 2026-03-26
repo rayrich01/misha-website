@@ -78,13 +78,16 @@ export default function InquirePage() {
       }
 
       // Push lead event to GTM dataLayer for GA4 measurement
-      if (typeof window !== 'undefined' && (window as Record<string, unknown>).dataLayer) {
-        ;(window as { dataLayer: Record<string, unknown>[] }).dataLayer.push({
-          event: 'generate_lead',
-          form_id: 'inquire',
-          project_type: payload.projectType || '',
-          room_type: payload.roomType || '',
-        })
+      if (typeof window !== 'undefined') {
+        const w = window as unknown as { dataLayer?: Record<string, unknown>[] }
+        if (w.dataLayer) {
+          w.dataLayer.push({
+            event: 'generate_lead',
+            form_id: 'inquire',
+            project_type: payload.projectType || '',
+            room_type: payload.roomType || '',
+          })
+        }
       }
 
       setSubmitted(true)
