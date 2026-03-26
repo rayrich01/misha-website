@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/preview/', '/api/', '/index'],
     },
     sitemap: 'https://mishacreations.com/sitemap.xml',
     host: 'https://mishacreations.com',
