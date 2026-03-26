@@ -3,11 +3,16 @@ import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
 
 export const metadata: Metadata = {
-  title: 'FAQ | Misha Creations Houston',
+  title: 'Decorative Painting FAQ | Pricing, Process & Timeline | Misha Creations',
   description:
-    'Answers to common questions about luxury murals, Venetian plaster & decorative painting for River Oaks, Memorial & Tanglewood homes.',
+    'Common questions about luxury decorative painting, Venetian plaster, wall murals, and custom finishes in Houston. Learn about pricing, timelines, and Misha\'s 25+ year process. River Oaks, Memorial, Tanglewood.',
   alternates: {
     canonical: 'https://mishacreations.com/faq',
+  },
+  openGraph: {
+    title: 'Decorative Painting FAQ | Pricing, Process & Timeline | Misha Creations',
+    description: 'Common questions about luxury decorative painting, Venetian plaster, wall murals, and custom finishes in Houston. Pricing, timelines, and process.',
+    url: 'https://mishacreations.com/faq',
   },
 }
 
