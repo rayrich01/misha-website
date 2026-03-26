@@ -7,14 +7,14 @@ import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
 
 export const metadata: Metadata = {
-  title: 'Decorative Painting Houston | Custom Wall Murals | Venetian Plaster | Misha Creations',
-  description: 'Master faux artist specializing in custom wall murals Houston, venetian plaster, decorative painting, and luxury finishes. Serving River Oaks, Memorial, The Woodlands, and surrounding areas.',
+  title: 'Decorative Painting Services Houston | Murals, Plaster & Custom Finishes | Misha Creations',
+  description: 'Explore 8 luxury decorative painting services from Houston\'s premier artist. Venetian plaster, wall murals, trompe l\'oeil, decorative ceilings, faux finishes, and more. 25+ years serving River Oaks, Memorial, and Tanglewood.',
   alternates: {
     canonical: 'https://mishacreations.com/services',
   },
   openGraph: {
-    title: 'Decorative Painting Services Houston | Misha Creations',
-    description: "Master faux artist specializing in custom wall murals, venetian plaster, and luxury decorative finishes for Houston's finest homes.",
+    title: 'Decorative Painting Services Houston | Murals, Plaster & Custom Finishes | Misha Creations',
+    description: 'Explore 8 luxury decorative painting services from Houston\'s premier artist. Venetian plaster, wall murals, trompe l\'oeil, decorative ceilings, faux finishes, and more.',
     url: 'https://mishacreations.com/services',
   },
 }

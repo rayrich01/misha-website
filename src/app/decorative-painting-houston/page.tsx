@@ -7,16 +7,16 @@ import { JsonLd } from '@/components/JsonLd'
 
 // -- SEO Metadata --
 export const metadata: Metadata = {
-  title: 'Decorative Painting Houston',
+  title: 'Decorative Painting Houston TX | Luxury Finishes & Murals | Misha Creations',
   description:
-    "Houston's premier decorative painting artist. Venetian plaster, hand-painted murals, faux finishes & luxury wall treatments. River Oaks, Memorial, Tanglewood.",
+    'Expert decorative painting for Houston luxury homes. Hand-painted murals, Venetian plaster, faux finishes, and decorative ceilings by an artist with 25+ years of experience. Serving River Oaks, Memorial, Tanglewood, and The Woodlands.',
   alternates: {
     canonical: 'https://mishacreations.com/decorative-painting-houston',
   },
   openGraph: {
-    title: 'Decorative Painting Houston | Misha Creations',
+    title: 'Decorative Painting Houston TX | Luxury Finishes & Murals | Misha Creations',
     description:
-      "Houston's premier decorative painting artist. Venetian plaster, murals, faux finishes for luxury estates.",
+      'Expert decorative painting for Houston luxury homes. Hand-painted murals, Venetian plaster, faux finishes, and decorative ceilings by an artist with 25+ years of experience.',
     url: 'https://mishacreations.com/decorative-painting-houston',
     type: 'website',
   },
