@@ -160,6 +160,81 @@ export const FINISH_DESCRIPTIONS: Record<string, string> = {
   'commercial': 'Themed installations for commercial, hospitality, restaurant, and public spaces. Large-scale murals and environmental art designed for high-traffic durability and visual impact.',
 }
 
+/* ─── Service card descriptions for the /services hub (003B) ─── */
+export const SERVICE_CARD_DESCRIPTIONS: Record<string, string> = {
+  'wall-murals': 'Custom hand-painted murals for walls, ceilings, and architectural features.',
+  'venetian-plaster': 'Authentic hand-applied lime plaster finishes with depth and luminosity.',
+  'trompe-loeil': 'Classical illusion painting — faux niches, stone detailing, and architectural molding.',
+  'childrens-rooms': 'Custom themed room murals that bring your child\'s imagination to life.',
+  'themed-rooms': 'Hand-painted sky ceiling murals and themed room environments.',
+  'decorative-ceilings': 'Sky murals, frescoed medallions, and ornamental ceiling finishes.',
+  'faux-finishes': 'Custom faux and specialty treatments hand-applied for luxury residences.',
+  'modello-stencils': 'Elegant stencil designs for walls, ceilings, and architectural details.',
+}
+
+/* ─── Service page enrichment content (003A — venetian plaster first) ─── */
+export interface ServiceEnrichment {
+  intro: { heading: string; paragraphs: string[] }
+  process: { heading: string; steps: { name: string; desc: string }[] }
+  trust: { heading: string; points: string[] }
+  extraFaqs: { question: string; answer: string }[]
+  relatedServices: { slug: string; label: string }[]
+  areaContext: string
+}
+
+export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
+  'venetian-plaster': {
+    intro: {
+      heading: 'What Is Venetian Lime Plaster?',
+      paragraphs: [
+        'Venetian lime plaster is an authentic, lime-based decorative finish applied by hand in multiple thin layers and polished to create depth, luminosity, and tonal variation unique to each surface. The technique dates back centuries and produces finishes that change with the light — from soft warmth in the morning to a burnished glow under evening illumination.',
+        'Misha has over 25 years of experience applying Venetian lime plaster in Houston luxury homes. She trained at the Buon Fresco School of Venetian Plastering in Washington D.C. and at Nicola Vigini Studios, bringing authentic Italian technique to every surface she finishes. Venetian plaster is suitable for walls, ceilings, foyers, bathrooms, and architectural features.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Venetian Plaster Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the space, light, and architecture. She discusses your vision and recommends the ideal plaster finish for your surfaces.' },
+        { name: 'Custom Sample Creation', desc: 'Physical finish samples are created on sample boards for your approval. You see and touch the exact finish before any work begins in your home.' },
+        { name: 'Hand Application', desc: 'Multiple layers of lime plaster are hand-applied by Misha personally, building depth and luminosity with each pass. The work is coordinated around your schedule.' },
+        { name: 'Final Polish and Reveal', desc: 'The surface is burnished to its final sheen and reviewed for quality. The result is a one-of-a-kind finish designed for your home and applied by the artist who conceived it.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Venetian Plaster',
+      points: [
+        '25+ years of Venetian plaster experience in Houston',
+        'Trained at the Buon Fresco School of Venetian Plastering and Nicola Vigini Studios',
+        'Every surface hand-applied by the artist personally',
+        'Physical finish samples provided before any work begins',
+        'Complimentary in-home consultation to study your space',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What rooms are best for Venetian lime plaster?', answer: 'Venetian plaster works beautifully on walls, ceilings, columns, foyers, bathrooms, living rooms, and dining rooms — any architectural surface. It adapts to curved walls, niches, and custom features, making it one of the most versatile luxury finishes available.' },
+      { question: 'Is Venetian lime plaster durable?', answer: 'Yes. Authentic lime plaster is extremely durable and naturally develops character over time. It is suitable for high-traffic areas and even moisture-rich spaces like bathrooms when properly sealed.' },
+      { question: 'Can Venetian plaster be applied over existing walls?', answer: 'In most cases, yes, after proper surface preparation. Misha assesses your existing surfaces during the in-home consultation and recommends the best preparation approach for your specific walls.' },
+      { question: 'What is the difference between Venetian plaster and regular plaster?', answer: 'Venetian plaster uses slaked lime applied in multiple thin layers, then polished to create depth and luminosity. Regular plaster is a single-layer functional surface without the artistic finish. The multi-layer technique is what gives Venetian plaster its signature depth and light-catching quality.' },
+      { question: 'Does Misha serve my area for Venetian plaster?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'faux-specialty-finishes', label: 'Faux & Specialty Finishes' },
+      { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
+    ],
+    areaContext: 'Misha has applied Venetian lime plaster finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
+}
+
+/* ─── Hub-level FAQs for /services page (003B) ─── */
+export const SERVICES_HUB_FAQS = [
+  { question: 'What decorative painting services does Misha offer?', answer: 'Misha offers 8 luxury decorative painting services: Luxury Wall Murals, Venetian Lime Plaster, Trompe L\'Oeil & Architectural Illusions, Children\'s Themed Rooms, Themed Rooms & Skyscapes, Decorative Ceilings, Faux & Specialty Finishes, and Modello Stencils. Each finish is hand-applied by the artist personally.' },
+  { question: 'How much does decorative painting cost?', answer: 'Every project is customized and priced by scope, surface area, and complexity. Misha provides a detailed, no-obligation estimate after a complimentary in-home consultation where she evaluates your surfaces, lighting, and vision.' },
+  { question: 'How long has Misha been a decorative painter?', answer: 'Misha has over 25 years of experience as a decorative painting artist in Houston. She trained at the Buon Fresco School of Venetian Plastering in Washington D.C. and Nicola Vigini Studios, and has completed projects ranging from private estates to the Houston Zoo.' },
+  { question: 'What areas of Houston does Misha serve?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.' },
+  { question: 'How do I start a project?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation to study your space, lighting, and vision.' },
+  { question: 'Does Misha do the work herself?', answer: 'Yes. Every decorative finish is hand-applied by Misha personally. She does not subcontract her artistry.' },
+]
+
 export interface NeighborhoodContent {
   description: string
   featuredCategories: [string, string]

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS } from '@/lib/constants'
+import Link from 'next/link'
+import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS, SERVICE_ENRICHMENT } from '@/lib/constants'
 import { getPiecesByCategory, getFinishCategory } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -53,7 +54,9 @@ export default async function ServicePage({ params }: PageProps) {
     FINISH_DESCRIPTIONS[finish.categoryId] ||
     `Misha Creations brings 25+ years of expertise in ${finish.title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
-  const finishFaqs = [
+  const enrichment = SERVICE_ENRICHMENT[finish.categoryId]
+
+  const baseFaqs = [
     {
       question: `How much does ${finish.title.toLowerCase()} cost in Houston?`,
       answer: `Every ${finish.title.toLowerCase()} project is customized to your tastes and priced based on scope, surface area, and complexity. Misha provides a detailed estimate after an in-home consultation where she studies your space, lighting, and vision.`,
@@ -67,6 +70,7 @@ export default async function ServicePage({ params }: PageProps) {
       answer: `Absolutely. Misha creates physical finish samples for your approval before any brushwork begins. You see and touch the exact finish that will be applied in your home. No surprises on install day.`,
     },
   ]
+  const finishFaqs = enrichment ? [...baseFaqs, ...enrichment.extraFaqs] : baseFaqs
 
   const serviceSchema = {
     '@context': 'https://schema.org',
@@ -111,6 +115,44 @@ export default async function ServicePage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Service Intro — enriched pages only (003A) */}
+      {enrichment && (
+        <section className="py-16 md:py-20 bg-ink">
+          <div className="max-w-3xl mx-auto px-5">
+            <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-8">
+              {enrichment.intro.heading}
+            </h2>
+            {enrichment.intro.paragraphs.map((p, i) => (
+              <p key={i} className="font-body text-lg leading-relaxed text-mist mb-6 last:mb-0">{p}</p>
+            ))}
+            {enrichment.areaContext && (
+              <p className="font-body text-mist/70 mt-8 text-center text-sm">{enrichment.areaContext}</p>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Process — enriched pages only (003A) */}
+      {enrichment && (
+        <section className="py-16 md:py-20 bg-warm">
+          <div className="max-w-3xl mx-auto px-5">
+            <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
+              {enrichment.process.heading}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {enrichment.process.steps.map((step, i) => (
+                <div key={i} className="border border-muted/30 rounded-lg p-6">
+                  <h3 className="font-editorial text-lg text-gold mb-2">
+                    {String(i + 1).padStart(2, '0')}. {step.name}
+                  </h3>
+                  <p className="font-body text-mist leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Portfolio Grid */}
       {pieces.length > 0 && (
         <section className="py-16 md:py-20 bg-ink">
@@ -142,8 +184,57 @@ export default async function ServicePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* Trust Block — enriched pages only (003A) */}
+      {enrichment && (
+        <section className="py-16 md:py-20 bg-warm">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <h2 className="font-display text-3xl md:text-4xl text-cream mb-8">
+              {enrichment.trust.heading}
+            </h2>
+            <ul className="space-y-3 text-left max-w-xl mx-auto">
+              {enrichment.trust.points.map((point, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="text-gold mt-1 flex-shrink-0">&#10003;</span>
+                  <span className="font-body text-mist">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <FaqAccordion faqs={finishFaqs} heading={`${finish.title} FAQ`} />
-      <CtaSection headline={`Ready for ${finish.title} in Your Home?`} />
+
+      {/* Related Services — enriched pages only (003A / 002C) */}
+      {enrichment && enrichment.relatedServices.length > 0 && (
+        <section className="py-12 bg-warm">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <p className="font-body text-xs uppercase tracking-widest text-muted mb-4">Related Services</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              {enrichment.relatedServices.map((rs) => (
+                <Link
+                  key={rs.slug}
+                  href={`/services/${rs.slug}`}
+                  className="font-body text-gold border border-gold/40 px-5 py-2 rounded-full hover:bg-gold/10 transition-colors"
+                >
+                  {rs.label}
+                </Link>
+              ))}
+              <Link
+                href="/services"
+                className="font-body text-mist border border-muted/30 px-5 py-2 rounded-full hover:bg-muted/10 transition-colors"
+              >
+                View All Services
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <CtaSection
+        headline={`Start Your ${finish.title} Project`}
+        body="Call today for a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
+      />
     </>
   )
 }
