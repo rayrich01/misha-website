@@ -47,7 +47,7 @@ export default async function AreaPage({ params }: PageProps) {
     ? await getPiecesByCategories(content.featuredCategories, 2, content.categoryOffset)
     : (await getMishaSelectPieces(4)).slice(0, 4)
 
-  const neighborhoodFaqs = content
+  const baseFaqs = content
     ? [
         { question: `Does Misha Creations serve ${hood.name}?`, answer: content.faqAnswers.serve },
         { question: `How much does decorative painting cost in ${hood.name}?`, answer: content.faqAnswers.cost },
@@ -58,6 +58,7 @@ export default async function AreaPage({ params }: PageProps) {
         { question: `How much does decorative painting cost in ${hood.name}?`, answer: `Every project is customized to your tastes and priced based on scope, surface area, and finish complexity. Misha provides a detailed, no-obligation estimate after an in-home consultation.` },
         { question: `What decorative finishes are popular in ${hood.name}?`, answer: `${hood.name} homeowners often choose Venetian plaster for entry halls, custom wall murals for dining rooms, and decorative ceiling treatments for living areas. Misha tailors every finish to complement your home's architecture.` },
       ]
+  const neighborhoodFaqs = content?.extraFaqs ? [...baseFaqs, ...content.extraFaqs] : baseFaqs
 
   const localBusinessSchema = {
     '@context': 'https://schema.org',
@@ -146,8 +147,51 @@ export default async function AreaPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Trust Block (004A / 013B) */}
+      {content?.trustPoints && (
+        <section className="py-16 md:py-20 bg-ink">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <h2 className="font-display text-3xl md:text-4xl text-cream mb-8">
+              Why {hood.name} Homeowners Choose Misha
+            </h2>
+            <ul className="space-y-3 text-left max-w-xl mx-auto">
+              {content.trustPoints.map((point, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="text-gold mt-1 flex-shrink-0">&#10003;</span>
+                  <span className="font-body text-mist">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <FaqAccordion faqs={neighborhoodFaqs} heading={`${hood.name} FAQ`} />
-      <CtaSection headline={`Ready to Transform Your ${hood.name} Home?`} />
+
+      {/* Nearby Areas (004A / 013B) */}
+      {content?.nearbyAreas && content.nearbyAreas.length > 0 && (
+        <section className="py-10 bg-warm">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <p className="font-body text-xs uppercase tracking-widest text-muted mb-4">Also Serving Nearby</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {content.nearbyAreas.map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/areas/${area.slug}`}
+                  className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors"
+                >
+                  {area.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <CtaSection
+        headline={`Start Your ${hood.name} Project`}
+        body="Call today for a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
+      />
     </>
   )
 }

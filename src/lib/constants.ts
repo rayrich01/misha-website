@@ -445,6 +445,10 @@ export interface NeighborhoodContent {
     cost: string
     popular: string
   }
+  /* ─── 004A / 013B area-page enrichment fields ─── */
+  extraFaqs?: { question: string; answer: string }[]
+  nearbyAreas?: { slug: string; name: string }[]
+  trustPoints?: string[]
 }
 
 export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
@@ -458,6 +462,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'River Oaks projects are tailored to the scale and prestige of each estate. Misha provides a detailed, no-obligation estimate after an in-home consultation where she evaluates the surfaces, lighting, and architectural details of your space.',
       popular: 'River Oaks homeowners frequently commission Venetian plaster for grand entry halls, trompe l\'oeil architectural illusions in dining rooms, and gilded ceiling medallions for formal living areas. Each finish is customized to complement the home\'s period and style.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in River Oaks?', answer: 'Misha offers all 8 luxury decorative painting services in River Oaks: Luxury Wall Murals, Venetian Lime Plaster, Trompe L\'Oeil & Architectural Illusions, Children\'s Themed Rooms, Themed Rooms & Skyscapes, Decorative Ceilings, Faux & Specialty Finishes, and Modello Stencils.' },
+      { question: 'How do I start a project in River Oaks?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation at your River Oaks residence.' },
+      { question: 'Does Misha provide in-home consultations in River Oaks?', answer: 'Yes. Misha personally visits every River Oaks home for consultation. The visit is complimentary with no obligation.' },
+    ],
+    nearbyAreas: [{ slug: 'memorial', name: 'Memorial' }, { slug: 'tanglewood', name: 'Tanglewood' }, { slug: 'west-university', name: 'West University' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation', 'Serving Houston\'s finest neighborhoods'],
   },
   'memorial': {
     description: 'Memorial\'s stately homes call for artistry that balances grandeur with warmth. Misha brings decades of experience painting expansive wall murals, hand-finished decorative ceilings, and immersive landscapes that transform Memorial residences into one-of-a-kind living environments.',
@@ -469,6 +480,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'Pricing depends on the scope, surface area, and complexity of the finish. Memorial homeowners typically invest in larger-scale murals and ceiling treatments. Misha provides a clear, detailed quote after seeing your space in person.',
       popular: 'Memorial clients love expansive wall murals for dining and living rooms, painted sky ceilings for master bedrooms, and decorative crown and ceiling treatments that add dimension to their already impressive architecture.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in Memorial?', answer: 'Misha offers all 8 luxury decorative painting services in Memorial: Luxury Wall Murals, Venetian Lime Plaster, Trompe L\'Oeil & Architectural Illusions, Children\'s Themed Rooms, Themed Rooms & Skyscapes, Decorative Ceilings, Faux & Specialty Finishes, and Modello Stencils.' },
+      { question: 'How do I start a project in Memorial?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation at your Memorial home.' },
+      { question: 'Does Misha provide in-home consultations in Memorial?', answer: 'Yes. Misha personally visits every Memorial home for consultation. The visit is complimentary with no obligation.' },
+    ],
+    nearbyAreas: [{ slug: 'river-oaks-luxury-murals', name: 'River Oaks' }, { slug: 'tanglewood', name: 'Tanglewood' }, { slug: 'bellaire', name: 'Bellaire' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation', 'Serving Houston\'s finest neighborhoods'],
   },
   'tanglewood': {
     description: 'Tanglewood\'s refined residences are the perfect canvas for Misha\'s specialty finishes. From luminous Venetian plaster that captures natural light to hand-rubbed faux stone and metallic glazes, every surface is treated as a piece of fine art, designed to enhance the sophisticated character of Tanglewood homes.',
@@ -480,6 +498,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'Each Tanglewood project is scoped individually based on surface area, finish complexity, and design requirements. Misha provides a comprehensive estimate after an in-home walkthrough where she studies your walls, lighting, and vision.',
       popular: 'Tanglewood homeowners gravitate toward hand-applied faux stone and aged plaster for accent walls, metallic glazes in powder rooms, and luminous Venetian plaster in entry halls. Misha matches every finish to the home\'s existing palette and architecture.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in Tanglewood?', answer: 'Misha offers all 8 luxury decorative painting services in Tanglewood including Venetian Lime Plaster, Faux & Specialty Finishes, Luxury Wall Murals, and more.' },
+      { question: 'How do I start a project in Tanglewood?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation.' },
+      { question: 'Does Misha provide in-home consultations in Tanglewood?', answer: 'Yes. Misha personally visits every Tanglewood home for consultation at no charge.' },
+    ],
+    nearbyAreas: [{ slug: 'river-oaks-luxury-murals', name: 'River Oaks' }, { slug: 'memorial', name: 'Memorial' }, { slug: 'west-university', name: 'West University' }, { slug: 'bellaire', name: 'Bellaire' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation', 'Serving Houston\'s finest neighborhoods'],
   },
   'west-university': {
     description: 'West University families trust Misha to create spaces that inspire — from whimsical children\'s room murals that spark imagination to elegant botanical wall murals that bring nature indoors. Every project in West U reflects the neighborhood\'s blend of family warmth and refined taste.',
@@ -491,6 +516,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'West University projects range from single-wall nursery murals to multi-room transformations. Misha provides a clear estimate after a free in-home consultation where she discusses your vision, measures the space, and recommends the best approach.',
       popular: 'West University families love hand-painted children\'s room murals with storybook themes, botanical wall murals for living and dining spaces, and soft decorative finishes for nurseries. Misha creates age-appropriate designs that grow with your children.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in West University?', answer: 'Misha offers all 8 luxury decorative painting services in West University including Children\'s Themed Rooms, Luxury Wall Murals, and custom decorative finishes.' },
+      { question: 'How do I start a project in West University?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation.' },
+      { question: 'Does Misha provide in-home consultations in West University?', answer: 'Yes. Misha personally visits every West University home for consultation at no charge.' },
+    ],
+    nearbyAreas: [{ slug: 'river-oaks-luxury-murals', name: 'River Oaks' }, { slug: 'memorial', name: 'Memorial' }, { slug: 'bellaire', name: 'Bellaire' }, { slug: 'tanglewood', name: 'Tanglewood' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation', 'Serving Houston\'s finest neighborhoods'],
   },
   'the-woodlands': {
     description: 'The Woodlands\' nature-inspired homes deserve artistry that brings the outdoors in. Misha creates immersive themed environments, from wine cellar vineyards to painted sky ceilings, alongside refined decorative ceiling treatments that add drama and depth to The Woodlands\' spacious floor plans.',
@@ -502,6 +534,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'The Woodlands homes often feature open floor plans and tall ceilings, which Misha accounts for in her scoping. She provides a detailed, no-obligation estimate after visiting your home and understanding the full project vision.',
       popular: 'The Woodlands homeowners often request immersive themed environments for game rooms and wine cellars, painted sky and cloud ceilings for bedrooms and living areas, and decorative ceiling treatments that take advantage of the area\'s generous ceiling heights.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in The Woodlands?', answer: 'Misha offers all 8 luxury decorative painting services in The Woodlands including Themed Rooms & Skyscapes, Decorative Ceilings, and custom wall murals.' },
+      { question: 'How do I start a project in The Woodlands?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will travel to The Woodlands for a complimentary in-home consultation.' },
+      { question: 'Does Misha travel to The Woodlands for consultations?', answer: 'Yes. Misha regularly travels to The Woodlands for consultations and project work. The consultation is complimentary with no obligation.' },
+    ],
+    nearbyAreas: [{ slug: 'memorial', name: 'Memorial' }, { slug: 'tanglewood', name: 'Tanglewood' }, { slug: 'bellaire', name: 'Bellaire' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation — travels to The Woodlands', 'Serving Houston\'s finest neighborhoods'],
   },
   'bellaire': {
     description: 'Bellaire\'s mix of updated classics and contemporary new builds gives Misha a diverse canvas. She brings specialty faux finishes — aged leather, brushed metals, hand-rubbed stone — alongside nature-inspired wall murals that add character and depth to Bellaire\'s evolving residential landscape.',
@@ -513,6 +552,13 @@ export const NEIGHBORHOOD_CONTENT: Record<string, NeighborhoodContent> = {
       cost: 'Bellaire projects vary widely from accent walls to full-room transformations. Misha provides a personalized estimate after a free in-home consultation where she evaluates the space and discusses your goals.',
       popular: 'Bellaire homeowners are drawn to specialty faux finishes like aged leather and brushed metal for accent walls, nature-inspired wall murals for family rooms, and textured Venetian plaster treatments that add warmth to contemporary interiors.',
     },
+    extraFaqs: [
+      { question: 'What services does Misha offer in Bellaire?', answer: 'Misha offers all 8 luxury decorative painting services in Bellaire including Faux & Specialty Finishes, Luxury Wall Murals, Venetian Plaster, and more.' },
+      { question: 'How do I start a project in Bellaire?', answer: 'Call (281) 650-0500 or submit a project inquiry online. Misha will arrange a complimentary in-home consultation at your Bellaire home.' },
+      { question: 'Does Misha provide in-home consultations in Bellaire?', answer: 'Yes. Misha personally visits every Bellaire home for consultation at no charge.' },
+    ],
+    nearbyAreas: [{ slug: 'west-university', name: 'West University' }, { slug: 'memorial', name: 'Memorial' }, { slug: 'tanglewood', name: 'Tanglewood' }, { slug: 'river-oaks-luxury-murals', name: 'River Oaks' }],
+    trustPoints: ['25+ years of museum-quality artistry in Houston', 'Every finish hand-applied by the artist personally', 'Complimentary in-home consultation', 'Serving Houston\'s finest neighborhoods'],
   },
 }
 
