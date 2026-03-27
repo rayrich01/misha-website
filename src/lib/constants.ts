@@ -423,6 +423,86 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
     ],
     areaContext: 'Misha has painted children\'s themed room murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
+  'themed-rooms': {
+    intro: {
+      heading: 'What Are Themed Rooms & Skyscapes?',
+      paragraphs: [
+        'Themed rooms and skyscapes are immersive, hand-painted environments that transform entire rooms into experiences. Sky ceiling murals create the illusion of open sky overhead — with realistic cloud formations, atmospheric depth, and natural light transitions. Themed rooms extend beyond ceilings to create complete environments: wine cellars with vineyard scenes, media rooms with panoramic landscapes, and entertainment spaces with custom atmospheric treatments.',
+        'With over 25 years of experience, Misha creates themed environments for Houston luxury homes that go far beyond standard decoration. Every skyscape and themed room is hand-painted by the artist personally, designed to integrate with the room\'s architecture, lighting, and intended atmosphere.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Themed Room Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the room, ceiling height, lighting, and intended use. She discusses your vision for the themed environment.' },
+        { name: 'Custom Design Renderings', desc: 'Detailed design renderings show how the themed room or skyscape will look. Atmospheric effects, color palette, and spatial flow are refined to your approval.' },
+        { name: 'Hand-Painted Execution', desc: 'The environment is painted on-site by Misha personally — ceiling, walls, and connecting surfaces as needed. Work is coordinated around your schedule.' },
+        { name: 'Final Reveal', desc: 'Once complete, Misha walks you through the finished environment. The full atmospheric effect is best experienced in person under the room\'s intended lighting.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Themed Rooms',
+      points: [
+        '25+ years of themed room and skyscape experience in Houston',
+        'Every environment hand-painted by the artist personally',
+        'Custom design renderings for approval before painting begins',
+        'Full-room immersive environments — ceilings, walls, and transitions',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What is a skyscape ceiling mural?', answer: 'A skyscape is a hand-painted ceiling treatment that creates the illusion of an open sky with realistic clouds, atmospheric depth, and natural light transitions. Misha paints each skyscape to match the room\'s character and intended lighting.' },
+      { question: 'Can themed rooms be designed for adults?', answer: 'Absolutely. Themed rooms are not just for children. Misha creates immersive environments for wine cellars, home theaters, media rooms, game rooms, and entertainment spaces tailored to adult interests and sophisticated design.' },
+      { question: 'How realistic are hand-painted sky ceilings?', answer: 'Misha\'s sky ceilings are painted to create convincing atmospheric depth with realistic cloud formations and light transitions. The effect is best appreciated in person — samples and references are available during the consultation.' },
+      { question: 'How long does a themed room project take?', answer: 'Timeline depends on the scope and complexity of the environment. Most themed room projects take 1-3 weeks from design approval to completion. Misha coordinates around your schedule.' },
+      { question: 'Does Misha serve my area for themed rooms?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'childrens-themed-rooms', label: 'Children\'s Themed Rooms' },
+      { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
+    ],
+    areaContext: 'Misha has painted themed rooms and skyscapes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
+  'modello-stencils': {
+    intro: {
+      heading: 'What Are Modello Stencils?',
+      paragraphs: [
+        'Modello stencils are precision-cut decorative stencils used to create elegant repeating patterns, borders, and designs on walls, ceilings, and architectural details. Unlike simple paint stencils, Modello designs are applied by hand with multiple layers of finish — paint, plaster, metallic, or glaze — producing refined, dimensional results with museum-quality detail.',
+        'Misha has over 25 years of experience applying Modello stencil designs in Houston luxury homes. She combines stencil precision with artistic hand-finishing to create surfaces that have the depth and refinement of custom millwork — without the structural commitment. Stencils can be combined with Venetian plaster, faux finishes, or metallic glazes for layered, multi-dimensional effects.',
+      ],
+    },
+    process: {
+      heading: 'Misha\'s Stencil Process',
+      steps: [
+        { name: 'In-Home Consultation', desc: 'Misha visits your home to study the surfaces, architecture, and design context. She discusses pattern options, scale, and finish combinations.' },
+        { name: 'Pattern Selection and Samples', desc: 'Misha presents pattern options and creates physical samples showing the stencil with your chosen finish treatment. You approve the pattern, scale, and finish before work begins.' },
+        { name: 'Hand-Applied Execution', desc: 'The stencil is applied by Misha personally with multiple layers of finish — paint, plaster, or metallic — building depth and dimension. Work is coordinated around your schedule.' },
+        { name: 'Final Review', desc: 'Once complete, Misha reviews the finished pattern with you. The result is an elegant decorative surface that adds architectural interest and refined detail to your space.' },
+      ],
+    },
+    trust: {
+      heading: 'Why Choose Misha for Modello Stencils',
+      points: [
+        '25+ years of decorative stencil experience in Houston',
+        'Every stencil hand-applied by the artist personally',
+        'Physical samples with your chosen finish before work begins',
+        'Can be combined with Venetian plaster, faux finishes, or metallic glazes',
+        'Serving River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire',
+      ],
+    },
+    extraFaqs: [
+      { question: 'What are Modello stencils?', answer: 'Modello stencils are precision-cut decorative stencils used to create elegant repeating patterns and designs on walls, ceilings, and architectural details. Misha applies them by hand with multiple layers of finish for a refined, dimensional result.' },
+      { question: 'Where do Modello stencils work best?', answer: 'Modello stencils are ideal for accent walls, ceiling borders, entryways, powder rooms, dining rooms, and architectural details like column wraps and niches. They add dimension and pattern to any surface.' },
+      { question: 'Can stencils be combined with other finishes?', answer: 'Yes. Misha often combines Modello stencils with Venetian plaster, faux finishes, or metallic glazes for a layered, multi-dimensional effect. She discusses combination options during the consultation.' },
+      { question: 'How long does a stencil project take?', answer: 'Timeline depends on the scope and complexity of the pattern. Most stencil projects take 1-2 weeks from design approval to completion. Misha coordinates around your schedule.' },
+      { question: 'Does Misha serve my area for stencil work?', answer: 'Misha serves Houston\'s finest neighborhoods including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire. Call (281) 650-0500 for a complimentary consultation.' },
+    ],
+    relatedServices: [
+      { slug: 'faux-specialty-finishes', label: 'Faux & Specialty Finishes' },
+      { slug: 'venetian-lime-plaster', label: 'Venetian Lime Plaster' },
+    ],
+    areaContext: 'Misha has applied Modello stencil designs in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+  },
 }
 
 /* ─── Hub-level FAQs for /services page (003B) ─── */
