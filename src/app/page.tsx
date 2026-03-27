@@ -187,6 +187,19 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Explore More (014E — dead-end elimination) */}
+      <section className="py-12 bg-ink">
+        <div className="max-w-3xl mx-auto px-5 text-center">
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/services" className="font-body text-sm text-gold border border-gold/40 px-5 py-2 rounded-full hover:bg-gold/10 transition-colors">Explore Our Services</Link>
+            <Link href="/process" className="font-body text-sm text-gold border border-gold/40 px-5 py-2 rounded-full hover:bg-gold/10 transition-colors">How We Work</Link>
+            <Link href="/about" className="font-body text-sm text-mist border border-muted/30 px-5 py-2 rounded-full hover:bg-muted/10 transition-colors">About Misha</Link>
+            <Link href="/blog/guide-to-decorative-painting-houston" className="font-body text-sm text-mist border border-muted/30 px-5 py-2 rounded-full hover:bg-muted/10 transition-colors">Decorative Painting Guide</Link>
+            <Link href="/inquire" className="font-body text-sm text-gold border border-gold/40 px-5 py-2 rounded-full hover:bg-gold/10 transition-colors">Start a Project</Link>
+          </div>
+        </div>
+      </section>
+
       <CtaSection />
     </>
   )

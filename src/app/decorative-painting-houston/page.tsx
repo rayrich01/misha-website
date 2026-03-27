@@ -177,6 +177,18 @@ export default async function DecorativePaintingHoustonPage() {
         </div>
       </section>
 
+      {/* Explore (014E — dead-end elimination) */}
+      <section className="py-12 bg-ink">
+        <div className="max-w-3xl mx-auto px-5 text-center">
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/process" className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors">Our Process</Link>
+            <Link href="/about" className="font-body text-sm text-mist border border-muted/30 px-4 py-2 rounded-full hover:bg-muted/10 transition-colors">About Misha</Link>
+            <Link href="/blog/guide-to-decorative-painting-houston" className="font-body text-sm text-mist border border-muted/30 px-4 py-2 rounded-full hover:bg-muted/10 transition-colors">Complete Guide to Decorative Painting</Link>
+            <Link href="/inquire" className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors">Start a Project</Link>
+          </div>
+        </div>
+      </section>
+
       {/* Closing CTA */}
       <CtaSection
         headline="Begin Your Commission"

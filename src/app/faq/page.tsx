@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
 
@@ -69,6 +70,21 @@ export default function FaqPage() {
       </section>
 
       <FaqAccordion faqs={generalFaqs} heading="" />
+
+      {/* Explore (014E — dead-end elimination) */}
+      <section className="py-12 bg-warm">
+        <div className="max-w-3xl mx-auto px-5 text-center">
+          <p className="font-body text-xs uppercase tracking-widest text-muted mb-4">Learn More</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/services" className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors">Our Services</Link>
+            <Link href="/process" className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors">Our Process</Link>
+            <Link href="/about" className="font-body text-sm text-mist border border-muted/30 px-4 py-2 rounded-full hover:bg-muted/10 transition-colors">About Misha</Link>
+            <Link href="/blog/guide-to-venetian-lime-plaster-houston" className="font-body text-sm text-mist border border-muted/30 px-4 py-2 rounded-full hover:bg-muted/10 transition-colors">Venetian Plaster Guide</Link>
+            <Link href="/inquire" className="font-body text-sm text-gold border border-gold/40 px-4 py-2 rounded-full hover:bg-gold/10 transition-colors">Start a Project</Link>
+          </div>
+        </div>
+      </section>
+
       <CtaSection headline="Have More Questions?" body="Call today for a complimentary consultation to discuss your project with Misha in person." />
     </>
   )
