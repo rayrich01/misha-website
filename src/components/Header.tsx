@@ -49,7 +49,7 @@ export function Header() {
             </span>
             <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
               <div className="bg-warm border border-muted/20 rounded-lg shadow-lg py-2 min-w-[260px]">
-                <p className="px-4 py-2 text-xs uppercase tracking-widest text-cream/80 font-body">Serving the Greater Houston Metro Area</p>
+                <p className="px-4 py-2 text-xs uppercase tracking-widest text-gold font-body">Serving the Greater Houston Metro Area</p>
                 {NEIGHBORHOODS.map((n) => (
                   <Link
                     key={n.slug}
