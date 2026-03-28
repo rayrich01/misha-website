@@ -29,6 +29,7 @@ export function Footer() {
           </div>
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Service Areas</p>
+            <p className="font-body text-sm text-mist/70 mb-2">Serving the Greater Houston Metro Area</p>
             <div className="space-y-1">
               {NEIGHBORHOODS.map((n) => (
                 <Link
