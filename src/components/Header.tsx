@@ -45,7 +45,8 @@ export function Header() {
               Areas
             </span>
             <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
-              <div className="bg-warm border border-muted/20 rounded-lg shadow-lg py-2 min-w-[200px]">
+              <div className="bg-warm border border-muted/20 rounded-lg shadow-lg py-2 min-w-[260px]">
+                <p className="px-4 py-2 text-xs uppercase tracking-widest text-muted/60 font-body">Serving the Greater Houston Metro Area</p>
                 {NEIGHBORHOODS.map((n) => (
                   <Link
                     key={n.slug}
@@ -115,6 +116,7 @@ export function Header() {
             </Link>
           ))}
           <p className="text-xs uppercase tracking-widest text-muted font-body mt-4">Areas</p>
+          <p className="text-xs text-muted/60 font-body pl-3 mb-1">Serving the Greater Houston Metro Area</p>
           {NEIGHBORHOODS.map((n) => (
             <Link
               key={n.slug}
