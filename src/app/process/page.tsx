@@ -79,7 +79,7 @@ export default function ProcessPage() {
             <a href={COPY.phoneHref} className="text-gold hover:text-goldf transition-colors">{COPY.phone}</a>{' '}
             or{' '}
             <Link href="/inquire" className="text-gold hover:text-goldf transition-colors">submit an inquiry</Link>
-            , Misha responds within 48 hours. From there, the process is personal, consultative, and grounded in 25+ years of decorative painting expertise in Houston.
+            , Misha responds within 24 hours. From there, the process is personal, consultative, and grounded in 25+ years of decorative painting expertise in Houston.
           </p>
         </div>
       </section>
