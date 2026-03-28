@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { NEIGHBORHOOD_MAP, NEIGHBORHOODS, NEIGHBORHOOD_CONTENT, FINISH_SURFACES } from '@/lib/constants'
-import { getPiecesByCategories, getMishaSelectPieces } from '@/lib/queries'
+import { getPiecesByCategories, getMishaSelectPieces, getAreaPage, getAllAreaSlugs, getAllServicePages } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
@@ -15,23 +15,29 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
+  const cmsSlugs = await getAllAreaSlugs().catch(() => [])
+  if (cmsSlugs.length > 0) return cmsSlugs.map((s) => ({ slug: s }))
   return NEIGHBORHOODS.map((n) => ({ slug: n.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
+  const cms = await getAreaPage(slug).catch(() => null)
   const hood = NEIGHBORHOOD_MAP[slug]
-  if (!hood) return notFound()
+  if (!cms && !hood) return notFound()
+
+  const metaTitle = cms ? cms.seo.metaTitle : hood!.metaTitle
+  const metaDescription = cms ? cms.seo.metaDescription : hood!.metaDescription
 
   return {
-    title: hood.metaTitle,
-    description: hood.metaDescription,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical: `https://mishacreations.com/areas/${slug}`,
     },
     openGraph: {
-      title: hood.metaTitle,
-      description: hood.metaDescription,
+      title: metaTitle,
+      description: metaDescription,
       url: `https://mishacreations.com/areas/${slug}`,
     },
   }
@@ -39,24 +45,45 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function AreaPage({ params }: PageProps) {
   const { slug } = await params
+  const cms = await getAreaPage(slug).catch(() => null)
   const hood = NEIGHBORHOOD_MAP[slug]
-  if (!hood) return notFound()
+  if (!cms && !hood) return notFound()
 
-  const content = NEIGHBORHOOD_CONTENT[slug]
+  const name = cms?.name || hood!.name
+  const h1 = cms?.h1 || hood!.h1
+
+  // Use CMS content if available, fall back to constants
+  const content = cms ? {
+    description: cms.description,
+    featuredCategories: cms.featuredCategories as [string, string],
+    categoryOffset: cms.categoryOffset,
+    popularFinishes: cms.popularFinishes,
+    faqAnswers: cms.faqAnswers,
+    extraFaqs: cms.extraFaqs,
+    nearbyAreas: cms.nearbyAreas,
+    trustPoints: cms.trustPoints,
+  } : NEIGHBORHOOD_CONTENT[slug] || null
+
   const pieces = content
     ? await getPiecesByCategories(content.featuredCategories, 2, content.categoryOffset)
     : (await getMishaSelectPieces(4)).slice(0, 4)
 
+  // Fetch service pages from CMS for the services grid, fall back to constants
+  const cmsServices = await getAllServicePages().catch(() => [])
+  const serviceList = cmsServices.length > 0
+    ? cmsServices.map((s) => ({ slug: s.slug.current, title: s.title }))
+    : FINISH_SURFACES.map((f) => ({ slug: f.slug, title: f.title }))
+
   const baseFaqs = content
     ? [
-        { question: `Does Misha Creations serve ${hood.name}?`, answer: content.faqAnswers.serve },
-        { question: `How much does decorative painting cost in ${hood.name}?`, answer: content.faqAnswers.cost },
-        { question: `What decorative finishes are popular in ${hood.name}?`, answer: content.faqAnswers.popular },
+        { question: `Does Misha Creations serve ${name}?`, answer: content.faqAnswers.serve },
+        { question: `How much does decorative painting cost in ${name}?`, answer: content.faqAnswers.cost },
+        { question: `What decorative finishes are popular in ${name}?`, answer: content.faqAnswers.popular },
       ]
     : [
-        { question: `Does Misha Creations serve ${hood.name}?`, answer: `Yes! Misha has been serving ${hood.name} homeowners for over 25 years with luxury decorative finishes, wall murals, and Venetian plaster. She personally visits your home for every consultation.` },
-        { question: `How much does decorative painting cost in ${hood.name}?`, answer: `Every project is customized to your tastes and priced based on scope, surface area, and finish complexity. Misha provides a detailed, no-obligation estimate after an in-home consultation.` },
-        { question: `What decorative finishes are popular in ${hood.name}?`, answer: `${hood.name} homeowners often choose Venetian plaster for entry halls, custom wall murals for dining rooms, and decorative ceiling treatments for living areas. Misha tailors every finish to complement your home's architecture.` },
+        { question: `Does Misha Creations serve ${name}?`, answer: `Yes! Misha has been serving ${name} homeowners for over 25 years with luxury decorative finishes, wall murals, and Venetian plaster. She personally visits your home for every consultation.` },
+        { question: `How much does decorative painting cost in ${name}?`, answer: `Every project is customized to your tastes and priced based on scope, surface area, and finish complexity. Misha provides a detailed, no-obligation estimate after an in-home consultation.` },
+        { question: `What decorative finishes are popular in ${name}?`, answer: `${name} homeowners often choose Venetian plaster for entry halls, custom wall murals for dining rooms, and decorative ceiling treatments for living areas. Misha tailors every finish to complement your home's architecture.` },
       ]
   const neighborhoodFaqs = content?.extraFaqs ? [...baseFaqs, ...content.extraFaqs] : baseFaqs
 
@@ -64,9 +91,9 @@ export default async function AreaPage({ params }: PageProps) {
     '@context': 'https://schema.org',
     '@type': ['LocalBusiness', 'VisualArtist'],
     name: 'Misha Creations',
-    description: `Luxury decorative finishes and wall murals in ${hood.name}, Houston`,
+    description: `Luxury decorative finishes and wall murals in ${name}, Houston`,
     url: `https://mishacreations.com/areas/${slug}`,
-    areaServed: { '@type': 'Neighborhood', name: hood.name },
+    areaServed: { '@type': 'Neighborhood', name: name },
   }
 
   return (
@@ -82,10 +109,10 @@ export default async function AreaPage({ params }: PageProps) {
         )}
         <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
           <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-white mb-4">
-            {hood.h1}
+            {h1}
           </h1>
           <p className="font-body text-lg text-white/85 max-w-2xl mx-auto">
-            Trusted by {hood.name} homeowners for over 25 years
+            Trusted by {name} homeowners for over 25 years
           </p>
         </div>
       </section>
@@ -104,7 +131,7 @@ export default async function AreaPage({ params }: PageProps) {
         <section className={`py-16 md:py-20 ${content ? 'bg-ink' : 'bg-warm'}`}>
           <div className="max-w-6xl mx-auto px-5">
             <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
-              Work in {hood.name}
+              Work in {name}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {pieces.map((piece) => (
@@ -114,7 +141,7 @@ export default async function AreaPage({ params }: PageProps) {
                     fill
                     sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover"
-                    alt={piece.heroImage?.alt || `${piece.title} - decorative finish in ${hood.name} by Misha Creations`}
+                    alt={piece.heroImage?.alt || `${piece.title} - decorative finish in ${name} by Misha Creations`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -131,10 +158,10 @@ export default async function AreaPage({ params }: PageProps) {
       <section className="py-16 bg-warm">
         <div className="max-w-4xl mx-auto px-5 text-center">
           <h2 className="font-display text-3xl text-cream mb-8">
-            Services Available in {hood.name}
+            Services Available in {name}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {FINISH_SURFACES.map((f) => (
+            {serviceList.map((f) => (
               <Link
                 key={f.slug}
                 href={`/services/${f.slug}`}
@@ -152,7 +179,7 @@ export default async function AreaPage({ params }: PageProps) {
         <section className="py-16 md:py-20 bg-ink">
           <div className="max-w-3xl mx-auto px-5 text-center">
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-8">
-              Why {hood.name} Homeowners Choose Misha
+              Why {name} Homeowners Choose Misha
             </h2>
             <ul className="space-y-3 text-left max-w-xl mx-auto">
               {content.trustPoints.map((point, i) => (
@@ -166,7 +193,7 @@ export default async function AreaPage({ params }: PageProps) {
         </section>
       )}
 
-      <FaqAccordion faqs={neighborhoodFaqs} heading={`${hood.name} FAQ`} />
+      <FaqAccordion faqs={neighborhoodFaqs} heading={`${name} FAQ`} />
 
       {/* Nearby Areas (004A / 013B) */}
       {content?.nearbyAreas && content.nearbyAreas.length > 0 && (
@@ -189,7 +216,7 @@ export default async function AreaPage({ params }: PageProps) {
       )}
 
       <CtaSection
-        headline={`Start Your ${hood.name} Project`}
+        headline={`Start Your ${name} Project`}
         body="Call today for a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
       />
     </>
