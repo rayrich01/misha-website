@@ -104,7 +104,7 @@ export default function InquirePage() {
         <div className="max-w-xl mx-auto text-center">
           <h2 className="font-display text-4xl text-cream mb-4">Thank You</h2>
           <p className="font-body text-mist leading-relaxed mb-8">
-            Your inquiry has been received. Misha will be in touch within 48 hours.
+            Your inquiry has been received. Misha will be in touch within 24 hours.
           </p>
           <Link
             href="/"
@@ -128,7 +128,7 @@ export default function InquirePage() {
         </h1>
         <p className="font-body text-mist leading-relaxed mb-10">
           Tell Misha about your project, vision, location you live, a realistic timeline
-          as well as any questions you may have and she will respond within 48 hours.
+          as well as any questions you may have and she will respond within 24 hours.
           You can also call Misha directly at{' '}
           <a href="tel:+12816500500" className="text-gold hover:text-goldf transition-colors">(281) 650-0500</a>{' '}
           or reach out via text.
