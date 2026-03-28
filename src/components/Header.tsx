@@ -40,6 +40,9 @@ export function Header() {
               </div>
             </div>
           </div>
+          <Link href="/recent-projects" className="text-mist hover:text-gold transition-colors">
+            Projects
+          </Link>
           <div className="relative group">
             <span className="text-mist hover:text-gold transition-colors cursor-default">
               Areas
@@ -115,6 +118,9 @@ export function Header() {
               {f.title}
             </Link>
           ))}
+          <Link href="/recent-projects" className="block text-cream font-body mt-4" onClick={() => setOpen(false)}>
+            Projects
+          </Link>
           <p className="text-xs uppercase tracking-widest text-muted font-body mt-4">Areas</p>
           <p className="text-xs text-muted/60 font-body pl-3 mb-1">Serving the Greater Houston Metro Area</p>
           {NEIGHBORHOODS.map((n) => (
