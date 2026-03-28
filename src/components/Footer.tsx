@@ -1,7 +1,22 @@
 import Link from 'next/link'
-import { NEIGHBORHOODS, FINISH_SURFACES, COPY } from '@/lib/constants'
+import { NEIGHBORHOODS, FINISH_SURFACES } from '@/lib/constants'
 
-export function Footer() {
+interface NavItem { slug: string; title?: string; name?: string }
+
+interface FooterProps {
+  services?: NavItem[]
+  areas?: NavItem[]
+}
+
+export function Footer({ services, areas }: FooterProps = {}) {
+  const serviceItems = services && services.length > 0
+    ? services.map((s) => ({ slug: s.slug, label: s.title || '' }))
+    : FINISH_SURFACES.map((f) => ({ slug: f.slug, label: f.title }))
+
+  const areaItems = areas && areas.length > 0
+    ? areas.map((a) => ({ slug: a.slug, label: a.name || '' }))
+    : NEIGHBORHOODS.map((n) => ({ slug: n.slug, label: n.name }))
+
   return (
     <footer className="bg-ink text-mist py-16 border-t border-warm">
       <div className="max-w-7xl mx-auto px-5">
@@ -16,13 +31,13 @@ export function Footer() {
           <div>
             <p className="font-editorial text-lg text-cream mb-3">Services</p>
             <div className="space-y-1">
-              {FINISH_SURFACES.map((f) => (
+              {serviceItems.map((f) => (
                 <Link
                   key={f.slug}
                   href={`/services/${f.slug}`}
                   className="block font-body text-sm hover:text-gold transition-colors"
                 >
-                  {f.title}
+                  {f.label}
                 </Link>
               ))}
             </div>
@@ -31,13 +46,13 @@ export function Footer() {
             <p className="font-editorial text-lg text-cream mb-3">Service Areas</p>
             <p className="font-body text-sm text-mist/70 mb-2">Serving the Greater Houston Metro Area</p>
             <div className="space-y-1">
-              {NEIGHBORHOODS.map((n) => (
+              {areaItems.map((n) => (
                 <Link
                   key={n.slug}
                   href={`/areas/${n.slug}`}
                   className="block font-body text-sm hover:text-gold transition-colors"
                 >
-                  {n.name}
+                  {n.label}
                 </Link>
               ))}
             </div>

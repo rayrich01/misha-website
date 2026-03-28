@@ -3,6 +3,7 @@ import { Great_Vibes, Cormorant_Garamond, Jost } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { getNavData } from '@/lib/queries'
 
 const greatVibes = Great_Vibes({
   weight: '400',
@@ -56,11 +57,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Fetch nav data from CMS — falls back to constants inside Header/Footer if this fails
+  const nav = await getNavData().catch(() => ({ services: [], areas: [] }))
+  const navServices = nav.services.map((s) => ({ slug: s.slug, title: s.title }))
+  const navAreas = nav.areas.map((a) => ({ slug: a.slug, name: a.name }))
+
   return (
     <html lang="en">
       <body
@@ -82,9 +88,9 @@ export default function RootLayout({
 ` }} />
 {/* End Google Tag Manager */}
         <div className="max-w-screen-2xl mx-auto w-full">
-          <Header />
+          <Header services={navServices} areas={navAreas} />
           <main>{children}</main>
-          <Footer />
+          <Footer services={navServices} areas={navAreas} />
         </div>
       </body>
     </html>

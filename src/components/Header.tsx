@@ -4,8 +4,24 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { FINISH_SURFACES, NEIGHBORHOODS } from '@/lib/constants'
 
-export function Header() {
+interface NavItem { slug: string; title?: string; name?: string }
+
+interface HeaderProps {
+  services?: NavItem[]
+  areas?: NavItem[]
+}
+
+export function Header({ services, areas }: HeaderProps = {}) {
   const [open, setOpen] = useState(false)
+
+  // Use CMS data if provided, fall back to constants
+  const serviceItems = services && services.length > 0
+    ? services.map((s) => ({ slug: s.slug, label: s.title || '' }))
+    : FINISH_SURFACES.map((f) => ({ slug: f.slug, label: f.title }))
+
+  const areaItems = areas && areas.length > 0
+    ? areas.map((a) => ({ slug: a.slug, label: a.name || '' }))
+    : NEIGHBORHOODS.map((n) => ({ slug: n.slug, label: n.name }))
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-ink/95 backdrop-blur-sm border-b border-warm">
@@ -28,13 +44,13 @@ export function Header() {
             </Link>
             <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
               <div className="bg-warm border border-muted/20 rounded-lg shadow-lg py-2 min-w-[260px]">
-                {FINISH_SURFACES.map((f) => (
+                {serviceItems.map((f) => (
                   <Link
                     key={f.slug}
                     href={`/services/${f.slug}`}
                     className="block px-4 py-2 text-sm text-mist hover:bg-ink hover:text-gold transition-colors"
                   >
-                    {f.title}
+                    {f.label}
                   </Link>
                 ))}
               </div>
@@ -50,13 +66,13 @@ export function Header() {
             <div className="absolute top-full left-0 pt-2 hidden group-hover:block">
               <div className="bg-warm border border-muted/20 rounded-lg shadow-lg py-2 min-w-[260px]">
                 <p className="px-4 py-2 text-xs uppercase tracking-widest text-gold font-body">Serving the Greater Houston Metro Area</p>
-                {NEIGHBORHOODS.map((n) => (
+                {areaItems.map((n) => (
                   <Link
                     key={n.slug}
                     href={`/areas/${n.slug}`}
                     className="block px-4 py-2 text-sm text-mist hover:bg-ink hover:text-gold transition-colors"
                   >
-                    {n.name}
+                    {n.label}
                   </Link>
                 ))}
               </div>
@@ -108,14 +124,14 @@ export function Header() {
             Services
           </Link>
           <p className="text-xs uppercase tracking-widest text-muted font-body mt-4">Services</p>
-          {FINISH_SURFACES.map((f) => (
+          {serviceItems.map((f) => (
             <Link
               key={f.slug}
               href={`/services/${f.slug}`}
               className="block text-mist pl-3 font-body text-sm"
               onClick={() => setOpen(false)}
             >
-              {f.title}
+              {f.label}
             </Link>
           ))}
           <Link href="/recent-projects" className="block text-cream font-body mt-4" onClick={() => setOpen(false)}>
@@ -123,14 +139,14 @@ export function Header() {
           </Link>
           <p className="text-xs uppercase tracking-widest text-muted font-body mt-4">Areas</p>
           <p className="text-xs text-muted/60 font-body pl-3 mb-1">Serving the Greater Houston Metro Area</p>
-          {NEIGHBORHOODS.map((n) => (
+          {areaItems.map((n) => (
             <Link
               key={n.slug}
               href={`/areas/${n.slug}`}
               className="block text-mist pl-3 font-body text-sm"
               onClick={() => setOpen(false)}
             >
-              {n.name}
+              {n.label}
             </Link>
           ))}
           <Link href="/faq" className="block mt-4 text-cream font-body" onClick={() => setOpen(false)}>
