@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS, SERVICE_ENRICHMENT } from '@/lib/constants'
-import { getPiecesByCategory, getFinishCategory } from '@/lib/queries'
+import { getPiecesByCategory, getFinishCategory, getServicePage, getAllServiceSlugs } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { CtaSection } from '@/components/CtaSection'
@@ -15,23 +15,29 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
+  const cmsSlugs = await getAllServiceSlugs().catch(() => [])
+  if (cmsSlugs.length > 0) return cmsSlugs.map((s) => ({ slug: s }))
   return FINISH_SURFACES.map((f) => ({ slug: f.slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const finish = FINISH_MAP[slug]
+  const cms = await getServicePage(slug).catch(() => null)
+  const finish = cms || FINISH_MAP[slug]
   if (!finish) return notFound()
 
+  const metaTitle = cms ? cms.seo.metaTitle : (finish as typeof FINISH_MAP[string]).metaTitle
+  const metaDescription = cms ? cms.seo.metaDescription : (finish as typeof FINISH_MAP[string]).metaDescription
+
   return {
-    title: finish.metaTitle,
-    description: finish.metaDescription,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical: `https://mishacreations.com/services/${slug}`,
     },
     openGraph: {
-      title: finish.metaTitle,
-      description: finish.metaDescription,
+      title: metaTitle,
+      description: metaDescription,
       url: `https://mishacreations.com/services/${slug}`,
     },
   }
@@ -39,34 +45,47 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ServicePage({ params }: PageProps) {
   const { slug } = await params
+  const cms = await getServicePage(slug).catch(() => null)
   const finish = FINISH_MAP[slug]
-  if (!finish) return notFound()
+  if (!cms && !finish) return notFound()
+
+  const title = cms?.title || finish?.title || ''
+  const h1 = cms?.h1 || finish?.h1 || ''
+  const categoryId = cms?.categoryId || finish?.categoryId || ''
 
   const [pieces, category] = await Promise.all([
-    getPiecesByCategory(finish.categoryId, 6),
-    getFinishCategory(finish.categoryId),
+    getPiecesByCategory(categoryId, 6),
+    getFinishCategory(categoryId),
   ])
 
   const heroImage = category?.heroImage || pieces[0]?.heroImage
   const description =
     category?.tradeDescription ||
     category?.shortDescription ||
-    FINISH_DESCRIPTIONS[finish.categoryId] ||
-    `Misha Creations brings 25+ years of expertise in ${finish.title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
+    FINISH_DESCRIPTIONS[categoryId] ||
+    `Misha Creations brings 25+ years of expertise in ${title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
-  const enrichment = SERVICE_ENRICHMENT[finish.categoryId]
+  // CMS enrichment takes priority, fall back to constants.ts
+  const enrichment = cms ? {
+    intro: cms.intro,
+    process: cms.process,
+    trust: cms.trust,
+    extraFaqs: cms.extraFaqs,
+    relatedServices: cms.relatedServices,
+    areaContext: cms.areaContext,
+  } : SERVICE_ENRICHMENT[categoryId] || null
 
   const baseFaqs = [
     {
-      question: `How much does ${finish.title.toLowerCase()} cost in Houston?`,
-      answer: `Every ${finish.title.toLowerCase()} project is customized to your tastes and priced based on scope, surface area, and complexity. Misha provides a detailed estimate after an in-home consultation where she studies your space, lighting, and vision.`,
+      question: `How much does ${title.toLowerCase()} cost in Houston?`,
+      answer: `Every ${title.toLowerCase()} project is customized to your tastes and priced based on scope, surface area, and complexity. Misha provides a detailed estimate after an in-home consultation where she studies your space, lighting, and vision.`,
     },
     {
-      question: `How long does a ${finish.title.toLowerCase()} project take?`,
+      question: `How long does a ${title.toLowerCase()} project take?`,
       answer: `Timeline depends on the scope and complexity of the work. Most projects take 1-3 weeks from design approval to completion. Misha coordinates around your schedule and provides a realistic timeline during the consultation.`,
     },
     {
-      question: `Do you provide samples before starting ${finish.title.toLowerCase()} work?`,
+      question: `Do you provide samples before starting ${title.toLowerCase()} work?`,
       answer: `Absolutely. Misha creates physical finish samples for your approval before any brushwork begins. You see and touch the exact finish that will be applied in your home. No surprises on install day.`,
     },
   ]
@@ -75,7 +94,7 @@ export default async function ServicePage({ params }: PageProps) {
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
-    name: `${finish.title} Houston`,
+    name: `${title} Houston`,
     provider: {
       '@type': 'LocalBusiness',
       name: 'Misha Creations',
@@ -100,7 +119,7 @@ export default async function ServicePage({ params }: PageProps) {
         {!heroImage && <div className="absolute inset-0 bg-ink" />}
         <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
           <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-white mb-4">
-            {finish.h1}
+            {h1}
           </h1>
           <p className="font-body text-lg text-white/85 max-w-2xl mx-auto">
             By Misha Creations &middot; 25+ Years of Artistic Excellence
@@ -158,7 +177,7 @@ export default async function ServicePage({ params }: PageProps) {
         <section className="py-16 md:py-20 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
             <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
-              Featured {finish.title} Work
+              Featured {title} Work
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {pieces.map((piece) => (
@@ -168,7 +187,7 @@ export default async function ServicePage({ params }: PageProps) {
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover"
-                    alt={piece.heroImage?.alt || `${piece.title} - ${finish.title} by Misha Creations Houston`}
+                    alt={piece.heroImage?.alt || `${piece.title} - ${title} by Misha Creations Houston`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -203,7 +222,7 @@ export default async function ServicePage({ params }: PageProps) {
         </section>
       )}
 
-      <FaqAccordion faqs={finishFaqs} heading={`${finish.title} FAQ`} />
+      <FaqAccordion faqs={finishFaqs} heading={`${title} FAQ`} />
 
       {/* Related Services — enriched pages only (003A / 002C) */}
       {enrichment && enrichment.relatedServices.length > 0 && (
@@ -232,7 +251,7 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       <CtaSection
-        headline={`Start Your ${finish.title} Project`}
+        headline={`Start Your ${title} Project`}
         body="Call today for a complimentary consultation. Misha will visit your home, study the light and architecture, and show you what is possible."
       />
     </>
