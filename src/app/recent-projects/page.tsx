@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
-import { getMishaSelectPieces } from '@/lib/queries'
+import Link from 'next/link'
+import { getMishaSelectPieces, getAllProjects } from '@/lib/queries'
 import { COPY } from '@/lib/constants'
 import { PortfolioCard } from '@/components/PortfolioCard'
+import { SanityImage } from '@/components/SanityImage'
 import { CtaSection } from '@/components/CtaSection'
 
 export const revalidate = 60
@@ -22,7 +24,10 @@ export const metadata: Metadata = {
 }
 
 export default async function RecentProjectsPage() {
-  const pieces = await getMishaSelectPieces(12)
+  const [pieces, projects] = await Promise.all([
+    getMishaSelectPieces(12),
+    getAllProjects().catch(() => []),
+  ])
 
   return (
     <>
@@ -40,9 +45,76 @@ export default async function RecentProjectsPage() {
         </div>
       </section>
 
+      {/* Project Galleries */}
+      {projects.length > 0 && (
+        <section className="py-12 md:py-16 bg-ink border-b border-warm">
+          <div className="max-w-7xl mx-auto px-5">
+            <h2 className="font-editorial text-2xl text-cream mb-8 text-center">
+              Project Galleries
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project) => (
+                <Link
+                  key={project._id}
+                  href={`/projects/${project.slug.current}`}
+                  className="group relative block overflow-hidden rounded-lg bg-warm"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    {project.heroImage?.asset ? (
+                      <SanityImage
+                        image={project.heroImage}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : project.pieces?.[0]?.heroImage?.asset ? (
+                      <SanityImage
+                        image={project.pieces[0].heroImage}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-ink/50 flex items-center justify-center">
+                        <span className="text-muted text-sm">No preview</span>
+                      </div>
+                    )}
+                    {/* Image count badge */}
+                    <div className="absolute top-3 right-3 bg-ink/80 backdrop-blur-sm text-cream text-xs font-body px-2.5 py-1 rounded-full">
+                      {project.pieceCount} {project.pieceCount === 1 ? 'image' : 'images'}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-editorial text-lg text-cream group-hover:text-gold transition-colors line-clamp-2">
+                      {project.title}
+                    </h3>
+                    {project.description && (
+                      <p className="font-body text-sm text-mist mt-1 line-clamp-2">
+                        {project.description}
+                      </p>
+                    )}
+                    <span className="font-body text-xs text-gold mt-2 inline-block">
+                      View Project &rarr;
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Individual Pieces */}
       {pieces.length > 0 && (
         <section className="py-16 md:py-24 bg-warm">
           <div className="max-w-7xl mx-auto px-5">
+            {projects.length > 0 && (
+              <h2 className="font-editorial text-2xl text-cream mb-8 text-center">
+                Featured Works
+              </h2>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {pieces.map((piece, i) => (
                 <PortfolioCard

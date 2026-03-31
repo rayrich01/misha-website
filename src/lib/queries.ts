@@ -369,3 +369,57 @@ export async function getNavData(): Promise<{
   ])
   return { services, areas }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Project Galleries
+   ═══════════════════════════════════════════════════════════════ */
+
+export interface StudioProject {
+  _id: string
+  title: string
+  slug: { current: string }
+  category: string
+  description?: string
+  heroImage?: SanityImage
+  displayOrder?: number
+  pieces: PortfolioPiece[]
+  pieceCount: number
+}
+
+const PROJECT_FIELDS = `
+  _id, title, slug, category, description, displayOrder,
+  heroImage { asset, hotspot, alt, "lqip": asset->metadata.lqip },
+  "pieces": pieces[]->{ ${PIECE_FIELDS} },
+  "pieceCount": count(pieces)
+`
+
+/** All published projects for /recent-projects listing */
+export async function getAllProjects(): Promise<StudioProject[]> {
+  return sanityClient.fetch(`
+    *[_type == "studioProject" && defined(slug.current) && count(pieces) > 0]
+    | order(displayOrder asc) { ${PROJECT_FIELDS} }
+  `)
+}
+
+/** Single project by slug */
+export async function getProjectBySlug(slug: string): Promise<StudioProject | null> {
+  return sanityClient.fetch(`
+    *[_type == "studioProject" && slug.current == $slug][0] { ${PROJECT_FIELDS} }
+  `, { slug })
+}
+
+/** All project slugs for generateStaticParams */
+export async function getAllProjectSlugs(): Promise<string[]> {
+  return sanityClient.fetch(`
+    *[_type == "studioProject" && defined(slug.current) && count(pieces) > 0].slug.current
+  `)
+}
+
+/** Get project info for a piece (if it belongs to a project) */
+export async function getProjectForPiece(pieceId: string): Promise<{ title: string; slug: string; pieceCount: number } | null> {
+  return sanityClient.fetch(`
+    *[_type == "studioProject" && $pieceId in pieces[]._ref][0]{
+      title, "slug": slug.current, "pieceCount": count(pieces)
+    }
+  `, { pieceId })
+}
