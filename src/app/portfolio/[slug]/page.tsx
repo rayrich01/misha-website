@@ -139,15 +139,20 @@ export default async function PieceDetailPage({ params }: PageProps) {
               {projectInfo && (
                 <Link
                   href={`/projects/${projectInfo.slug}`}
-                  className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-warm rounded-lg border border-muted/20 hover:border-gold/40 transition-colors group"
+                  className="flex items-center gap-3 mt-6 px-5 py-3.5 bg-warm rounded-lg border border-gold/30 hover:border-gold/60 transition-colors group"
                 >
-                  <span className="font-editorial text-sm text-cream group-hover:text-gold transition-colors">
-                    See Full Project
+                  <div className="flex-1">
+                    <span className="block font-editorial text-base text-cream group-hover:text-gold transition-colors">
+                      See {projectInfo.pieceCount - 1} additional images in this project
+                    </span>
+                    <span className="block font-body text-xs text-muted mt-0.5">
+                      {projectInfo.title}
+                    </span>
+                  </div>
+                  <span className="font-body text-xs text-ink bg-gold px-2.5 py-1 rounded-full font-medium whitespace-nowrap">
+                    {projectInfo.pieceCount} images
                   </span>
-                  <span className="font-body text-xs text-muted bg-ink/50 px-2 py-0.5 rounded-full">
-                    {projectInfo.pieceCount} {projectInfo.pieceCount === 1 ? 'image' : 'images'}
-                  </span>
-                  <span className="text-gold text-xs">&rarr;</span>
+                  <span className="text-gold text-sm">&rarr;</span>
                 </Link>
               )}
             </div>
