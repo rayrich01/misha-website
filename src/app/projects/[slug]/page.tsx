@@ -45,14 +45,17 @@ export default async function ProjectPage({
 
   if (!project) notFound()
 
-  const pieces = project.pieces || []
+  // Filter out null refs (unresolved), unpublished, and archived pieces
+  const pieces = (project.pieces || []).filter(
+    (p: any) => p && p._id && p.heroImage?.asset
+  )
 
   const projectSchema = {
     '@context': 'https://schema.org',
     '@type': 'ImageGallery',
     name: project.title,
-    description: project.description || `A ${project.pieceCount}-image project by Misha Creations`,
-    numberOfItems: project.pieceCount,
+    description: project.description || `A ${pieces.length}-image project by Misha Creations`,
+    numberOfItems: pieces.length,
     author: {
       '@type': 'LocalBusiness',
       name: 'Misha Creations',
@@ -79,7 +82,7 @@ export default async function ProjectPage({
             </p>
           )}
           <p className="font-body text-sm text-muted">
-            {project.pieceCount} {project.pieceCount === 1 ? 'image' : 'images'} in this project
+            {pieces.length} {project.pieceCount === 1 ? 'image' : 'images'} in this project
           </p>
           <div className="w-8 h-px bg-gold mx-auto mt-6" />
         </div>
