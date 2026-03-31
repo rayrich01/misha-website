@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
       { source: '/venetian-plaster', destination: '/services/venetian-lime-plaster', permanent: true },
       { source: '/trompe-loeil-architectural-illusions', destination: '/services/trompe-loeil-architectural-illusions', permanent: true },
       { source: '/childrens-themed-rooms', destination: '/services/childrens-themed-rooms', permanent: true },
-      { source: '/themed-rooms-skyscapes', destination: '/services/themed-rooms-skyscapes', permanent: true },
+      { source: '/themed-rooms-skyscapes', destination: '/services/themed-rooms', permanent: true },
       { source: '/decorative-ceilings', destination: '/services/decorative-ceilings', permanent: true },
       { source: '/faux-specialty-finishes', destination: '/services/faux-specialty-finishes', permanent: true },
       { source: '/modello-stencils', destination: '/services/modello-stencils', permanent: true },
@@ -38,10 +38,11 @@ const nextConfig: NextConfig = {
       { source: '/faux-finishes-houston', destination: '/services/faux-specialty-finishes', permanent: true },
       { source: '/decorative-ceilings-houston', destination: '/services/decorative-ceilings', permanent: true },
       { source: '/childrens-rooms-houston', destination: '/services/childrens-themed-rooms', permanent: true },
-      { source: '/themed-rooms-houston', destination: '/services/themed-rooms-skyscapes', permanent: true },
+      { source: '/themed-rooms-houston', destination: '/services/themed-rooms', permanent: true },
       { source: '/trompe-loeil-houston', destination: '/services/trompe-loeil-architectural-illusions', permanent: true },
       { source: '/modello-stencils-houston', destination: '/services/modello-stencils', permanent: true },
-      { source: '/skyscapes-houston', destination: '/services/themed-rooms-skyscapes', permanent: true },
+      { source: '/skyscapes-houston', destination: '/services/skyscapes-celestial', permanent: true },
+      { source: '/services/themed-rooms-skyscapes', destination: '/services/themed-rooms', permanent: true },
       { source: '/commercial-houston', destination: '/gallery', permanent: true },
 
       // ── Area pages ──
