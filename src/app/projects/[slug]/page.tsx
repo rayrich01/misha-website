@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getProjectBySlug, getAllProjectSlugs } from '@/lib/queries'
 import { PortfolioCard } from '@/components/PortfolioCard'
+import { SanityImage } from '@/components/SanityImage'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
 import { notFound } from 'next/navigation'
@@ -83,6 +84,24 @@ export default async function ProjectPage({
           <div className="w-8 h-px bg-gold mx-auto mt-6" />
         </div>
       </section>
+
+      {/* Hero Image */}
+      {project.heroImage?.asset && (
+        <section className="bg-ink pb-8">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-xl">
+              <SanityImage
+                image={project.heroImage}
+                alt={project.heroImage.alt || project.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Image Grid */}
       <section className="bg-ink py-12 md:py-16">
