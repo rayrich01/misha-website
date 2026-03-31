@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getPieceBySlug, getAllPortfolioSlugs, getRelatedPieces } from '@/lib/queries'
+import { getPieceBySlug, getAllPortfolioSlugs, getRelatedPieces, getProjectForPiece } from '@/lib/queries'
 import { sanityImageUrl } from '@/lib/sanity'
 import { FINISH_SURFACES } from '@/lib/constants'
 import { PortfolioDetailClient } from '@/components/PortfolioDetailClient'
@@ -39,7 +39,10 @@ export default async function PieceDetailPage({ params }: PageProps) {
   const piece = await getPieceBySlug(slug)
   if (!piece) return notFound()
 
-  const relatedPieces = await getRelatedPieces(piece.category, piece._id, 3)
+  const [relatedPieces, projectInfo] = await Promise.all([
+    getRelatedPieces(piece.category, piece._id, 3),
+    getProjectForPiece(piece._id).catch(() => null),
+  ])
   const finish = FINISH_SURFACES.find((f) => f.categoryId === piece.category)
 
   // Build all images array: hero + additional images
@@ -132,6 +135,20 @@ export default async function PieceDetailPage({ params }: PageProps) {
                     </span>
                   ))}
                 </div>
+              )}
+              {projectInfo && (
+                <Link
+                  href={`/projects/${projectInfo.slug}`}
+                  className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 bg-warm rounded-lg border border-muted/20 hover:border-gold/40 transition-colors group"
+                >
+                  <span className="font-editorial text-sm text-cream group-hover:text-gold transition-colors">
+                    See Full Project
+                  </span>
+                  <span className="font-body text-xs text-muted bg-ink/50 px-2 py-0.5 rounded-full">
+                    {projectInfo.pieceCount} {projectInfo.pieceCount === 1 ? 'image' : 'images'}
+                  </span>
+                  <span className="text-gold text-xs">&rarr;</span>
+                </Link>
               )}
             </div>
 
