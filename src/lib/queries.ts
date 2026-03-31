@@ -389,8 +389,8 @@ export interface StudioProject {
 const PROJECT_FIELDS = `
   _id, title, slug, category, description, displayOrder,
   heroImage { asset, hotspot, alt, "lqip": asset->metadata.lqip },
-  "pieces": pieces[]->[published == true && coalesce(archived, false) != true]{ ${PIECE_FIELDS} },
-  "pieceCount": count(pieces[]->[published == true && coalesce(archived, false) != true])
+  "pieces": pieces[]->{ ${PIECE_FIELDS} },
+  "pieceCount": count(pieces)
 `
 
 /** All published projects for /recent-projects listing */
