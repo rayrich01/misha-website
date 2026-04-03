@@ -214,6 +214,27 @@ jobs:
               });
             }
 
+            // ── Governance incident helper ──
+            async function logGovernanceIncident(crNumber, gate, detail) {
+              const incidentBody = [
+                `## 🔒 Governance Incident — CR-${crNumber}`,
+                '',
+                `**Gate:** ${gate}`,
+                `**Time:** ${new Date().toISOString()}`,
+                `**Detail:** ${detail}`,
+                `**Disposition:** Escalated. Change NOT marked as deployed.`,
+              ].join('\n');
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: crNumber,
+                body: incidentBody
+              });
+
+              core.error(`[GOVERNANCE-INCIDENT] CR-${crNumber} | ${gate} | ${detail}`);
+            }
+
             // ══════════════════════════════════════════
             // ── MAIN: Fetch and execute pending tasks ──
             // ══════════════════════════════════════════
@@ -373,22 +394,90 @@ jobs:
                 await escalate(crNum,
                   `Git commit/push failed: ${gitErr.message}`
                 );
+                await logGovernanceIncident(crNum, 'commit-push',
+                  `Git commit/push operation failed: ${gitErr.message}`
+                );
                 continue;
               }
 
-              // ── Get commit SHA ──
+              // ── STOP-GATE 1: Verify push landed on remote ──
               const commitSha = execSync('git rev-parse --short HEAD', {
                 encoding: 'utf-8'
               }).trim();
+              const fullSha = execSync('git rev-parse HEAD', {
+                encoding: 'utf-8'
+              }).trim();
+
+              try {
+                execSync('git fetch origin main', { encoding: 'utf-8' });
+                execSync(`git merge-base --is-ancestor ${fullSha} origin/main`, {
+                  encoding: 'utf-8',
+                  stdio: 'pipe'
+                });
+                core.info(`  Push verified: ${commitSha} confirmed on origin/main`);
+              } catch (verifyErr) {
+                // Push did not land — escalate, do NOT mark as review
+                const reason = `Push appeared to succeed but remote verification failed. ` +
+                  `Commit ${commitSha} is NOT confirmed on origin/main. ` +
+                  `Change may NOT be deployed. Escalating for manual review.`;
+                await escalate(crNum, reason);
+                await logGovernanceIncident(crNum, 'push-verification', reason);
+                continue;
+              }
+
+              // ── Build semantic validation hint for the notifier ──
+              // The notifier will search the live page for this text.
+              // If not found, the notifier fails closed instead of claiming success.
+              //
+              // Priority: diff-derived text > quoted text in title/description > empty (fail closed)
+              let validationHint = '';
+
+              // Strategy 1: Extract from actual git diff (most reliable)
+              try {
+                const diffText = execSync(
+                  `git diff HEAD~1 HEAD -- ${changedFiles.map(f => `"${f}"`).join(' ')}`,
+                  { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }
+                );
+                const addedLines = diffText.split('\n')
+                  .filter(l => l.startsWith('+') && !l.startsWith('+++'))
+                  .map(l => l.slice(1).trim())
+                  .filter(l => {
+                    if (l.length < 10) return false;
+                    if (/^[<{}\[\]\/\*]|^import |^export |^const |^let |^var |^function |^return |^if |^else /.test(l)) return false;
+                    if (/^className=|^style=/.test(l)) return false;
+                    return /[a-zA-Z]{3,}/.test(l);
+                  });
+                if (addedLines.length > 0) {
+                  const plain = addedLines[0].replace(/<[^>]+>/g, '').replace(/[{}]/g, '').replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ').trim();
+                  if (plain.length >= 8) validationHint = plain.slice(0, 80);
+                }
+              } catch (e) {
+                core.warning(`  Diff hint extraction failed: ${e.message}`);
+              }
+
+              // Strategy 2: Fallback to quoted text in title/description
+              if (!validationHint) {
+                const quotedMatch = title.match(/['"]([^'"]{3,})['"]/);
+                validationHint = quotedMatch
+                  ? quotedMatch[1]
+                  : (description.match(/['"]([^'"]{3,})['"]/)?.[1] || '');
+              }
 
               // ── Update Supabase: status → review ──
               await updateTask(crNum, {
                 status: 'review',
                 result: {
                   commit: commitSha,
-                  files_changed: changedFiles
+                  files_changed: changedFiles,
+                  validation_hint: validationHint
                 }
               });
+
+              if (validationHint) {
+                core.info(`  Validation hint for notifier: "${validationHint}"`);
+              } else {
+                core.warning(`  No validation hint extracted — notifier will fail closed (DESCRIPTOR_MISSING)`);
+              }
 
               core.info(`CR-${crNum} executed successfully. Commit: ${commitSha}`);
               // cr-completion-notifier.yml picks up from here
