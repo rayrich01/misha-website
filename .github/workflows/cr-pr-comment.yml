@@ -46,7 +46,8 @@ jobs:
               ? descMatch[1].trim()
               : body;
 
-            // Queue to Supabase
+            // PR-comment CRs are not auto-executable — the executor only
+            // handles category=content-update. Queue for manual developer review.
             const resp = await fetch(`${process.env.SUPABASE_URL}/rest/v1/cr_tasks`, {
               method: 'POST',
               headers: {
@@ -60,8 +61,8 @@ jobs:
                 cr_number: context.payload.issue.number,
                 category: 'pr-comment',
                 priority: 'before-launch',
-                auto_execute: true,
-                status: 'queued',
+                auto_execute: false,
+                status: 'pending',
                 issue_url: context.payload.issue.html_url,
                 page,
                 body: description,

@@ -42,8 +42,9 @@ jobs:
             }
 
             // --- Auto-execute decision ---
-            // All categorized CRs auto-execute; review happens after completion
-            const autoExecute = category !== 'unknown';
+            // Only content-update CRs are safe for auto-execution.
+            // Bugs, feature requests, and SEO/performance issues require developer investigation.
+            const autoExecute = category === 'content-update';
 
             core.setOutput('category', category);
             core.setOutput('priority', priority);
@@ -153,12 +154,22 @@ jobs:
                 });
               } catch (e) { /* label may not exist yet */ }
 
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: num,
-                labels: ['cr-queued']
-              });
+              if (autoExecute) {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: num,
+                  labels: ['cr-queued']
+                });
+              } else {
+                // Non-auto CRs need developer investigation — not the executor.
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: num,
+                  labels: ['cr-developer-required']
+                });
+              }
             } else {
               const err = await res.text();
               core.warning(`Failed to queue CR-${num} to Supabase: ${err}`);
