@@ -2,6 +2,8 @@ name: CR Completion Notifier
 on:
   schedule:
     - cron: '*/5 * * * *'
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -28,16 +30,37 @@ jobs:
               'Content-Type': 'application/json'
             };
 
-            // ── Helper to build Supabase query URLs safely (hyphens in tenant names) ──
+            // ── Helper to build Supabase query URLs safely ──
             function sbQuery(params) {
               const url = new URL(`${sbUrl}/rest/v1/cr_tasks`);
               for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
               return url.toString();
             }
 
+            // ── Governance incident helper ──
+            async function logGovernanceIncident(crNum, gate, detail) {
+              const incidentBody = [
+                `## 🔒 Governance Incident — CR-${crNum}`,
+                '',
+                `**Gate:** ${gate}`,
+                `**Time:** ${new Date().toISOString()}`,
+                `**Detail:** ${detail}`,
+                `**Disposition:** Escalated. Change NOT confirmed as deployed.`,
+              ].join('\n');
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: crNum,
+                body: incidentBody
+              });
+
+              core.error(`[GOVERNANCE-INCIDENT] CR-${crNum} | ${gate} | ${detail}`);
+            }
+
             // ── Fetch tasks in 'review' status (completed but not yet notified) ──
             const res = await fetch(
-              sbQuery({ tenant: 'eq.misha-main', status: 'eq.review', select: '*' }),
+              sbQuery({ status: 'eq.review', tenant: 'eq.misha-main', select: '*' }),
               { headers }
             );
             if (!res.ok) return;
@@ -46,27 +69,288 @@ jobs:
             for (const task of tasks) {
               const result = task.result || {};
               const crNum = task.cr_number;
+              const pageUrl = task.page_url || '';
 
-              const previewLink = result.preview_url
-                ? `**[Click here to review the change](${result.preview_url})**`
-                : '_(no preview link available)_';
+              // ── Guard: skip tasks whose GitHub issue is already closed ──
+              try {
+                const issue = await github.rest.issues.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: crNum
+                });
+                if (issue.data.state === 'closed') {
+                  core.info(`CR-${crNum}: Issue is closed — marking task done, skipping notification`);
+                  await fetch(
+                    `${sbUrl}/rest/v1/cr_tasks?id=eq.${task.id}`,
+                    {
+                      method: 'PATCH',
+                      headers: { ...headers, 'Prefer': 'return=minimal' },
+                      body: JSON.stringify({
+                        status: 'done',
+                        completed_at: new Date().toISOString(),
+                        result: { ...result, validation_outcome: 'ISSUE_CLOSED', notified: true }
+                      })
+                    }
+                  );
+                  continue;
+                }
+              } catch (issueErr) {
+                core.warning(`CR-${crNum}: Could not check issue state: ${issueErr.message}`);
+              }
+
+              // ── Build review URL (normalized — prevents doubled-base URLs) ──
+              const previewBase = 'https://mishacreations.com';
+              const normalizePagePath = (raw) => {
+                if (!raw || !raw.trim()) return null;
+                const s = raw.trim();
+                if (s.startsWith('http://') || s.startsWith('https://')) {
+                  try { return new URL(s).pathname; } catch (e) { return null; }
+                }
+                return s.startsWith('/') ? s : `/${s}`;
+              };
+              const normalizedPath = normalizePagePath(pageUrl);
+              const liveUrl = normalizedPath ? `${previewBase}${normalizedPath}` : null;
+              const previewLink = liveUrl
+                ? `**[Review on live site](${liveUrl})**`
+                : '**Review link unavailable** (no valid page URL provided)';
+
+              // ── STOP-GATE 2: Semantic production validation ──
+              // Success requires: page reachable + CR-specific semantic evidence found.
+              // If no validation_hint exists in the task result, fail closed (DESCRIPTOR_MISSING).
+              // Transport-only evidence (HTTP 200, body length) is NEVER sufficient for success.
+
+              let validationPassed = false;
+              let validationDetail = '';
+              let validationOutcome = 'VALIDATION_FAILED'; // default: fail closed
+
+              const validationHint = result.validation_hint || '';
+              const transportOnly = !validationHint;
+
+              if (!liveUrl) {
+                validationOutcome = 'VALIDATION_FAILED';
+                validationDetail = pageUrl
+                  ? `Page URL "${pageUrl}" could not be resolved to a valid path — cannot validate production page`
+                  : 'No page_url provided — cannot validate production page';
+                core.warning(`  CR-${crNum}: No valid liveUrl (raw pageUrl=${JSON.stringify(pageUrl)}), cannot validate`);
+              } else if (transportOnly) {
+                validationOutcome = 'VALIDATION_DESCRIPTOR_MISSING';
+                validationDetail = 'No validation_hint in task result — semantic validation cannot be performed. Fail closed.';
+                core.warning(`  CR-${crNum}: No validation_hint — DESCRIPTOR_MISSING, fail closed`);
+              } else {
+                // We have a page_url and a validation_hint — perform semantic check
+                try {
+                  const liveRes = await fetch(liveUrl, {
+                    method: 'GET',
+                    headers: { 'Cache-Control': 'no-cache' },
+                    redirect: 'follow',
+                  });
+
+                  if (!liveRes.ok) {
+                    validationOutcome = 'VALIDATION_FAILED';
+                    validationDetail = `HTTP ${liveRes.status} — page not reachable`;
+                    core.warning(`  CR-${crNum}: Production page returned ${liveRes.status}`);
+                  } else {
+                    const body = await liveRes.text();
+
+                    if (body.length <= 500) {
+                      validationOutcome = 'VALIDATION_INCONCLUSIVE';
+                      validationDetail = `HTTP 200 but suspiciously short body (${body.length} chars) — cannot evaluate semantic hint`;
+                      core.warning(`  CR-${crNum}: Body too short for semantic check`);
+                    } else if (body.includes(validationHint)) {
+                      // Semantic evidence found on live page
+                      validationOutcome = 'VALIDATED_SUCCESS';
+                      validationPassed = true;
+                      validationDetail = `Semantic validation passed: "${validationHint}" found on live page (${body.length} chars)`;
+                      core.info(`  CR-${crNum}: VALIDATED_SUCCESS — "${validationHint}" found at ${liveUrl}`);
+                    } else {
+                      // Page reachable but semantic evidence missing
+                      validationOutcome = 'VALIDATION_FAILED';
+                      validationDetail = `Semantic validation failed: "${validationHint}" NOT found on live page (${body.length} chars)`;
+                      core.warning(`  CR-${crNum}: VALIDATION_FAILED — "${validationHint}" not found at ${liveUrl}`);
+                    }
+                  }
+                } catch (fetchErr) {
+                  validationOutcome = 'VALIDATION_FAILED';
+                  validationDetail = `Fetch error: ${fetchErr.message}`;
+                  core.warning(`  CR-${crNum}: Production fetch failed: ${fetchErr.message}`);
+                }
+              }
+
+              // ── STOP-GATE 3: Gate notification on validation result ──
+              // Only VALIDATED_SUCCESS may proceed. All other outcomes follow governed recovery paths.
+              if (!validationPassed) {
+                const retryCount = result.retry_count || 0;
+
+                // ── RECOVERY PATH: VALIDATION_INCONCLUSIVE — auto-retry once ──
+                if (validationOutcome === 'VALIDATION_INCONCLUSIVE' && retryCount < 1) {
+                  core.info(`  CR-${crNum}: INCONCLUSIVE on attempt ${retryCount + 1} — auto-retrying on next notifier run`);
+                  await fetch(`${sbUrl}/rest/v1/cr_tasks?id=eq.${task.id}`, {
+                    method: 'PATCH',
+                    headers: { ...headers, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify({
+                      status: 'review',
+                      result: { ...result, validation_outcome: validationOutcome, retry_count: 1, validation: validationDetail }
+                    })
+                  });
+                  continue;
+                }
+
+                // ── Build subclass-specific escalation comment ──
+                let escalationTitle = 'pushed but NOT validated live';
+                let escalationGuidance = '';
+                let escalationLabel = 'cr-validation-failed';
+
+                if (validationOutcome === 'VALIDATION_DESCRIPTOR_MISSING') {
+                  escalationTitle = 'pushed but validation hint missing';
+                  escalationLabel = 'cr-validation-descriptor-missing';
+                  escalationGuidance = [
+                    'The executor committed this change but did not generate a semantic validation hint, so automated validation cannot confirm the change is live.',
+                    '',
+                    '**What this means:** The hint-generation step produced no output — the diff may have been empty, or no quoted text was found in the title. This is an executor gap, not necessarily an implementation failure.',
+                    '',
+                    '**Recovery path:**',
+                    `1. ${previewLink}`,
+                    '2. Check whether the change appears on the live page.',
+                    '3. **If confirmed live:** Reply "Confirmed live" and close this issue.',
+                    '4. **If not live:** Reply with details — a developer will re-queue and investigate hint generation.',
+                  ].join('\n');
+                } else if (validationOutcome === 'VALIDATION_INCONCLUSIVE') {
+                  escalationTitle = 'validation inconclusive after retry';
+                  escalationLabel = 'cr-validation-inconclusive';
+                  escalationGuidance = [
+                    'The live page returned an unexpectedly short response on both validation attempts — possible redirect loop, page error, or Vercel serving a fallback.',
+                    '',
+                    '**Recovery path:**',
+                    `1. ${previewLink}`,
+                    '2. If the page loads correctly with the expected change, reply "Confirmed live" and close this issue.',
+                    '3. If the page is broken or missing the change, reply with details — a developer will investigate.',
+                  ].join('\n');
+                } else if (!pageUrl) {
+                  escalationTitle = 'pushed but page URL missing for validation';
+                  escalationGuidance = [
+                    'This CR was executed and committed, but no page URL was provided, so automated validation cannot confirm the change is live.',
+                    '',
+                    '**Recovery path:**',
+                    '1. Reply with the URL of the page that was changed.',
+                    '2. A team member will manually verify the change is live and close this issue.',
+                  ].join('\n');
+                } else if (validationDetail.startsWith('Semantic validation failed')) {
+                  escalationTitle = 'pushed but expected content not found on live page';
+                  escalationGuidance = [
+                    validationHint ? `The expected text \`"${validationHint}"\` was not found on the live page.` : 'The expected content was not found on the live page.',
+                    '',
+                    '**Possible causes:**',
+                    '- Vercel deployment is still in progress (changes can take 1–2 minutes to go live)',
+                    '- The change was applied to the wrong file or location in the codebase',
+                    '- The validation hint did not match the actual changed text',
+                    '',
+                    '**Recovery path:**',
+                    `1. Wait 2–3 minutes, then ${previewLink}`,
+                    '2. If the change is live and correct, reply "Confirmed live" and close this issue.',
+                    result.commit
+                      ? `3. If the change is wrong or missing, reply with details — a developer will review commit \`${result.commit}\` and re-execute if needed.`
+                      : '3. If the change is wrong or missing, reply with details — a developer will re-execute if needed.',
+                  ].join('\n');
+                } else {
+                  escalationTitle = 'pushed but production page unreachable';
+                  escalationGuidance = [
+                    'The executor committed and pushed this change, but the live page could not be reached for validation. This may be a temporary Vercel deployment delay.',
+                    '',
+                    `**Detail:** ${validationDetail}`,
+                    '',
+                    '**Recovery path:**',
+                    `1. Wait 2–3 minutes for Vercel to finish deploying, then ${previewLink}`,
+                    '2. If the change is live and correct, reply "Confirmed live" and close this issue.',
+                    '3. If the page is still unreachable or the change is missing, reply with details — a developer will investigate.',
+                  ].join('\n');
+                }
+
+                const escalationBody = [
+                  `## ⚠️ CR-${crNum} — ${escalationTitle}`,
+                  '',
+                  pageUrl ? `**Page:** ${pageUrl}` : '',
+                  result.commit ? `**Commit:** \`${result.commit}\`` : '',
+                  `**Validation outcome:** ${validationOutcome}`,
+                  '',
+                  escalationGuidance,
+                ].filter(line => line !== undefined).join('\n');
+
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: crNum,
+                  body: escalationBody
+                });
+
+                // Log governance incident
+                await logGovernanceIncident(crNum, 'production-validation',
+                  `${validationOutcome} for ${liveUrl || '(no valid review URL)'}: ${validationDetail}`
+                );
+
+                // Mark as validation-failed with subclass detail
+                await fetch(
+                  `${sbUrl}/rest/v1/cr_tasks?id=eq.${task.id}`,
+                  {
+                    method: 'PATCH',
+                    headers: { ...headers, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify({
+                      status: 'validation-failed',
+                      result: { ...result, validation_outcome: validationOutcome, validation: validationDetail, retry_count: retryCount }
+                    })
+                  }
+                );
+
+                // Update labels — clear stale validation labels before applying subclass label
+                for (const label of ['cr-queued', 'cr-executing', 'cr-pending',
+                                      'cr-validation-failed', 'cr-validation-descriptor-missing', 'cr-validation-inconclusive']) {
+                  try {
+                    await github.rest.issues.removeLabel({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: crNum,
+                      name: label
+                    });
+                  } catch (e) { /* label may not exist */ }
+                }
+                try {
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: crNum,
+                    labels: [escalationLabel]
+                  });
+                } catch (e) { /* label may not exist in repo yet */ }
+
+                core.warning(`CR-${crNum}: ${validationOutcome} — recovery path posted (${escalationLabel}), NOT notified as deployed`);
+                continue;
+              }
+
+              // ── Build completion comment (only reached if VALIDATED_SUCCESS) ──
+              const desc = task.description || '';
+              const excerpt = desc.length > 200 ? desc.slice(0, 200) + '…' : desc;
+              const sourceLink = task.source_url
+                ? `[original request](${task.source_url})`
+                : 'original request';
 
               let comment = [
-                `## Change deployed and ready for review`,
+                `## ✅ CR-${crNum} deployed and semantically validated live`,
                 '',
-                `**Change:** ${result.summary || task.title}`,
               ];
 
-              if (task.page_url) comment.push(`**Page:** ${task.page_url}`);
+              if (pageUrl) comment.push(`**Page:** ${pageUrl}`);
+              if (excerpt) comment.push(`**Requested:** ${excerpt}`);
+              comment.push(`**Source:** ${sourceLink}`);
               if (result.commit) comment.push(`**Commit:** \`${result.commit}\``);
               if (result.files_changed?.length) {
                 comment.push(`**Files changed:** ${result.files_changed.join(', ')}`);
               }
+              comment.push(`**Validation:** ${validationOutcome}`);
+              comment.push(`**Evidence:** ${validationDetail}`);
 
               comment.push('');
               comment.push(`### Please validate`);
               comment.push(`1. ${previewLink}`);
-              comment.push(`2. Verify the change looks correct.`);
+              comment.push(`2. Verify the change looks correct on the live page.`);
               comment.push(`3. **If it looks good:** Reply with "Approved" or a thumbs-up reaction.`);
               comment.push(`4. **If it needs adjustment:** Reply describing what needs to change.`);
 
@@ -105,17 +389,18 @@ jobs:
                   headers: { ...headers, 'Prefer': 'return=minimal' },
                   body: JSON.stringify({
                     status: 'done',
-                    completed_at: new Date().toISOString()
+                    completed_at: new Date().toISOString(),
+                    result: { ...result, validation_outcome: validationOutcome, validation: validationDetail }
                   })
                 }
               );
 
-              core.info(`Notified CR-${crNum} completion`);
+              core.info(`Notified CR-${crNum} completion (${validationOutcome})`);
             }
 
             // ── Handle failed/blocked tasks ──
             const failRes = await fetch(
-              sbQuery({ tenant: 'eq.misha-main', status: 'in.(failed,blocked,escalated)', 'error': 'not.is.null', select: '*' }),
+              sbQuery({ status: 'in.(failed,blocked,escalated,validation-failed)', tenant: 'eq.misha-main', 'error': 'not.is.null', select: '*' }),
               { headers }
             );
             if (!failRes.ok) return;
@@ -125,13 +410,38 @@ jobs:
               if (task.result?.notified) continue;
 
               const crNum = task.cr_number;
+
+              // ── Guard: skip tasks whose GitHub issue is already closed ──
+              try {
+                const issue = await github.rest.issues.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: crNum
+                });
+                if (issue.data.state === 'closed') {
+                  core.info(`CR-${crNum}: Issue closed — marking notified, skipping`);
+                  await fetch(
+                    `${sbUrl}/rest/v1/cr_tasks?id=eq.${task.id}`,
+                    {
+                      method: 'PATCH',
+                      headers: { ...headers, 'Prefer': 'return=minimal' },
+                      body: JSON.stringify({
+                        result: { ...(task.result || {}), notified: true }
+                      })
+                    }
+                  );
+                  continue;
+                }
+              } catch (e) { /* proceed if check fails */ }
+
               let statusText = 'encountered an issue';
               if (task.status === 'blocked') statusText = 'needs clarification';
               else if (task.status === 'escalated') statusText = 'requires manual review';
               else if (task.status === 'failed') statusText = 'encountered a build error — escalated to Ray';
+              else if (task.status === 'validation-failed') statusText = 'was pushed but production validation failed';
 
               const body = [
-                `## CR-${crNum} ${statusText}`,
+                `## ⚠️ CR-${crNum} ${statusText}`,
                 '',
                 task.error || 'No additional details available.',
                 '',
