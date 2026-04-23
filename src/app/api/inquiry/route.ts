@@ -155,9 +155,17 @@ export async function POST(req: NextRequest) {
 
   // ── Response ─────────────────────────────────────────────────────────────────
 
-  if (errors.some(e => e.startsWith('ghl_contact'))) {
+  // Fail the submission only if the notification email to Misha also failed —
+  // the email is our lead-capture source of truth. GHL CRM upsert is secondary
+  // tracking; log failures but do not block the user's success response when
+  // Misha has already received the inquiry by email.
+  if (errors.some(e => e.startsWith('notification_email'))) {
     return NextResponse.json(
-      { error: 'Form submission could not be processed. Please try again or email us directly.', errors },
+      {
+        error:
+          'Form submission could not be processed. Please try again, e-mail us directly at misha@mishacreations.com or call/text Misha at 281-650-0500. We are sorry for the inconvenience.',
+        errors,
+      },
       { status: 500 }
     );
   }

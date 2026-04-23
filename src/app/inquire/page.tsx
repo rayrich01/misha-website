@@ -92,7 +92,7 @@ export default function InquirePage() {
 
       setSubmitted(true)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again or call to reach us directly.')
+      setError(err instanceof Error ? err.message : 'Form submission could not be processed. Please try again, e-mail us directly at misha@mishacreations.com or call/text Misha at 281-650-0500. We are sorry for the inconvenience.')
     } finally {
       setSending(false)
     }
