@@ -117,6 +117,34 @@ export default async function ProjectPage({
         </div>
       </section>
 
+      {/* Testimonial — rendered only when a quote is present */}
+      {project.testimonial?.quote && (
+        <section className="bg-warm py-16 md:py-24">
+          <div className="max-w-3xl mx-auto px-5 text-center">
+            <p className="font-body text-xs uppercase tracking-[0.2em] text-gold mb-6">
+              Client Testimonial
+            </p>
+            <blockquote className="font-editorial text-xl md:text-2xl text-cream italic leading-relaxed mb-6">
+              &ldquo;{project.testimonial.quote}&rdquo;
+            </blockquote>
+            {(project.testimonial.attribution || project.testimonial.role) && (
+              <div className="flex items-baseline justify-center gap-3 flex-wrap">
+                {project.testimonial.attribution && (
+                  <p className="font-body text-sm text-mist">
+                    &mdash; {project.testimonial.attribution}
+                  </p>
+                )}
+                {project.testimonial.role && (
+                  <p className="font-body text-xs text-mist/70 italic">
+                    {project.testimonial.role}
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Back nav */}
       <section className="bg-warm py-8">
         <div className="max-w-7xl mx-auto px-5 flex flex-wrap gap-4 justify-center">

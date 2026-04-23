@@ -374,6 +374,13 @@ export async function getNavData(): Promise<{
    Project Galleries
    ═══════════════════════════════════════════════════════════════ */
 
+export interface StudioProjectTestimonial {
+  quote?: string
+  attribution?: string
+  role?: string
+  date?: string
+}
+
 export interface StudioProject {
   _id: string
   title: string
@@ -384,13 +391,15 @@ export interface StudioProject {
   displayOrder?: number
   pieces: PortfolioPiece[]
   pieceCount: number
+  testimonial?: StudioProjectTestimonial
 }
 
 const PROJECT_FIELDS = `
   _id, title, slug, category, description, displayOrder,
   heroImage { asset, hotspot, alt, "lqip": asset->metadata.lqip },
   "pieces": pieces[]->{ ${PIECE_FIELDS} },
-  "pieceCount": count(pieces)
+  "pieceCount": count(pieces),
+  testimonial { quote, attribution, role, date }
 `
 
 /** All published projects for /recent-projects listing */
