@@ -44,7 +44,7 @@ export default function AboutPage() {
             The Story Behind the Finish
           </h1>
           <p className="font-body text-lg text-mist leading-relaxed">
-            Every surface tells a story. Ours began over 25 years ago with a simple belief: your home should move you.
+            Every surface tells a story. Ours began over 25 years ago with a simple belief: Your home or business should move you, your guests and customers.
           </p>
         </div>
       </section>
