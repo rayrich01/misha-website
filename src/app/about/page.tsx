@@ -5,13 +5,13 @@ import { PROCESS_STEPS } from '@/lib/constants'
 
 export const metadata: Metadata = {
   title: 'About Misha Thibeaux | 25+ Years of Decorative Artistry in Houston | Misha Creations',
-  description: "Meet Misha Thibeaux — muralist, luminist, and decorative artist with 25+ years transforming Houston's finest homes. Formal training at Buon Fresco School of Venetian Plastering, Nicola Vigini Studios, Faux Effects, Definitive School of Decorative Arts, Nina's Decorative Finishes, and iVenetian with Eli Lucero.",
+  description: "Meet Misha Thibeaux — muralist, luminist, and decorative artist with 25+ years transforming Houston's finest homes, businesses, and public spaces. Formal training at Buon Fresco School of Venetian Plastering, Nicola Vigini Studios, Faux Effects, Definitive School of Decorative Arts, Nina's Decorative Finishes, and iVenetian with Eli Lucero.",
   alternates: {
     canonical: 'https://mishacreations.com/about',
   },
   openGraph: {
     title: 'About Misha Thibeaux | 25+ Years of Decorative Artistry in Houston | Misha Creations',
-    description: "Meet Misha Thibeaux — muralist, luminist, and decorative artist with 25+ years transforming Houston's finest homes. Formal training at Buon Fresco School of Venetian Plastering, Nicola Vigini Studios, Faux Effects, Definitive School of Decorative Arts, Nina's Decorative Finishes, and iVenetian with Eli Lucero.",
+    description: "Meet Misha Thibeaux — muralist, luminist, and decorative artist with 25+ years transforming Houston's finest homes, businesses, and public spaces. Formal training at Buon Fresco School of Venetian Plastering, Nicola Vigini Studios, Faux Effects, Definitive School of Decorative Arts, Nina's Decorative Finishes, and iVenetian with Eli Lucero.",
     url: 'https://mishacreations.com/about',
     type: 'profile',
   },

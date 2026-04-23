@@ -52,7 +52,7 @@ export default async function GalleryPage() {
             Gallery
           </h1>
           <p className="font-editorial text-xl md:text-2xl text-mist max-w-2xl mx-auto mb-6">
-            A curated collection of decorative finishes across Houston&apos;s finest homes
+            A curated collection of decorative finishes across Houston&apos;s finest homes, businesses, and public spaces
           </p>
           <div className="w-8 h-px bg-gold mx-auto mb-6" />
           <p className="font-body text-sm text-muted">

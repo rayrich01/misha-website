@@ -133,7 +133,7 @@ export default async function HomePage() {
                 Selected Works
               </h2>
               <p className="font-body text-mist max-w-2xl mx-auto">
-                A curated selection of decorative finishes, murals, and plaster work customized to our clients&apos; tastes across Houston&apos;s finest homes.
+                A curated selection of decorative finishes, murals, and plaster work customized to our clients&apos; tastes across Houston&apos;s finest homes, businesses, and public spaces.
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
