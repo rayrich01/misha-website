@@ -86,13 +86,59 @@ export async function upsertContact(payload: GHLContactPayload): Promise<GHLCont
     body: JSON.stringify(body),
   });
 
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`GHL upsertContact failed (${res.status}): ${err}`);
+  // Happy path — new contact created
+  if (res.ok) {
+    const data = await res.json();
+    return data.contact as GHLContact;
   }
 
-  const data = await res.json();
-  return data.contact as GHLContact;
+  // Duplicate contact — some GHL locations reject POST on existing email
+  // and return 400 with the existing contactId in meta. Update tags +
+  // custom fields on the existing contact so the inquiry still lands.
+  if (res.status === 400) {
+    const errBody = await res.json().catch(() => null);
+    const existingId: string | undefined = errBody?.meta?.contactId;
+    const isDuplicate = /duplicat/i.test(errBody?.message || '');
+
+    if (existingId && isDuplicate) {
+      // Fire in parallel — tag application + custom-field update
+      await Promise.all([
+        payload.tags?.length ? addTags(existingId, payload.tags) : Promise.resolve(),
+        customFields.length > 0 ? updateContactCustomFields(existingId, customFields) : Promise.resolve(),
+      ]);
+
+      return {
+        id: existingId,
+        email: payload.email,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+      } as GHLContact;
+    }
+
+    throw new Error(`GHL upsertContact failed (400): ${JSON.stringify(errBody)}`);
+  }
+
+  const errText = await res.text();
+  throw new Error(`GHL upsertContact failed (${res.status}): ${errText}`);
+}
+
+// Update only custom fields on an existing contact (non-destructive — does
+// not touch name, email, phone, etc. which may have cleaner data than what
+// the form captured).
+async function updateContactCustomFields(
+  contactId: string,
+  customFields: Array<{ id: string; field_value: string }>
+): Promise<void> {
+  const res = await fetch(`${GHL_BASE}/contacts/${contactId}`, {
+    method: 'PUT',
+    headers: headers(),
+    body: JSON.stringify({ customFields }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`GHL updateContactCustomFields failed (${res.status}): ${err}`);
+  }
 }
 
 export async function addTags(contactId: string, tags: string[]): Promise<void> {
