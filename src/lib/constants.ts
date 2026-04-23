@@ -720,7 +720,7 @@ export const PROCESS_STEPS = [
   {
     step: '02',
     name: 'Design',
-    desc: 'Misha creates physical finish samples and detailed design sketches customized to your tastes for your approval before any brushwork begins.',
+    desc: 'Misha develops the necessary visuals and examples of her proposed approach which she will review and customize to your tastes for your approval before any brushwork or finishwork begins.',
   },
   {
     step: '03',
