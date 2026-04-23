@@ -24,7 +24,7 @@ export function Footer({ services, areas }: FooterProps = {}) {
           <div>
             <p className="font-display text-2xl text-cream mb-3">Misha Creations</p>
             <p className="font-body text-sm leading-relaxed mb-4">
-              Luxury decorative finishes, wall murals, and Venetian plaster for Houston&apos;s finest homes.
+              Luxury decorative finishes, wall murals, and Venetian plaster for Houston&apos;s finest homes, businesses, and public spaces.
               25+ years of artistic excellence.
             </p>
           </div>
