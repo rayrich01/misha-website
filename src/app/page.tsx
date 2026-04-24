@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getMishaSelectPieces, getMainSiteSettings, getHomepageHero } from '@/lib/queries'
+import { getHomepageFeaturedServices, getMainSiteSettings, getHomepageHero } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { NeighborhoodStrip } from '@/components/NeighborhoodStrip'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
-import { COPY, FINISH_SURFACES } from '@/lib/constants'
+import { COPY } from '@/lib/constants'
 
 export const metadata: Metadata = {
   alternates: {
@@ -16,9 +16,13 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [settings, pieces, heroPiece] = await Promise.all([
+  // CR-HOMEPAGE-FEATURED-001: "Selected Works" now renders the 9 service
+  // category heroes (same images shown on /services/[slug]), not pieces
+  // flagged with isMishaSelect. isMishaSelect is now exclusively the
+  // /select?view=gallery private-gallery flag.
+  const [settings, featuredServices, heroPiece] = await Promise.all([
     getMainSiteSettings(),
-    getMishaSelectPieces(6),
+    getHomepageFeaturedServices(),
     getHomepageHero(),
   ])
 
@@ -124,8 +128,8 @@ export default async function HomePage() {
 
       <NeighborhoodStrip />
 
-      {/* Misha Select Preview */}
-      {pieces.length > 0 && (
+      {/* Selected Works — grid of 9 service category heroes */}
+      {featuredServices.length > 0 && (
         <section className="py-16 md:py-24 bg-ink">
           <div className="max-w-7xl mx-auto px-5">
             <div className="text-center mb-14">
@@ -137,31 +141,28 @@ export default async function HomePage() {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {pieces.map((piece) => {
-                const finish = FINISH_SURFACES.find((f) => f.categoryId === piece.category)
-                return (
-                  <Link
-                    key={piece._id}
-                    href={finish ? `/services/${finish.slug}` : '/gallery'}
-                    className="group relative aspect-[4/5] rounded-lg overflow-hidden shadow-md"
-                  >
+              {featuredServices.map((service) => (
+                <Link
+                  key={service.categoryId}
+                  href={service.servicePath}
+                  className="group relative aspect-[4/5] rounded-lg overflow-hidden shadow-md"
+                >
+                  {service.heroImage && (
                     <SanityImage
-                      image={piece.heroImage}
+                      image={service.heroImage}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      alt={`${piece.title} - ${piece.category} by Misha Creations Houston`}
+                      alt={`${service.title} — Misha Creations Houston`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="font-editorial text-xl text-white">{piece.title}</p>
-                      {piece.location && (
-                        <p className="font-body text-sm text-white/70 mt-1">{piece.location}</p>
-                      )}
-                    </div>
-                  </Link>
-                )
-              })}
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <p className="font-editorial text-xl text-white">{service.title}</p>
+                    <p className="font-body text-sm text-white/70 mt-1">Explore &rarr;</p>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

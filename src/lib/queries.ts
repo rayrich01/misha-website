@@ -432,3 +432,59 @@ export async function getProjectForPiece(pieceId: string): Promise<{ title: stri
     }
   `, { pieceId })
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   Homepage Featured Services
+   — CR-HOMEPAGE-FEATURED-001: decouple home page from isMishaSelect.
+     The home-page "Selected Works" grid now renders the 9 service
+     category heroes from Sanity, matching the images shown on each
+     service page. Ordering is driven by FINISH_SURFACES (code).
+   ═══════════════════════════════════════════════════════════════ */
+
+export interface HomepageFeaturedService {
+  categoryId: string        // the Sanity finishCategory slug (e.g. "wall-murals")
+  title: string             // the service-page title from FINISH_SURFACES
+  servicePath: string       // the public URL, e.g. "/services/luxury-wall-murals"
+  heroImage: SanityImage    // guaranteed non-null (entries without an image are dropped)
+}
+
+/**
+ * Fetch the hero image for each service category, matching the fallback
+ * logic used by /services/[slug]: prefer the finishCategory.heroImage,
+ * fall back to the first published piece in that category.
+ */
+export async function getHomepageFeaturedServices(): Promise<HomepageFeaturedService[]> {
+  const { FINISH_SURFACES } = await import('@/lib/constants')
+  const categoryIds = FINISH_SURFACES.map(f => f.categoryId)
+
+  const results: Array<{
+    categoryId: string
+    heroImage: SanityImage | null
+    firstPieceImage: SanityImage | null
+  }> = await sanityClient.fetch(
+    `*[_type == "finishCategory" && slug.current in $categoryIds] {
+      "categoryId": slug.current,
+      heroImage { asset, hotspot, alt, "lqip": asset->metadata.lqip },
+      "firstPieceImage": *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true && category == ^.slug.current]
+        | order(coalesce(isFeatured, false) desc, displayOrder asc) [0].heroImage { asset, hotspot, alt, "lqip": asset->metadata.lqip }
+    }`,
+    { categoryIds }
+  )
+
+  const byCategoryId = new Map(results.map(r => [r.categoryId, r]))
+
+  // Preserve FINISH_SURFACES order; drop entries with no image available.
+  return FINISH_SURFACES
+    .map((f) => {
+      const row = byCategoryId.get(f.categoryId)
+      const heroImage = row?.heroImage || row?.firstPieceImage || null
+      if (!heroImage) return null
+      return {
+        categoryId: f.categoryId,
+        title: f.title,
+        servicePath: `/services/${f.slug}`,
+        heroImage,
+      }
+    })
+    .filter((x): x is HomepageFeaturedService => x !== null)
+}
