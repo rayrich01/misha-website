@@ -59,6 +59,11 @@ export interface MainSiteSettings {
 }
 
 /** Misha Select pieces — curated gallery for main site */
+// ⚠ Shared-flag consumer — reads `isMishaSelect`. Other consumers of this
+// flag: getFeaturedPieces() (below), getRelatedPieces() (below), and
+// misha-studio-site/src/lib/studio-queries.ts getMishaSelectPieces().
+// Before any batch mutation to isMishaSelect, run the consumer-diff checklist in
+// _ttp/CR-HOMEPAGE-FEATURED-001-GOVERNANCE-BREACH/hardening.md.
 export async function getMishaSelectPieces(limit = 12): Promise<PortfolioPiece[]> {
   return sanityClient.fetch(`
     *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true && isMishaSelect == true]
@@ -96,6 +101,8 @@ export async function getPiecesByLocation(location: string, limit = 4): Promise<
 }
 
 /** Featured portfolio pieces for gallery hero */
+// ⚠ Shared-flag consumer — combines `isMishaSelect` AND `isFeatured`. Mutating
+// either flag affects this query. See hardening packet before batch edits.
 export async function getFeaturedPieces(limit = 6): Promise<PortfolioPiece[]> {
   return sanityClient.fetch(`
     *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
@@ -120,6 +127,9 @@ export async function getAllPortfolioSlugs(): Promise<string[]> {
 }
 
 /** Related pieces from same category, excluding current */
+// ⚠ Shared-flag consumer — reads `isMishaSelect` AND `category`. A piece
+// gains/loses a "Related" placement on sibling piece pages when either flips.
+// See hardening packet.
 export async function getRelatedPieces(category: string, excludeId: string, limit = 3): Promise<PortfolioPiece[]> {
   return sanityClient.fetch(`
     *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true
@@ -153,6 +163,8 @@ export async function getMainSiteSettings(): Promise<MainSiteSettings | null> {
 }
 
 /** Homepage hero piece (fallback if no mainSiteSettings) */
+// ⚠ Shared-flag consumer — reads `isFeatured`. Flipping this flag on a piece
+// can replace the full-screen home-page hero background. See hardening packet.
 export async function getHomepageHero(): Promise<PortfolioPiece | null> {
   return sanityClient.fetch(`
     *[_type == "portfolioPiece" && published == true && isFeatured == true]
