@@ -89,7 +89,7 @@ export default async function ServicePage({ params }: PageProps) {
       answer: `Absolutely. Misha creates physical finish samples for your approval before any brushwork begins. You see and touch the exact finish that will be applied in your home. No surprises on install day.`,
     },
   ]
-  const finishFaqs = enrichment ? [...baseFaqs, ...enrichment.extraFaqs] : baseFaqs
+  const finishFaqs = enrichment ? [...baseFaqs, ...(enrichment.extraFaqs || [])] : baseFaqs
 
   const serviceSchema = {
     '@context': 'https://schema.org',
