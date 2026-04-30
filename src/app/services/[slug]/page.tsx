@@ -63,7 +63,7 @@ export default async function ServicePage({ params }: PageProps) {
     category?.tradeDescription ||
     category?.shortDescription ||
     FINISH_DESCRIPTIONS[categoryId] ||
-    `Misha Creations brings 25+ years of expertise in ${title.toLowerCase()} to Houston's most distinguished homes. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
+    `Misha Creations brings 25+ years of expertise in ${title.toLowerCase()} to Houston's most distinguished homes and businesses. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
   // CMS enrichment takes priority, fall back to constants.ts
   const enrichment = cms ? {
