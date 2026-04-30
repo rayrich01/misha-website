@@ -65,15 +65,16 @@ export default async function ServicePage({ params }: PageProps) {
     FINISH_DESCRIPTIONS[categoryId] ||
     `Misha Creations brings 25+ years of expertise in ${title.toLowerCase()} to Houston's most distinguished homes and businesses. Each project is customized to your tastes, designed to complement your architecture and capture the unique light of your space.`
 
-  // CMS enrichment takes priority, fall back to constants.ts
-  const enrichment = cms ? {
-    intro: cms.intro,
-    process: cms.process,
-    trust: cms.trust,
-    extraFaqs: cms.extraFaqs,
-    relatedServices: cms.relatedServices,
-    areaContext: cms.areaContext,
-  } : SERVICE_ENRICHMENT[categoryId] || null
+  // CMS enrichment takes priority per-section, fall back to constants.ts per-section
+  const fallback = SERVICE_ENRICHMENT[categoryId] || null
+  const enrichment = (cms || fallback) ? {
+    intro: (cms?.intro?.heading && cms?.intro?.paragraphs?.length) ? cms.intro : fallback?.intro ?? null,
+    process: (cms?.process?.heading && cms?.process?.steps?.length) ? cms.process : fallback?.process ?? null,
+    trust: (cms?.trust?.heading && cms?.trust?.points?.length) ? cms.trust : fallback?.trust ?? null,
+    extraFaqs: cms?.extraFaqs?.length ? cms.extraFaqs : fallback?.extraFaqs ?? null,
+    relatedServices: cms?.relatedServices?.length ? cms.relatedServices : fallback?.relatedServices ?? [],
+    areaContext: cms?.areaContext || fallback?.areaContext || null,
+  } : null
 
   const baseFaqs = [
     {
@@ -135,7 +136,7 @@ export default async function ServicePage({ params }: PageProps) {
       </section>
 
       {/* Service Intro — enriched pages only (003A) */}
-      {enrichment && (
+      {enrichment?.intro && (
         <section className="py-16 md:py-20 bg-ink">
           <div className="max-w-3xl mx-auto px-5">
             <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-8">
@@ -144,7 +145,7 @@ export default async function ServicePage({ params }: PageProps) {
             {enrichment.intro.paragraphs.map((p, i) => (
               <p key={i} className="font-body text-lg leading-relaxed text-mist mb-6 last:mb-0">{p}</p>
             ))}
-            {enrichment.areaContext && (
+            {enrichment?.areaContext && (
               <p className="font-body text-mist/70 mt-8 text-center text-sm">{enrichment.areaContext}</p>
             )}
           </div>
@@ -152,7 +153,7 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       {/* Process — enriched pages only (003A) */}
-      {enrichment && (
+      {enrichment?.process && (
         <section className="py-16 md:py-20 bg-warm">
           <div className="max-w-3xl mx-auto px-5">
             <h2 className="font-display text-3xl md:text-4xl text-center text-cream mb-12">
@@ -204,7 +205,7 @@ export default async function ServicePage({ params }: PageProps) {
       )}
 
       {/* Trust Block — enriched pages only (003A) */}
-      {enrichment && (
+      {enrichment?.trust && (
         <section className="py-16 md:py-20 bg-warm">
           <div className="max-w-3xl mx-auto px-5 text-center">
             <h2 className="font-display text-3xl md:text-4xl text-cream mb-8">
@@ -225,7 +226,7 @@ export default async function ServicePage({ params }: PageProps) {
       <FaqAccordion faqs={finishFaqs} heading={`${title} FAQ`} />
 
       {/* Related Services — enriched pages only (003A / 002C) */}
-      {enrichment && enrichment.relatedServices.length > 0 && (
+      {enrichment?.relatedServices && enrichment.relatedServices.length > 0 && (
         <section className="py-12 bg-warm">
           <div className="max-w-3xl mx-auto px-5 text-center">
             <p className="font-body text-xs uppercase tracking-widest text-muted mb-4">Related Services</p>
