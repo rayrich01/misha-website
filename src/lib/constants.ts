@@ -230,7 +230,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'faux-specialty-finishes', label: 'Faux & Specialty Finishes' },
       { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
     ],
-    areaContext: 'Misha has applied Venetian lime plaster finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has applied Venetian lime plaster finishes in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'wall-murals': {
     intro: {
@@ -270,7 +270,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'trompe-loeil-architectural-illusions', label: 'Trompe L\'Oeil & Architectural Illusions' },
       { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
     ],
-    areaContext: 'Misha has painted custom wall murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted custom wall murals in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'decorative-ceilings': {
     intro: {
@@ -310,7 +310,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'luxury-wall-murals', label: 'Luxury Wall Murals' },
       { slug: 'trompe-loeil-architectural-illusions', label: 'Trompe L\'Oeil & Architectural Illusions' },
     ],
-    areaContext: 'Misha has painted decorative ceilings in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted decorative ceilings in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'faux-finishes': {
     intro: {
@@ -350,7 +350,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'venetian-lime-plaster', label: 'Venetian Lime Plaster' },
       { slug: 'modello-stencils', label: 'Modello Stencils' },
     ],
-    areaContext: 'Misha has applied faux and specialty finishes in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has applied faux and specialty finishes in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'trompe-loeil': {
     intro: {
@@ -390,7 +390,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'luxury-wall-murals', label: 'Luxury Wall Murals' },
       { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
     ],
-    areaContext: 'Misha has painted trompe l\'oeil and architectural illusions in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted trompe l\'oeil and architectural illusions in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'childrens-rooms': {
     intro: {
@@ -430,7 +430,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'themed-rooms', label: 'Themed Rooms' },
       { slug: 'skyscapes-celestial', label: 'Skyscapes & Celestial' },
     ],
-    areaContext: 'Misha has painted children\'s themed room murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted children\'s themed room murals in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'themed-rooms': {
     intro: {
@@ -470,7 +470,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'childrens-themed-rooms', label: 'Children\'s Themed Rooms' },
       { slug: 'skyscapes-celestial', label: 'Skyscapes & Celestial' },
     ],
-    areaContext: 'Misha has painted themed rooms in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted themed rooms in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'skyscapes': {
     intro: {
@@ -514,7 +514,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'decorative-ceilings', label: 'Decorative Ceilings' },
       { slug: 'themed-rooms', label: 'Themed Rooms' },
     ],
-    areaContext: 'Misha has painted skyscapes and celestial murals in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has painted skyscapes and celestial murals in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
   'modello-stencils': {
     intro: {
@@ -554,7 +554,7 @@ export const SERVICE_ENRICHMENT: Record<string, ServiceEnrichment> = {
       { slug: 'faux-specialty-finishes', label: 'Faux & Specialty Finishes' },
       { slug: 'venetian-lime-plaster', label: 'Venetian Lime Plaster' },
     ],
-    areaContext: 'Misha has applied Modello stencil designs in homes across River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
+    areaContext: 'Misha has applied Modello stencil designs in homes and businesses across the greater Houston area including River Oaks, Memorial, Tanglewood, West University, The Woodlands, and Bellaire.',
   },
 }
 
