@@ -109,24 +109,28 @@ export default async function ServicePage({ params }: PageProps) {
     <>
       <JsonLd data={serviceSchema} />
 
-      {/* Hero */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {heroImage && (
-          <div className="absolute inset-0">
-            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
-          </div>
-        )}
-        {!heroImage && <div className="absolute inset-0 bg-ink" />}
-        <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
-          <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-white mb-4">
+      {/* Hero — editorial band (text only) */}
+      <section className="bg-ink pt-32 pb-12 md:pt-40 md:pb-16">
+        <div className="text-center px-5 max-w-4xl mx-auto">
+          <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-cream mb-4">
             {h1}
           </h1>
-          <p className="font-body text-lg text-white/85 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto">
             By Misha Creations &middot; 25+ Years of Artistic Excellence
           </p>
         </div>
       </section>
+
+      {/* Hero image — contained, clean */}
+      {heroImage && (
+        <section className="bg-ink pb-8">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl">
+              <SanityImage image={heroImage} fill priority sizes="(max-width: 1024px) 100vw, 1024px" className="object-cover" />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Description */}
       <section className="py-16 md:py-20 bg-warm">
