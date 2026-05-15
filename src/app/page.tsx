@@ -145,21 +145,26 @@ export default async function HomePage() {
                 <Link
                   key={service.categoryId}
                   href={service.servicePath}
-                  className="group relative aspect-[4/5] rounded-lg overflow-hidden shadow-md"
+                  className="group block"
                 >
-                  {service.heroImage && (
-                    <SanityImage
-                      image={service.heroImage}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      alt={`${service.title} — Misha Creations Houston`}
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="font-editorial text-xl text-white">{service.title}</p>
-                    <p className="font-body text-sm text-white/70 mt-1">Explore &rarr;</p>
+                  <div className="relative aspect-[4/5] rounded-lg overflow-hidden shadow-md mb-4">
+                    {service.heroImage && (
+                      <SanityImage
+                        image={service.heroImage}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        alt={`${service.title} — Misha Creations Houston`}
+                      />
+                    )}
+                  </div>
+                  <div className="px-1">
+                    <p className="font-editorial text-xl text-cream group-hover:text-gold transition-colors">
+                      {service.title}
+                    </p>
+                    <p className="font-body text-xs uppercase tracking-widest text-gold mt-1.5">
+                      View Service &rarr;
+                    </p>
                   </div>
                 </Link>
               ))}

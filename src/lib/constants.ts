@@ -15,6 +15,13 @@ export const FONTS = {
   body:      "'Jost', sans-serif",
 } as const
 
+// CR-MC-MAIN-SITE-SUPPRESS-FEATURED-IMAGE-TITLES-001: hides absolute-positioned
+// text overlays on top of card images (portfolio cards, service-index tiles,
+// service-detail grids, area-page grids, homepage Selected Works). Does not
+// affect page H1/H2/H3 headings, hero text, alt text, or card body text
+// rendered below images. Flip to `false` to restore overlay labels.
+export const SUPPRESS_VISIBLE_IMAGE_TITLES = true
+
 export interface FinishSurface {
   /** URL slug — used in /services/{slug} route */
   slug: string

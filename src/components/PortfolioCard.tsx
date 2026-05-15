@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import type { PortfolioPiece } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
-import { FINISH_SURFACES } from '@/lib/constants'
+import { FINISH_SURFACES, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
 
 interface PortfolioCardProps {
   piece: PortfolioPiece
@@ -36,18 +36,20 @@ export function PortfolioCard({ piece, showCategory, sizes, priority }: Portfoli
         </span>
       )}
 
-      {/* Info overlay */}
-      <div className="absolute bottom-0 left-0 right-0 p-5">
-        {showCategory && finish && (
-          <p className="font-body text-[10px] uppercase tracking-[0.16em] text-gold mb-1.5">
-            {finish.title}
-          </p>
-        )}
-        <p className="font-editorial text-lg text-white leading-snug">{piece.title}</p>
-        {piece.location && (
-          <p className="font-body text-sm text-white/65 mt-1">{piece.location}</p>
-        )}
-      </div>
+      {/* Info overlay — suppressed by SUPPRESS_VISIBLE_IMAGE_TITLES (CR-MC-MAIN-SITE-SUPPRESS-FEATURED-IMAGE-TITLES-001) */}
+      {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
+        <div className="absolute bottom-0 left-0 right-0 p-5">
+          {showCategory && finish && (
+            <p className="font-body text-[10px] uppercase tracking-[0.16em] text-gold mb-1.5">
+              {finish.title}
+            </p>
+          )}
+          <p className="font-editorial text-lg text-white leading-snug">{piece.title}</p>
+          {piece.location && (
+            <p className="font-body text-sm text-white/65 mt-1">{piece.location}</p>
+          )}
+        </div>
+      )}
     </Link>
   )
 }
