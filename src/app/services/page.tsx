@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_SURFACES, SERVICE_CARD_DESCRIPTIONS, SERVICES_HUB_FAQS, PROCESS_STEPS, COPY, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
+import { FINISH_SURFACES, SERVICE_CARD_DESCRIPTIONS, SERVICES_HUB_FAQS, PROCESS_STEPS, COPY } from '@/lib/constants'
 import { getPiecesByCategory, getServicesHubPage, getAllServicePages, getSiteGlobals } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { CtaSection } from '@/components/CtaSection'
@@ -96,26 +96,32 @@ export default async function ServicesPage() {
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group relative aspect-[3/4] rounded-lg overflow-hidden shadow-md"
+                className="group block"
               >
-                {heroImage && (
-                  <SanityImage
-                    image={heroImage}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                )}
-                {!heroImage && <div className="absolute inset-0 bg-ink" />}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <h3 className="font-editorial text-lg text-white">{service.title}</h3>
-                    {service.cardDescription && (
-                      <p className="font-body text-sm text-white/70 mt-1">{service.cardDescription}</p>
-                    )}
-                  </div>
-                )}
+                <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md mb-4">
+                  {heroImage && (
+                    <SanityImage
+                      image={heroImage}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  )}
+                  {!heroImage && <div className="absolute inset-0 bg-ink" />}
+                </div>
+                <div className="px-1">
+                  <h3 className="font-editorial text-lg text-cream group-hover:text-gold transition-colors">
+                    {service.title}
+                  </h3>
+                  {service.cardDescription && (
+                    <p className="font-body text-sm text-mist/80 mt-1.5 leading-snug">
+                      {service.cardDescription}
+                    </p>
+                  )}
+                  <p className="font-body text-xs uppercase tracking-widest text-gold mt-2">
+                    Explore &rarr;
+                  </p>
+                </div>
               </Link>
             ))}
           </div>
