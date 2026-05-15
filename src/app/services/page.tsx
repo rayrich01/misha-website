@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_SURFACES, SERVICE_CARD_DESCRIPTIONS, SERVICES_HUB_FAQS, PROCESS_STEPS, COPY } from '@/lib/constants'
+import { FINISH_SURFACES, SERVICE_CARD_DESCRIPTIONS, SERVICES_HUB_FAQS, PROCESS_STEPS, COPY, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
 import { getPiecesByCategory, getServicesHubPage, getAllServicePages, getSiteGlobals } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { CtaSection } from '@/components/CtaSection'
@@ -108,12 +108,14 @@ export default async function ServicesPage() {
                 )}
                 {!heroImage && <div className="absolute inset-0 bg-ink" />}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-editorial text-lg text-white">{service.title}</h3>
-                  {service.cardDescription && (
-                    <p className="font-body text-sm text-white/70 mt-1">{service.cardDescription}</p>
-                  )}
-                </div>
+                {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 className="font-editorial text-lg text-white">{service.title}</h3>
+                    {service.cardDescription && (
+                      <p className="font-body text-sm text-white/70 mt-1">{service.cardDescription}</p>
+                    )}
+                  </div>
+                )}
               </Link>
             ))}
           </div>

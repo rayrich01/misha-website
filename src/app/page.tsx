@@ -5,7 +5,7 @@ import { SanityImage } from '@/components/SanityImage'
 import { NeighborhoodStrip } from '@/components/NeighborhoodStrip'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
-import { COPY } from '@/lib/constants'
+import { COPY, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
 
 export const metadata: Metadata = {
   alternates: {
@@ -157,10 +157,12 @@ export default async function HomePage() {
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="font-editorial text-xl text-white">{service.title}</p>
-                    <p className="font-body text-sm text-white/70 mt-1">Explore &rarr;</p>
-                  </div>
+                  {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="font-editorial text-xl text-white">{service.title}</p>
+                      <p className="font-body text-sm text-white/70 mt-1">Explore &rarr;</p>
+                    </div>
+                  )}
                 </Link>
               ))}
             </div>

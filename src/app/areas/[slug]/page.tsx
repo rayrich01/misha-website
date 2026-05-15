@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { NEIGHBORHOOD_MAP, NEIGHBORHOODS, NEIGHBORHOOD_CONTENT, FINISH_SURFACES } from '@/lib/constants'
+import { NEIGHBORHOOD_MAP, NEIGHBORHOODS, NEIGHBORHOOD_CONTENT, FINISH_SURFACES, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
 import { getPiecesByCategories, getMishaSelectPieces, getAreaPage, getAllAreaSlugs, getAllServicePages } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -144,9 +144,11 @@ export default async function AreaPage({ params }: PageProps) {
                     alt={piece.heroImage?.alt || `${piece.title} - decorative finish in ${name} by Misha Creations`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="font-editorial text-lg text-white">{piece.title}</p>
-                  </div>
+                  {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="font-editorial text-lg text-white">{piece.title}</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

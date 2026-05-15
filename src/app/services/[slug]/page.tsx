@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS, SERVICE_ENRICHMENT } from '@/lib/constants'
+import { FINISH_MAP, FINISH_SURFACES, FINISH_DESCRIPTIONS, SERVICE_ENRICHMENT, SUPPRESS_VISIBLE_IMAGE_TITLES } from '@/lib/constants'
 import { getPiecesByCategory, getFinishCategory, getServicePage, getAllServiceSlugs } from '@/lib/queries'
 import { SanityImage } from '@/components/SanityImage'
 import { FaqAccordion } from '@/components/FaqAccordion'
@@ -191,12 +191,14 @@ export default async function ServicePage({ params }: PageProps) {
                     alt={piece.heroImage?.alt || `${piece.title} - ${title} by Misha Creations Houston`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <p className="font-editorial text-lg text-white">{piece.title}</p>
-                    {piece.location && (
-                      <p className="font-body text-sm text-white/70 mt-1">{piece.location}</p>
-                    )}
-                  </div>
+                  {!SUPPRESS_VISIBLE_IMAGE_TITLES && (
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="font-editorial text-lg text-white">{piece.title}</p>
+                      {piece.location && (
+                        <p className="font-body text-sm text-white/70 mt-1">{piece.location}</p>
+                      )}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
