@@ -101,20 +101,13 @@ export default async function HomePage() {
     <>
       <JsonLd data={localBusinessSchema} />
 
-      {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {heroImage && (
-          <div className="absolute inset-0">
-            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
-          </div>
-        )}
-        {!heroImage && <div className="absolute inset-0 bg-ink" />}
-        <div className="relative z-10 text-left px-5 md:px-12 max-w-4xl mr-auto pt-20">
-          <h1 className="font-display text-[42px] leading-[52px] md:text-[60px] md:leading-[72px] text-white mb-6">
+      {/* Hero — editorial band (text only, no image overlay) */}
+      <section className="bg-ink pt-32 pb-12 md:pt-40 md:pb-16">
+        <div className="text-left px-5 md:px-12 max-w-4xl mr-auto">
+          <h1 className="font-display text-[42px] leading-[52px] md:text-[60px] md:leading-[72px] text-cream mb-6">
             {headline}
           </h1>
-          <p className="font-body text-lg md:text-xl text-white/90 mb-10 max-w-2xl leading-relaxed">
+          <p className="font-body text-lg md:text-xl text-mist mb-10 max-w-2xl leading-relaxed">
             {subheadline}
           </p>
           <a
@@ -125,6 +118,15 @@ export default async function HomePage() {
           </a>
         </div>
       </section>
+
+      {/* Hero image — full-bleed, clean (no overlay text) */}
+      {heroImage && (
+        <section className="bg-ink">
+          <div className="relative w-full aspect-[4/5] md:aspect-[21/9] max-h-[62vh] overflow-hidden">
+            <SanityImage image={heroImage} fill priority sizes="100vw" className="object-cover" />
+          </div>
+        </section>
+      )}
 
       <NeighborhoodStrip />
 

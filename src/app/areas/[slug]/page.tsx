@@ -100,22 +100,28 @@ export default async function AreaPage({ params }: PageProps) {
     <>
       <JsonLd data={localBusinessSchema} />
 
-      {/* Hero */}
-      <section className="relative min-h-[55vh] flex items-center justify-center overflow-hidden bg-ink">
-        {pieces[0]?.heroImage && (
-          <div className="absolute inset-0">
-            <SanityImage image={pieces[0].heroImage} fill priority sizes="100vw" className="object-cover opacity-40" />
-          </div>
-        )}
-        <div className="relative z-10 text-center px-5 max-w-4xl mx-auto pt-20">
-          <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-white mb-4">
+      {/* Hero — editorial band (text only) */}
+      <section className="bg-ink pt-32 pb-12 md:pt-40 md:pb-16">
+        <div className="text-center px-5 max-w-4xl mx-auto">
+          <h1 className="font-display text-[38px] leading-[48px] md:text-[54px] md:leading-[64px] text-cream mb-4">
             {h1}
           </h1>
-          <p className="font-body text-lg text-white/85 max-w-2xl mx-auto">
+          <p className="font-body text-lg text-mist max-w-2xl mx-auto">
             Trusted by {name} homeowners for over 25 years
           </p>
         </div>
       </section>
+
+      {/* Hero image — contained, clean (full opacity, no fade) */}
+      {pieces[0]?.heroImage && (
+        <section className="bg-ink pb-8">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="relative w-full aspect-[16/9] overflow-hidden rounded-xl">
+              <SanityImage image={pieces[0].heroImage} fill priority sizes="(max-width: 1024px) 100vw, 1024px" className="object-cover" />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Description */}
       {content && (
