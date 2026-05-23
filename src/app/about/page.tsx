@@ -84,7 +84,7 @@ export default async function AboutPage() {
       {/* Story */}
       <section className="py-16 md:py-24 bg-warm">
         <div className="max-w-3xl mx-auto px-5">
-          <h2 className="font-display text-3xl md:text-4xl text-cream mb-8 text-center">
+          <h2 className="font-editorial text-3xl md:text-4xl text-cream mb-8 text-center">
             Art That Lives With You
           </h2>
           <div className="font-body text-mist leading-relaxed space-y-6">
@@ -231,7 +231,7 @@ export default async function AboutPage() {
       {/* Process */}
       <section className="py-16 md:py-24 bg-ink">
         <div className="max-w-4xl mx-auto px-5">
-          <h2 className="font-display text-3xl md:text-4xl text-cream mb-14 text-center">
+          <h2 className="font-editorial text-3xl md:text-4xl text-cream mb-14 text-center">
             How We Work Together
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
