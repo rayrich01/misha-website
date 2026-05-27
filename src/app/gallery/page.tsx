@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getFeaturedPieces, getPiecesByCategory } from '@/lib/queries'
-import { FINISH_SURFACES, COPY } from '@/lib/constants'
+import { getFeaturedPieces, getPiecesByCategory, getPiecesBySlugs } from '@/lib/queries'
+import { FINISH_SURFACES, COPY, GALLERY_SECTION_OVERRIDES } from '@/lib/constants'
 import { PortfolioCard } from '@/components/PortfolioCard'
 import { CtaSection } from '@/components/CtaSection'
 import { JsonLd } from '@/components/JsonLd'
@@ -26,7 +26,10 @@ export const metadata: Metadata = {
 export default async function GalleryPage() {
   const [featured, ...categoryResults] = await Promise.all([
     getFeaturedPieces(6),
-    ...FINISH_SURFACES.map((f) => getPiecesByCategory(f.categoryId, 6)),
+    ...FINISH_SURFACES.map((f) => {
+      const override = GALLERY_SECTION_OVERRIDES[f.categoryId]
+      return override ? getPiecesBySlugs(override) : getPiecesByCategory(f.categoryId, 6)
+    }),
   ])
 
   const gallerySchema = {

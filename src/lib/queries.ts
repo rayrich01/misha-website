@@ -79,6 +79,21 @@ export async function getPiecesByCategory(category: string, limit = 6): Promise<
   `, { category, limit })
 }
 
+/** Fetch published, non-archived portfolio pieces by an explicit ordered slug list.
+ *  Used by /gallery section overrides (GALLERY_SECTION_OVERRIDES) to pin specific
+ *  pieces for a given section. Returns pieces in the SAME order as the input slugs,
+ *  silently dropping any slug that does not resolve to a published, non-archived piece.
+ */
+export async function getPiecesBySlugs(slugs: string[]): Promise<PortfolioPiece[]> {
+  if (!slugs.length) return []
+  const pieces = await sanityClient.fetch<PortfolioPiece[]>(`
+    *[_type == "portfolioPiece" && published == true && coalesce(archived, false) != true && slug.current in $slugs]
+    { ${PIECE_FIELDS} }
+  `, { slugs })
+  const bySlug = new Map(pieces.map((p) => [p.slug.current, p]))
+  return slugs.map((s) => bySlug.get(s)).filter(Boolean) as PortfolioPiece[]
+}
+
 /** Pieces by multiple categories with offset (for unique neighborhood pages) */
 export async function getPiecesByCategories(categories: string[], perCategory = 2, offset = 0): Promise<PortfolioPiece[]> {
   const results = await Promise.all(

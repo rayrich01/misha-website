@@ -188,6 +188,31 @@ export const SERVICE_CARD_DESCRIPTIONS: Record<string, string> = {
   'modello-stencils': 'Elegant stencil designs for walls, ceilings, and architectural details.',
 }
 
+/* ─── /gallery section overrides ──────────────────────────────────────────
+ * CR-MC-MAIN-SITE-PORTFOLIO-IMAGE-REPLACEMENT-001
+ *
+ * Per-categoryId explicit piece-slug override for the /gallery page's
+ * per-finish-category sections. When an entry exists for a categoryId,
+ * /gallery renders exactly those slugs in that order instead of running
+ * getPiecesByCategory(). Detail pages, document fields, taxonomy, and any
+ * other gallery route (/portfolio listing, /services/[slug], /areas/[slug],
+ * /recent-projects, /projects/[slug]) continue to use the default
+ * category-driven query unchanged.
+ *
+ * To remove the override and restore default category behavior for a
+ * section, delete its entry here.
+ */
+export const GALLERY_SECTION_OVERRIDES: Record<string, string[]> = {
+  'themed-rooms': [
+    'hand-painted-grapevine-mural-wrapping-walls-and-angled-ceiling-of-residential-wine-cellar-with-t',
+    'hand-painted-space-mural-ceiling-in-childrens-bedroom-featuring-star-wars-star-destroyers-agains',
+    'hand-painted-blue-marlin-sealife-mural-on-commercial-wall-galveston-themescape-with-teal-ocean-b',
+    'hand-painted-childrens-bedroom-mural-with-waterfall-landscape-and-realistic-leopard-on-rocky-cli',
+    'early-america-themescape-mural-dear-and-waterfall',
+    'hand-painted-chinoiserie-bedroom-mural-on-celadon-plaster-ground-with-white-blossom-trees-and-co',
+  ],
+}
+
 /* ─── Service page enrichment content (003A — venetian plaster first) ─── */
 export interface ServiceEnrichment {
   intro: { heading: string; paragraphs: string[] }
